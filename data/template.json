@@ -1,0 +1,14 @@
+{
+  "skill": "Example Skill Name",
+  "prerequisites": ["Prereq 1", "Prereq 2"],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Stage Title",
+      "topics": ["Topic 1", "Topic 2"],
+      "estimated_time": "1-2 weeks"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Your Name"
+}

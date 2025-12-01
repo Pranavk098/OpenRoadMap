@@ -1,0 +1,552 @@
+[
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "6abff482-c286-4930-9af1-a85e8b3a714e"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Materials Science: 10 Things Every Engineer Should Know",
+    "relevant_resource_ids": [
+      "87f6a2e9-23aa-4c5f-9de0-31d1a7da278c"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Materials Science: 10 Things Every Engineer Should Know",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "R\u00e9ussir le Changement",
+    "relevant_resource_ids": [
+      "8717a640-cf09-403d-9d72-f54c8c224722"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "R\u00e9ussir le Changement",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "6092e117-f7f2-47dd-bf64-a26bdc63b99e"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Moral Foundations of Politics",
+    "relevant_resource_ids": [
+      "8ab177e2-79a8-45fb-be68-05bad2d84aa1"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Moral Foundations of Politics",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Building Cybersecurity Resilience In A Hyperconnected World",
+    "relevant_resource_ids": [
+      "4c04fcb9-97f2-4836-ba8b-e8816c66ef16"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Building Cybersecurity Resilience In A Hyperconnected World",
+      "source": "Feedspot"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "b4389c01-4805-4a1c-82ca-a6ccb44f4ac6"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Russian Alphabet",
+    "relevant_resource_ids": [
+      "4d26300a-46d0-465e-9173-c2b71b8e431f"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Russian Alphabet",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "efa316d7-ba0f-426a-84ee-6173ab6d0aac"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Learning JavaScript for the First Time After HTML and CSS",
+    "relevant_resource_ids": [
+      "cf1508aa-7a03-4bc4-82c4-69212def2e2b"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Learning JavaScript for the First Time After HTML and CSS",
+      "source": "YouTube"
+    }
+  },
+  {
+    "query": "Globalization, Economic Growth and Stability",
+    "relevant_resource_ids": [
+      "8b6e598c-183d-499c-8980-5a909b983217"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Globalization, Economic Growth and Stability",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Sleep: Neurobiology, Medicine, and Society",
+    "relevant_resource_ids": [
+      "e60891e5-35a0-440c-973b-f502b90ff2c8"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Sleep: Neurobiology, Medicine, and Society",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Spacecraft Dynamics and Control",
+    "relevant_resource_ids": [
+      "cdca2d07-e31c-4044-a9e1-2f02cd168317"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Spacecraft Dynamics and Control",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "94865d62-f793-4b4a-892e-356542e0f14f"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Requirements Engineering: Secure Software Specifications",
+    "relevant_resource_ids": [
+      "5146d780-ff4c-488f-a3c9-a9eb21e184d5"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Requirements Engineering: Secure Software Specifications",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Essentials of Corporate Finance",
+    "relevant_resource_ids": [
+      "43381c28-7b59-4112-88e7-a17bdab9734e"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Essentials of Corporate Finance",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Science of Exercise",
+    "relevant_resource_ids": [
+      "6771d28b-1bae-496f-bf90-365198493cfe"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Science of Exercise",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "What Is an AI Anyway? | Mustafa Suleyman | TED",
+    "relevant_resource_ids": [
+      "5d03156a-55ee-4171-a28e-214a229e70bc"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "What Is an AI Anyway? | Mustafa Suleyman | TED",
+      "source": "YouTube"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "daef853c-3437-4207-ac45-38663d58cb85"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Introduction to Ableton Live",
+    "relevant_resource_ids": [
+      "7ef5afe2-51d8-4562-a51c-6d21fd54c3bf"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Introduction to Ableton Live",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "3dfb2416-84c3-4d61-a281-2cb53c079105"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "36cee4b2-bd93-4267-a6e9-b8b1ecb97fd6"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Information Visualization",
+    "relevant_resource_ids": [
+      "b440a308-e385-4faf-b5c4-3320002b7961"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Information Visualization",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Systems Thinking In Public Health",
+    "relevant_resource_ids": [
+      "6b9002ad-721d-4245-8199-3353d23393a0"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Systems Thinking In Public Health",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "9608b3fd-8d55-4af0-84b4-e85fdc717f95"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "7220f5e6-c9ef-49cf-bd46-6689471a5630"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Hacia una pr\u00e1ctica constructivista en el aula",
+    "relevant_resource_ids": [
+      "355a4cd3-7078-4e43-9806-d06911fb5b3c"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Hacia una pr\u00e1ctica constructivista en el aula",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "6cd97504-b315-454e-9501-81802b546de7"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "4eec9a68-4e3f-4e5c-9920-8fe8dc6afe29"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Introduction to Cyber Attacks",
+    "relevant_resource_ids": [
+      "aa791a23-c0bb-49a5-98bb-12e4b6e944b9"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Introduction to Cyber Attacks",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "b96d52e2-4638-4fbc-811f-fa95b3a51742"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Fundamentals of Music Theory",
+    "relevant_resource_ids": [
+      "795f052c-ff81-406b-bdad-17e9dbeb6ee8"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Fundamentals of Music Theory",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "First Step Korean",
+    "relevant_resource_ids": [
+      "28f20942-fd0b-4cf9-b86c-d0a800982259"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "First Step Korean",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "00e072c0-6887-425b-af9c-23b14b690165"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "dbd91f59-a577-49bc-9d47-5f1b79ca6899"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "AI Excellence Awards: Leading AI Innovation For Learning And Skills Development 2026",
+    "relevant_resource_ids": [
+      "20d12cd6-e22d-4bc0-af0e-ea1d7b0169fc"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "AI Excellence Awards: Leading AI Innovation For Learning And Skills Development 2026",
+      "source": "Feedspot"
+    }
+  },
+  {
+    "query": "Russian for beginners \u04101. \u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a: A1",
+    "relevant_resource_ids": [
+      "385834fd-9be2-427a-8e4f-2003dee5924d"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Russian for beginners \u04101. \u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a: A1",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Using Databases with Python",
+    "relevant_resource_ids": [
+      "7efcae3d-97e7-4b15-9c6f-a269ed3cb650"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Using Databases with Python",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Supply Chain Operations",
+    "relevant_resource_ids": [
+      "40eccfe8-1ae5-4d00-b108-4516d57dbc55"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Supply Chain Operations",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "C for Everyone: Programming Fundamentals",
+    "relevant_resource_ids": [
+      "d548273d-6e15-4813-ac83-0cc53e831651"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "C for Everyone: Programming Fundamentals",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "151158e2-c6fd-46a7-801c-714e6c12718b"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "719ccf08-aea9-4e45-b11d-6a11471876ea"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "7d8caece-fa9d-4516-b459-d7bf0249e50e"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Cybersecurity for Business",
+    "relevant_resource_ids": [
+      "9b8532fc-ffc2-4740-8e24-4049fd2425e1"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Cybersecurity for Business",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Fundamentals of Graphic Design",
+    "relevant_resource_ids": [
+      "cd3fe827-73f1-45f5-b12b-c14576c6b998"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Fundamentals of Graphic Design",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "1543af99-1fec-4ec1-bc14-7ab4a47e9d58"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "176ad1c7-4793-42d3-a447-13ad9baac656"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Developing Your Musicianship",
+    "relevant_resource_ids": [
+      "601e4764-8646-4a29-836f-98aba7fd9877"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Developing Your Musicianship",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Foundations of Management",
+    "relevant_resource_ids": [
+      "0bbd3ed4-c54d-48db-b469-4c417d10dbc0"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Foundations of Management",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title",
+    "relevant_resource_ids": [
+      "fa85bfe5-a685-48c4-bf5e-0cab62550849"
+    ],
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  }
+]

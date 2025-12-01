@@ -1,0 +1,40 @@
+{
+  "skill": "SEO Fundamentals",
+  "prerequisites": [
+    "Basic Web Knowledge"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Keyword Research",
+      "topics": [
+        "Search Volume",
+        "Intent",
+        "Long-tail Keywords"
+      ],
+      "estimated_time": "1 week"
+    },
+    {
+      "stage": 2,
+      "title": "On-Page SEO",
+      "topics": [
+        "Title Tags",
+        "Meta Descriptions",
+        "Content Optimization"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Off-Page SEO",
+      "topics": [
+        "Backlinks",
+        "Domain Authority",
+        "Local SEO"
+      ],
+      "estimated_time": "2 weeks"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

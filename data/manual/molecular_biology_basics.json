@@ -1,0 +1,41 @@
+{
+  "skill": "Molecular Biology Basics",
+  "prerequisites": [
+    "General Biology",
+    "Chemistry"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "DNA Structure",
+      "topics": [
+        "Nucleotides",
+        "Double Helix",
+        "Replication"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 2,
+      "title": "Central Dogma",
+      "topics": [
+        "Transcription",
+        "Translation",
+        "Protein Synthesis"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Genetics",
+      "topics": [
+        "Mendelian Genetics",
+        "Mutations",
+        "Gene Regulation"
+      ],
+      "estimated_time": "2 weeks"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

@@ -1,0 +1,41 @@
+{
+  "skill": "Docker & Kubernetes",
+  "prerequisites": [
+    "Linux Basics",
+    "Networking Fundamentals"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Docker Basics",
+      "topics": [
+        "Containers vs VMs",
+        "Dockerfile",
+        "Docker Compose"
+      ],
+      "estimated_time": "1 week"
+    },
+    {
+      "stage": 2,
+      "title": "Container Orchestration",
+      "topics": [
+        "Kubernetes Architecture",
+        "Pods",
+        "Services"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Advanced K8s",
+      "topics": [
+        "Helm Charts",
+        "Ingress Controllers",
+        "Persistent Volumes"
+      ],
+      "estimated_time": "3 weeks"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

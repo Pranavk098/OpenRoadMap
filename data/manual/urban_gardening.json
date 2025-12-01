@@ -1,0 +1,40 @@
+{
+  "skill": "Urban Gardening",
+  "prerequisites": [
+    "None"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Planning",
+      "topics": [
+        "Space Assessment",
+        "Light Conditions",
+        "Container Selection"
+      ],
+      "estimated_time": "1 week"
+    },
+    {
+      "stage": 2,
+      "title": "Soil & Planting",
+      "topics": [
+        "Potting Mix",
+        "Seeds vs Starts",
+        "Watering"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Maintenance",
+      "topics": [
+        "Pruning",
+        "Pest Control",
+        "Harvesting"
+      ],
+      "estimated_time": "Ongoing"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

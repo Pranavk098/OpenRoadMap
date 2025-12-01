@@ -1,0 +1,30 @@
+{
+    "skill": "Python Programming",
+    "prerequisites": [
+        "Basic Computer Literacy"
+    ],
+    "roadmap": [
+        {
+            "stage": 1,
+            "title": "Basics",
+            "topics": [
+                "Variables",
+                "Loops",
+                "Functions"
+            ],
+            "estimated_time": "2 weeks"
+        },
+        {
+            "stage": 2,
+            "title": "Data Structures",
+            "topics": [
+                "Lists",
+                "Dictionaries",
+                "Sets"
+            ],
+            "estimated_time": "2 weeks"
+        }
+    ],
+    "source": "manual_annotation",
+    "annotator": "Pranav Koduru"
+}

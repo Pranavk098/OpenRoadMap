@@ -1,0 +1,41 @@
+{
+  "skill": "Introduction to Astrophysics",
+  "prerequisites": [
+    "Physics I",
+    "Calculus I"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Stellar Physics",
+      "topics": [
+        "Star Formation",
+        "Fusion",
+        "Stellar Evolution"
+      ],
+      "estimated_time": "3 weeks"
+    },
+    {
+      "stage": 2,
+      "title": "Galactic Astronomy",
+      "topics": [
+        "Milky Way Structure",
+        "Dark Matter",
+        "Galaxy Types"
+      ],
+      "estimated_time": "3 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Cosmology",
+      "topics": [
+        "Big Bang",
+        "Expansion of Universe",
+        "CMB"
+      ],
+      "estimated_time": "3 weeks"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

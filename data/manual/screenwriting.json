@@ -1,0 +1,40 @@
+{
+  "skill": "Screenwriting",
+  "prerequisites": [
+    "Creative Writing Interest"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Formatting",
+      "topics": [
+        "Sluglines",
+        "Action Lines",
+        "Dialogue"
+      ],
+      "estimated_time": "1 week"
+    },
+    {
+      "stage": 2,
+      "title": "Structure",
+      "topics": [
+        "Three-Act Structure",
+        "The Hero's Journey",
+        "Plot Points"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Character Development",
+      "topics": [
+        "Character Arcs",
+        "Backstory",
+        "Voice"
+      ],
+      "estimated_time": "2 weeks"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

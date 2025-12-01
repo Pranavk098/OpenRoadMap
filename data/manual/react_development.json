@@ -1,0 +1,52 @@
+{
+  "skill": "React Development",
+  "prerequisites": [
+    "HTML",
+    "CSS",
+    "JavaScript (ES6+)"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Fundamentals",
+      "topics": [
+        "JSX",
+        "Components",
+        "Props & State"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 2,
+      "title": "Hooks & Effects",
+      "topics": [
+        "useState",
+        "useEffect",
+        "Custom Hooks"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Routing & State Management",
+      "topics": [
+        "React Router",
+        "Context API",
+        "Redux Toolkit"
+      ],
+      "estimated_time": "3 weeks"
+    },
+    {
+      "stage": 4,
+      "title": "Advanced Patterns",
+      "topics": [
+        "HOCs",
+        "Render Props",
+        "Performance Optimization"
+      ],
+      "estimated_time": "2 weeks"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

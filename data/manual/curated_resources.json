@@ -1,0 +1,122 @@
+[
+    {
+        "title": "Python 3 Documentation",
+        "description": "The official documentation for the Python programming language. Comprehensive reference for language syntax, standard library, and tutorials.",
+        "url": "https://docs.python.org/3/",
+        "type": "Official Documentation",
+        "source": "Python.org",
+        "quality_score": 1.0
+    },
+    {
+        "title": "Real Python",
+        "description": "High-quality Python tutorials, articles, and courses for all skill levels. Covers basics, web dev, data science, and more.",
+        "url": "https://realpython.com/",
+        "type": "Tutorial Site",
+        "source": "Real Python",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Machine Learning Specialization by Andrew Ng",
+        "description": "A foundational online course by Andrew Ng on Coursera. Covers supervised learning, unsupervised learning, and best practices in AI.",
+        "url": "https://www.coursera.org/specializations/machine-learning-introduction",
+        "type": "Course",
+        "source": "Coursera",
+        "quality_score": 0.98
+    },
+    {
+        "title": "Fast.ai - Practical Deep Learning for Coders",
+        "description": "A free, hands-on course on deep learning. Teaches how to build state-of-the-art models using the fastai library and PyTorch.",
+        "url": "https://course.fast.ai/",
+        "type": "Course",
+        "source": "Fast.ai",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Google Machine Learning Crash Course",
+        "description": "Google's fast-paced, practical introduction to machine learning. Features video lectures, case studies, and hands-on exercises.",
+        "url": "https://developers.google.com/machine-learning/crash-course",
+        "type": "Course",
+        "source": "Google",
+        "quality_score": 0.96
+    },
+    {
+        "title": "MDN Web Docs",
+        "description": "Resources for developers, by developers. The most authoritative source for HTML, CSS, and JavaScript documentation.",
+        "url": "https://developer.mozilla.org/",
+        "type": "Official Documentation",
+        "source": "Mozilla",
+        "quality_score": 1.0
+    },
+    {
+        "title": "freeCodeCamp",
+        "description": "Learn to code for free. Interactive tutorials and certifications in Web Design, JavaScript, Front End Libraries, Data Visualization, and more.",
+        "url": "https://www.freecodecamp.org/",
+        "type": "Interactive Course",
+        "source": "freeCodeCamp",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Kaggle Learn",
+        "description": "Practical data science courses. Learn Python, Pandas, Machine Learning, Deep Learning, and SQL with hands-on exercises.",
+        "url": "https://www.kaggle.com/learn",
+        "type": "Interactive Course",
+        "source": "Kaggle",
+        "quality_score": 0.94
+    },
+    {
+        "title": "CS50: Introduction to Computer Science",
+        "description": "Harvard University's introduction to the intellectual enterprises of computer science and the art of programming.",
+        "url": "https://cs50.harvard.edu/x/",
+        "type": "Course",
+        "source": "Harvard / edX",
+        "quality_score": 0.99
+    },
+    {
+        "title": "The Odin Project",
+        "description": "A full stack web development curriculum. Free and open source. Covers HTML, CSS, JavaScript, React, Node.js, and Ruby on Rails.",
+        "url": "https://www.theodinproject.com/",
+        "type": "Curriculum",
+        "source": "The Odin Project",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Full Stack Open",
+        "description": "Deep dive into modern web development. Learn React, Redux, Node.js, MongoDB, GraphQL, and TypeScript.",
+        "url": "https://fullstackopen.com/en/",
+        "type": "Course",
+        "source": "University of Helsinki",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Scikit-learn Documentation",
+        "description": "Machine Learning in Python. Simple and efficient tools for predictive data analysis. Official documentation and user guide.",
+        "url": "https://scikit-learn.org/stable/",
+        "type": "Official Documentation",
+        "source": "Scikit-learn",
+        "quality_score": 0.98
+    },
+    {
+        "title": "PyTorch Tutorials",
+        "description": "Official tutorials for PyTorch. Learn how to use PyTorch for deep learning, from basics to advanced topics.",
+        "url": "https://pytorch.org/tutorials/",
+        "type": "Official Documentation",
+        "source": "PyTorch",
+        "quality_score": 0.97
+    },
+    {
+        "title": "TensorFlow Core",
+        "description": "The core open source library to help you develop and train ML models. Official documentation and guides.",
+        "url": "https://www.tensorflow.org/learn",
+        "type": "Official Documentation",
+        "source": "TensorFlow",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Hugging Face Course",
+        "description": "The Hugging Face course on Natural Language Processing. Learn about Transformers, datasets, and tokenizers.",
+        "url": "https://huggingface.co/course/chapter1/1",
+        "type": "Course",
+        "source": "Hugging Face",
+        "quality_score": 0.96
+    }
+]

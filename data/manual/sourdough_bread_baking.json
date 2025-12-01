@@ -1,0 +1,40 @@
+{
+  "skill": "Sourdough Bread Baking",
+  "prerequisites": [
+    "Kitchen Basics"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "The Starter",
+      "topics": [
+        "Creating Starter",
+        "Feeding Schedule",
+        "Discard"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 2,
+      "title": "Dough Management",
+      "topics": [
+        "Autolyse",
+        "Folding",
+        "Bulk Fermentation"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Baking",
+      "topics": [
+        "Shaping",
+        "Scoring",
+        "Oven Spring"
+      ],
+      "estimated_time": "Ongoing"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

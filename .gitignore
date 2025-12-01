@@ -1,0 +1,27 @@
+# Environment variables
+.env
+
+# Data
+data/raw/
+data/processed/
+qdrant_storage/
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# Virtual Environment
+data_env/
+venv/
+env/
+
+# Dependencies
+node_modules/
+
+# Build Output
+dist/
+build/

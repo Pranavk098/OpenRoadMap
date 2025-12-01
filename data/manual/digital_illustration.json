@@ -1,0 +1,41 @@
+{
+  "skill": "Digital Illustration",
+  "prerequisites": [
+    "Drawing Basics",
+    "Tablet Familiarity"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Software Basics",
+      "topics": [
+        "Layers",
+        "Brushes",
+        "Masking"
+      ],
+      "estimated_time": "1 week"
+    },
+    {
+      "stage": 2,
+      "title": "Sketching & Line Art",
+      "topics": [
+        "Gesture Drawing",
+        "Clean Line Art",
+        "Anatomy"
+      ],
+      "estimated_time": "3 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Color & Lighting",
+      "topics": [
+        "Color Theory",
+        "Shading",
+        "Blending Modes"
+      ],
+      "estimated_time": "3 weeks"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}

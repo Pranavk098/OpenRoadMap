@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+pydantic
+openai
+qdrant-client
+sentence-transformers
+python-dotenv
+duckduckgo-search
+bert-score
+rouge-score
+scikit-learn
+torch

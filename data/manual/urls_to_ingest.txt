@@ -1,0 +1,3 @@
+https://www.geeksforgeeks.org/machine-learning/
+https://react.dev/learn
+https://www.w3schools.com/python/

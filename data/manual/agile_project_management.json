@@ -1,0 +1,40 @@
+{
+  "skill": "Agile Project Management",
+  "prerequisites": [
+    "Basic Management Concepts"
+  ],
+  "roadmap": [
+    {
+      "stage": 1,
+      "title": "Agile Manifesto",
+      "topics": [
+        "Values",
+        "Principles",
+        "Waterfall vs Agile"
+      ],
+      "estimated_time": "1 week"
+    },
+    {
+      "stage": 2,
+      "title": "Scrum Framework",
+      "topics": [
+        "Roles",
+        "Events",
+        "Artifacts"
+      ],
+      "estimated_time": "2 weeks"
+    },
+    {
+      "stage": 3,
+      "title": "Kanban & Lean",
+      "topics": [
+        "WIP Limits",
+        "Flow",
+        "Kaizen"
+      ],
+      "estimated_time": "1 week"
+    }
+  ],
+  "source": "manual_annotation",
+  "annotator": "Pranav Koduru"
+}
