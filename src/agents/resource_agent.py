@@ -6,9 +6,15 @@ from ..models import Resource
 class ResourceAgent:
     def __init__(self):
         self.qdrant_client = get_qdrant_client()
-        # Load model once (could be shared, but keeping simple for now)
-        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+        # Lazy load model
+        self._model = None
         self.ddgs = DDGS()
+
+    @property
+    def model(self):
+        if self._model is None:
+            self._model = SentenceTransformer("all-MiniLM-L6-v2")
+        return self._model
 
     def find_resources(self, query: str, limit: int = 3) -> list[Resource]:
         """
