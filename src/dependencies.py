@@ -9,7 +9,11 @@ load_dotenv()
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 COLLECTION_NAME = "educational_resources"
 
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+
 def get_qdrant_client():
+    if QDRANT_API_KEY:
+        return QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
     return QdrantClient(url=QDRANT_URL)
 
 # OpenAI Setup
