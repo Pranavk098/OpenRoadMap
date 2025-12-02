@@ -3,9 +3,6 @@ uvicorn
 pydantic
 openai
 qdrant-client
-sentence-transformers>=3.1.0
-transformers>=4.45.0
-huggingface-hub>=0.25.0,<1.0
+fastembed
 python-dotenv
 duckduckgo-search
-torch

@@ -12,8 +12,12 @@ class ResourceAgent:
     @property
     def model(self):
         if self._model is None:
-            from sentence_transformers import SentenceTransformer
-            self._model = SentenceTransformer("all-MiniLM-L6-v2")
+            from fastembed import TextEmbedding
+            # FastEmbed uses "BAAI/bge-small-en-v1.5" by default which is better, 
+            # but to keep compatibility with existing vectors (if any), we should try to match.
+            # However, for a fresh deploy, default is fine. 
+            # Let's use the lightweight default.
+            self._model = TextEmbedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
         return self._model
 
     def find_resources(self, query: str, limit: int = 3) -> list[Resource]:
@@ -24,7 +28,8 @@ class ResourceAgent:
         
         # 1. Search Qdrant
         try:
-            query_vector = self.model.encode(query, convert_to_numpy=True).tolist()
+            # FastEmbed returns a generator of vectors
+            query_vector = list(self.model.embed(query))[0]
             search_results = self.qdrant_client.query_points(
                 collection_name=COLLECTION_NAME,
                 query=query_vector,
