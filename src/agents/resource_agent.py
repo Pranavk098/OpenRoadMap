@@ -1,4 +1,3 @@
-from sentence_transformers import SentenceTransformer
 from duckduckgo_search import DDGS
 from ..dependencies import get_qdrant_client, COLLECTION_NAME
 from ..models import Resource
@@ -13,6 +12,7 @@ class ResourceAgent:
     @property
     def model(self):
         if self._model is None:
+            from sentence_transformers import SentenceTransformer
             self._model = SentenceTransformer("all-MiniLM-L6-v2")
         return self._model
 
