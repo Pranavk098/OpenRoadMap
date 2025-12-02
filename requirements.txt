@@ -8,7 +8,4 @@ transformers>=4.45.0
 huggingface-hub>=0.25.0,<1.0
 python-dotenv
 duckduckgo-search
-bert-score
-rouge-score
-scikit-learn
 torch

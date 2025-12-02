@@ -1,8 +1,4 @@
 from ..models import RoadmapResponse
-from bert_score import score as bert_score
-from rouge_score import rouge_scorer
-from sklearn.metrics import ndcg_score
-import numpy as np
 import warnings
 
 # Suppress warnings for cleaner output
@@ -10,7 +6,15 @@ warnings.filterwarnings("ignore")
 
 class EvaluationAgent:
     def __init__(self):
-        self.rouge_scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
+        # Lazy load rouge_scorer only when needed or initialize as None
+        self._rouge_scorer = None
+
+    @property
+    def rouge_scorer(self):
+        if self._rouge_scorer is None:
+            from rouge_score import rouge_scorer
+            self._rouge_scorer = rouge_scorer.RougeScorer(['rougeL'], use_stemmer=True)
+        return self._rouge_scorer
 
     def evaluate_roadmap_structure(self, generated_roadmap: RoadmapResponse, ground_truth_topics: list[str]) -> dict:
         """
@@ -30,6 +34,7 @@ class EvaluationAgent:
         # We compare the list of topics. If lengths differ, we might need to align them or just compare as strings.
         # For simplicity, we compare the full sequence string.
         try:
+            from bert_score import score as bert_score
             P, R, F1 = bert_score([gen_seq], [ref_seq], lang="en", verbose=False)
             bert_f1 = F1.mean().item()
         except Exception as e:
@@ -72,6 +77,7 @@ class EvaluationAgent:
         # Calculate NDCG
         # ndcg_score expects 2D arrays (samples x items)
         try:
+            from sklearn.metrics import ndcg_score
             ndcg_k = ndcg_score([ideal_relevance], [relevance_scores], k=k)
         except Exception as e:
             print(f"NDCG calculation failed: {e}")
