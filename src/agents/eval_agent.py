@@ -1,4 +1,7 @@
-from ..models import RoadmapResponse
+try:
+    from src.models import RoadmapResponse
+except ImportError:
+    from ..models import RoadmapResponse
 import warnings
 
 # Suppress warnings for cleaner output
@@ -48,37 +51,48 @@ class EvaluationAgent:
             "ground_truth_topics": ground_truth_topics
         }
 
-    def evaluate_resources(self, retrieved_resources: list[str], relevant_resources: list[str], k: int = 5) -> dict:
+    def evaluate_resources(self, retrieved_resources: list[str], relevant_resources: dict[str, int] | list[str], k: int = 5) -> dict:
         """
         Evaluates resource retrieval using Recall@k and NDCG@k.
         retrieved_resources: List of URLs/IDs retrieved by the system (ranked).
-        relevant_resources: Set/List of relevant URLs/IDs (ground truth).
+        relevant_resources: Dictionary {id: score} (graded) OR List [id] (binary).
         """
         # Truncate to top-k
         top_k = retrieved_resources[:k]
         
+        # Normalize relevant_resources to dict {id: score}
+        if isinstance(relevant_resources, list):
+            relevant_resources = {res: 1 for res in relevant_resources}
+            
         # 1. Recall@k
-        # Count how many relevant items are in the top-k
-        hits = sum(1 for res in top_k if res in relevant_resources)
-        total_relevant = len(relevant_resources)
+        # Count how many relevant items (score > 0) are in the top-k
+        hits = sum(1 for res in top_k if res in relevant_resources and relevant_resources[res] > 0)
+        total_relevant = sum(1 for score in relevant_resources.values() if score > 0)
         recall_k = hits / total_relevant if total_relevant > 0 else 0.0
 
         # 2. NDCG@k
-        # Create binary relevance array for top-k
-        relevance_scores = [1 if res in relevant_resources else 0 for res in top_k]
+        # Create relevance array for top-k
+        relevance_scores = [relevant_resources.get(res, 0) for res in top_k]
         
         # Pad with zeros if less than k items retrieved
         if len(relevance_scores) < k:
             relevance_scores += [0] * (k - len(relevance_scores))
             
-        # Ideal relevance (all 1s for the number of relevant items found, or min(k, total_relevant))
-        ideal_relevance = [1] * min(k, total_relevant) + [0] * (k - min(k, total_relevant))
+        # Ideal relevance: Sort all relevant scores descending and take top k
+        all_relevant_scores = sorted([s for s in relevant_resources.values() if s > 0], reverse=True)
+        ideal_relevance = all_relevant_scores[:k]
+        # Pad ideal if needed
+        if len(ideal_relevance) < k:
+            ideal_relevance += [0] * (k - len(ideal_relevance))
         
         # Calculate NDCG
-        # ndcg_score expects 2D arrays (samples x items)
         try:
             from sklearn.metrics import ndcg_score
-            ndcg_k = ndcg_score([ideal_relevance], [relevance_scores], k=k)
+            # ndcg_score requires at least one relevant item in y_true (ideal)
+            if sum(ideal_relevance) == 0:
+                ndcg_k = 0.0
+            else:
+                ndcg_k = ndcg_score([ideal_relevance], [relevance_scores], k=k)
         except Exception as e:
             print(f"NDCG calculation failed: {e}")
             ndcg_k = 0.0

@@ -1,16 +1,19 @@
-import json
+import sys
 import os
+
+# Add src to path to allow imports
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
+
+import json
 from sentence_transformers import SentenceTransformer
-from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from dotenv import load_dotenv
+from dependencies import get_qdrant_client, COLLECTION_NAME
 
 load_dotenv()
 
 # Configuration
 INPUT_FILE = os.path.join("data", "processed", "unified_corpus.json")
-COLLECTION_NAME = "educational_resources"
-QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 MODEL_NAME = "all-MiniLM-L6-v2"
 
 def vectorize_corpus():
@@ -23,10 +26,13 @@ def vectorize_corpus():
         corpus = json.load(f)
         
     print(f"Loading model {MODEL_NAME}...")
-    model = SentenceTransformer(MODEL_NAME)
+    # Use FastEmbed for consistency with backend
+    from fastembed import TextEmbedding
+    # Use BAAI/bge-small-en-v1.5 which is supported and high quality (384 dim)
+    model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
     
-    print(f"Connecting to Qdrant at {QDRANT_URL}...")
-    client = QdrantClient(url=QDRANT_URL)
+    print(f"Connecting to Qdrant...")
+    client = get_qdrant_client()
     
     # Recreate collection
     client.recreate_collection(
@@ -42,8 +48,10 @@ def vectorize_corpus():
         batch = corpus[i:i+batch_size]
         
         # Prepare text for embedding (Title + Description)
+        # Prepare text for embedding (Title + Description)
         texts = [f"{item['title']}: {item['description']}" for item in batch]
-        embeddings = model.encode(texts)
+        # FastEmbed returns a generator, convert to list
+        embeddings = list(model.embed(texts))
         
         points = []
         for j, item in enumerate(batch):

@@ -121,7 +121,7 @@ ROADMAPS = [
 ]
 
 def main():
-    output_dir = Path(__file__).parent.parent / 'data' / 'manual'
+    output_dir = Path(__file__).parent.parent.parent / 'data' / 'manual'
     output_dir.mkdir(parents=True, exist_ok=True)
 
     for roadmap in ROADMAPS:

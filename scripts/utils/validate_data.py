@@ -21,7 +21,7 @@ def validate_file(file_path):
         return False
 
 def main():
-    base_dir = Path(__file__).parent.parent / 'data'
+    base_dir = Path(__file__).parent.parent.parent / 'data'
     if not base_dir.exists():
         print(f"Data directory not found: {base_dir}")
         return

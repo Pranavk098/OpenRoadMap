@@ -1,0 +1,662 @@
+[
+  {
+    "query": "Preparing to Manage Human Resources University of Minnesota",
+    "relevant_resources": {
+      "749697b3-f678-4e67-a5d5-0ee232a30035": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Preparing to Manage Human Resources",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Human Resources management course",
+    "relevant_resources": {
+      "749697b3-f678-4e67-a5d5-0ee232a30035": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Preparing to Manage Human Resources",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "University of Minnesota business courses",
+    "relevant_resources": {
+      "749697b3-f678-4e67-a5d5-0ee232a30035": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Preparing to Manage Human Resources",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Gesti\u00f3n de organizaciones efectivas Pontificia Universidad Cat\u00f3lica de Chile",
+    "relevant_resources": {
+      "6bb9d6b3-3f14-462f-bb42-97a071f5da69": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Gesti\u00f3n de organizaciones efectivas",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Effective organizations management course Chile",
+    "relevant_resources": {
+      "6bb9d6b3-3f14-462f-bb42-97a071f5da69": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Gesti\u00f3n de organizaciones efectivas",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Best business courses in South America",
+    "relevant_resources": {
+      "6bb9d6b3-3f14-462f-bb42-97a071f5da69": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Gesti\u00f3n de organizaciones efectivas",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Learning resource about unknown title",
+    "relevant_resources": {
+      "e9a6ea23-9d56-4851-8327-5b3d20242258": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Resource description unknown",
+    "relevant_resources": {
+      "e9a6ea23-9d56-4851-8327-5b3d20242258": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Educational material on unidentified topic",
+    "relevant_resources": {
+      "e9a6ea23-9d56-4851-8327-5b3d20242258": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Wonders of Ancient Egypt University of Pennsylvania",
+    "relevant_resources": {
+      "e260b9b7-ab75-4b3e-a43f-feef5b96e970": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Wonders of Ancient Egypt",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Ancient Egypt history course",
+    "relevant_resources": {
+      "e260b9b7-ab75-4b3e-a43f-feef5b96e970": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Wonders of Ancient Egypt",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "University of Pennsylvania online courses",
+    "relevant_resources": {
+      "e260b9b7-ab75-4b3e-a43f-feef5b96e970": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Wonders of Ancient Egypt",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "COVID-19 CME eligible course",
+    "relevant_resources": {
+      "8ba0d24f-4e42-4cf8-9c47-964def84bd9b": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "COVID-19: What You Need to Know (CME Eligible)",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Osmosis COVID-19 beginner course",
+    "relevant_resources": {
+      "8ba0d24f-4e42-4cf8-9c47-964def84bd9b": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "COVID-19: What You Need to Know (CME Eligible)",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "What to know about COVID-19",
+    "relevant_resources": {
+      "8ba0d24f-4e42-4cf8-9c47-964def84bd9b": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "COVID-19: What You Need to Know (CME Eligible)",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Unknown Title learning resource",
+    "relevant_resources": {
+      "cd3b88f4-1915-4ab0-97d3-6bc244078198": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Resource description Unknown Title",
+    "relevant_resources": {
+      "cd3b88f4-1915-4ab0-97d3-6bc244078198": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Educational material on unknown topics",
+    "relevant_resources": {
+      "cd3b88f4-1915-4ab0-97d3-6bc244078198": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Learning resource with unknown title",
+    "relevant_resources": {
+      "e9592d8f-873d-492a-8408-fc975154a444": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Resource description unknown",
+    "relevant_resources": {
+      "e9592d8f-873d-492a-8408-fc975154a444": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Educational material on unidentified subject",
+    "relevant_resources": {
+      "e9592d8f-873d-492a-8408-fc975154a444": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Power Electronics University of Colorado Boulder",
+    "relevant_resources": {
+      "ed515db0-e036-4099-8864-0f3f5fb15743": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Power Electronics",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Intermediate Power Electronics course",
+    "relevant_resources": {
+      "ed515db0-e036-4099-8864-0f3f5fb15743": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Power Electronics",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Electrical engineering resources",
+    "relevant_resources": {
+      "ed515db0-e036-4099-8864-0f3f5fb15743": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Power Electronics",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "deeplearning.ai AI for Medicine",
+    "relevant_resources": {
+      "15367a36-cb06-46d2-945b-9a38c332e1c7": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "AI for Medicine",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "AI in healthcare course",
+    "relevant_resources": {
+      "15367a36-cb06-46d2-945b-9a38c332e1c7": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "AI for Medicine",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Machine learning applications in medicine",
+    "relevant_resources": {
+      "15367a36-cb06-46d2-945b-9a38c332e1c7": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "AI for Medicine",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Introduction to Cyber Attacks New York University",
+    "relevant_resources": {
+      "2a2d19e8-d61b-41df-859a-122948c301aa": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Introduction to Cyber Attacks",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Cyber security course beginner level",
+    "relevant_resources": {
+      "2a2d19e8-d61b-41df-859a-122948c301aa": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Introduction to Cyber Attacks",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Online courses in technology",
+    "relevant_resources": {
+      "2a2d19e8-d61b-41df-859a-122948c301aa": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Introduction to Cyber Attacks",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "International Women's Health and Human Rights Stanford University",
+    "relevant_resources": {
+      "7a159169-02bf-46fd-b7a7-c3710187f192": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "International Women's Health and Human Rights",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Women's health and human rights course",
+    "relevant_resources": {
+      "7a159169-02bf-46fd-b7a7-c3710187f192": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "International Women's Health and Human Rights",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Human rights in healthcare",
+    "relevant_resources": {
+      "7a159169-02bf-46fd-b7a7-c3710187f192": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "International Women's Health and Human Rights",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Compassionate Leadership Through Service Learning with Jane Goodall",
+    "relevant_resources": {
+      "139af2bf-ec6c-415b-8110-946045c45cd6": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Compassionate Leadership Through Service Learning with Jane Goodall and Roots & Shoots",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Roots & Shoots service learning",
+    "relevant_resources": {
+      "139af2bf-ec6c-415b-8110-946045c45cd6": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Compassionate Leadership Through Service Learning with Jane Goodall and Roots & Shoots",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "University of Colorado Boulder service learning",
+    "relevant_resources": {
+      "139af2bf-ec6c-415b-8110-946045c45cd6": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Compassionate Leadership Through Service Learning with Jane Goodall and Roots & Shoots",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Fundamentals of Engineering Exam Review Georgia Tech",
+    "relevant_resources": {
+      "b8412ca3-58b7-47b6-97d7-b2a1e71632bb": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Fundamentals of Engineering Exam Review",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Engineering exam preparation",
+    "relevant_resources": {
+      "b8412ca3-58b7-47b6-97d7-b2a1e71632bb": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Fundamentals of Engineering Exam Review",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Georgia Tech resources for engineering students",
+    "relevant_resources": {
+      "b8412ca3-58b7-47b6-97d7-b2a1e71632bb": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Fundamentals of Engineering Exam Review",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Learning resource on Unknown Title",
+    "relevant_resources": {
+      "be90052b-c62f-4c43-87ae-4ee77338b0f4": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Resource about unknown topics",
+    "relevant_resources": {
+      "be90052b-c62f-4c43-87ae-4ee77338b0f4": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Educational materials for students",
+    "relevant_resources": {
+      "be90052b-c62f-4c43-87ae-4ee77338b0f4": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "University of London probability and statistics course",
+    "relevant_resources": {
+      "ca211231-28e0-4567-980d-f061e33d3985": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Probability and Statistics: To p or not to p?",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner statistics online course",
+    "relevant_resources": {
+      "ca211231-28e0-4567-980d-f061e33d3985": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Probability and Statistics: To p or not to p?",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "data analysis learning resources",
+    "relevant_resources": {
+      "ca211231-28e0-4567-980d-f061e33d3985": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Probability and Statistics: To p or not to p?",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Learning resource Unknown Title",
+    "relevant_resources": {
+      "8a17fc91-3776-4f7b-867f-e83902f07c57": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Resource on unknown topics",
+    "relevant_resources": {
+      "8a17fc91-3776-4f7b-867f-e83902f07c57": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Educational materials",
+    "relevant_resources": {
+      "8a17fc91-3776-4f7b-867f-e83902f07c57": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Unknown Title",
+      "source": "edX"
+    }
+  },
+  {
+    "query": "Advanced Machine Learning National Research University",
+    "relevant_resources": {
+      "ed51672a-6fdc-4b48-a46f-aa7297ae7b30": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Advanced Machine Learning",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Higher School of Economics machine learning course",
+    "relevant_resources": {
+      "ed51672a-6fdc-4b48-a46f-aa7297ae7b30": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Advanced Machine Learning",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Rating of advanced online courses",
+    "relevant_resources": {
+      "ed51672a-6fdc-4b48-a46f-aa7297ae7b30": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Advanced Machine Learning",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "AWS Fundamentals: Migrating to the Cloud",
+    "relevant_resources": {
+      "4869a41f-ff8a-4b69-b084-78d478b3d546": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "AWS Fundamentals: Migrating to the Cloud",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Amazon Web Services cloud migration",
+    "relevant_resources": {
+      "4869a41f-ff8a-4b69-b084-78d478b3d546": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "AWS Fundamentals: Migrating to the Cloud",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Intermediate cloud computing course",
+    "relevant_resources": {
+      "4869a41f-ff8a-4b69-b084-78d478b3d546": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "AWS Fundamentals: Migrating to the Cloud",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Actualizaci\u00f3n en el manejo del paciente con diabetes mellitus tipo 2",
+    "relevant_resources": {
+      "3cf7065f-2d0e-4c00-8c40-168b839717d9": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Actualizaci\u00f3n en el manejo del paciente con diabetes mellitus tipo 2",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Manejo del paciente con diabetes mellitus tipo 2",
+    "relevant_resources": {
+      "3cf7065f-2d0e-4c00-8c40-168b839717d9": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Actualizaci\u00f3n en el manejo del paciente con diabetes mellitus tipo 2",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Diabetes mellitus tipo 2 tratamiento",
+    "relevant_resources": {
+      "3cf7065f-2d0e-4c00-8c40-168b839717d9": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Actualizaci\u00f3n en el manejo del paciente con diabetes mellitus tipo 2",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Instructional Methods in Health Professions Education University of Michigan",
+    "relevant_resources": {
+      "2a2ae7f3-f9c9-4c49-ad9a-05ad942762f7": 3
+    },
+    "difficulty": "easy",
+    "source_item": {
+      "title": "Instructional Methods in Health Professions Education",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "Health Professions Education methods",
+    "relevant_resources": {
+      "2a2ae7f3-f9c9-4c49-ad9a-05ad942762f7": 2
+    },
+    "difficulty": "medium",
+    "source_item": {
+      "title": "Instructional Methods in Health Professions Education",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "University of Michigan educational resources",
+    "relevant_resources": {
+      "2a2ae7f3-f9c9-4c49-ad9a-05ad942762f7": 1
+    },
+    "difficulty": "hard",
+    "source_item": {
+      "title": "Instructional Methods in Health Professions Education",
+      "source": "Coursera"
+    }
+  }
+]
