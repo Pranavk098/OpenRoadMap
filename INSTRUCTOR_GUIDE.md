@@ -35,13 +35,15 @@ The backend is built with **FastAPI** and uses **Qdrant** (Vector DB) and **Fast
     ```
 
 3.  **Environment Configuration**:
-    *   Create a `.env` file in the root directory.
-    *   Add your OpenAI API Key (required for the Agentic features):
-        ```env
-        OPENAI_API_KEY=sk-your-key-here
-        QDRANT_URL=:memory:  # Use in-memory Qdrant for local testing, or a cloud URL
+    *   **Copy the template file**:
+        ```bash
+        cp .env.example .env
+        # Windows Command Prompt:
+        copy .env.example .env
         ```
-    *   *Note: If you want to use Qdrant Cloud, provide `QDRANT_URL` and `QDRANT_API_KEY`.*
+    *   **Edit `.env`**:
+        *   Add your `OPENAI_API_KEY` (Required).
+        *   (Optional) Update `QDRANT_URL` if you aren't using the default local or cloud setting.
 
 ### 3. Frontend Setup
 The frontend is built with **React** and **Vite**.
