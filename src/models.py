@@ -17,7 +17,9 @@ class RoadmapNode(BaseModel):
     description: str
     resources: List[Resource] = []
     prerequisites: List[str] = []
+    progress: Optional[int] = 0  # 0-100 percent
 
 class RoadmapResponse(BaseModel):
     goal: str
     nodes: List[RoadmapNode]
+    github_repo: Optional[str] = None

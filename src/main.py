@@ -17,11 +17,14 @@ app.add_middleware(
 
 @app.post("/generate-roadmap", response_model=RoadmapResponse)
 async def create_roadmap(request: RoadmapRequest):
+    # Input validation
+    if not hasattr(request, 'goal') or not isinstance(request.goal, str) or not request.goal.strip():
+        raise HTTPException(status_code=422, detail="The 'goal' field is required and must be a non-empty string.")
     try:
         roadmap = generate_roadmap(request.goal)
         return roadmap
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 @app.get("/health")
 async def health_check():
