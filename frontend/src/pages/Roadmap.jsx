@@ -63,6 +63,15 @@ const Roadmap = () => {
         topic: 'Python Data Science (Demo)'
     };
 
+    // GitHub repo integration (from roadmapData.github_repo)
+    const [githubRepo, setGithubRepo] = useState(roadmapData.github_repo || '');
+
+    // Progress tracking (per node, stored in localStorage)
+    const [progressMap, setProgressMap] = useState(() => {
+        const saved = localStorage.getItem(`progress_${topic}`);
+        return saved ? JSON.parse(saved) : {};
+    });
+
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const [selectedNode, setSelectedNode] = useState(null);
@@ -113,7 +122,12 @@ const Roadmap = () => {
             newNodes.push({
                 id: node.id,
                 position: { x: count * 250, y: level * 150 }, // Simple grid layout
-                data: { label: node.title, description: node.description, resources: node.resources },
+                data: {
+                    label: node.title,
+                    description: node.description,
+                    resources: node.resources,
+                    progress: progressMap[node.id] || node.progress || 0
+                },
                 style: {
                     background: '#fef08a', // Yellow
                     border: '2px solid #000', // Black border
@@ -146,7 +160,7 @@ const Roadmap = () => {
 
         setNodes(newNodes);
         setEdges(newEdges);
-    }, [roadmapData, setNodes, setEdges]);
+    }, [roadmapData, setNodes, setEdges, progressMap]);
 
     const onNodeClick = useCallback((event, node) => {
         if (node && node.data) {
@@ -215,6 +229,28 @@ const Roadmap = () => {
                             </p>
                         </div>
 
+                        {/* Progress Tracking UI */}
+                        <div className="flex items-center gap-4">
+                            <label className="font-semibold text-slate-700">Progress:</label>
+                            <input
+                                type="range"
+                                min={0}
+                                max={100}
+                                step={10}
+                                value={progressMap[selectedNode.id] || selectedNode.data.progress || 0}
+                                onChange={e => {
+                                    const val = parseInt(e.target.value, 10);
+                                    setProgressMap(prev => {
+                                        const updated = { ...prev, [selectedNode.id]: val };
+                                        localStorage.setItem(`progress_${topic}`, JSON.stringify(updated));
+                                        return updated;
+                                    });
+                                }}
+                                className="w-40"
+                            />
+                            <span className="text-slate-600 font-medium">{progressMap[selectedNode.id] || selectedNode.data.progress || 0}%</span>
+                        </div>
+
                         <div>
                             <h3 className="font-semibold text-slate-700 mb-3 flex items-center gap-2">
                                 <Book size={18} /> Recommended Resources
@@ -240,6 +276,30 @@ const Roadmap = () => {
                     </div>
                 </div>
             )}
+
+            {/* GitHub Repo Integration UI */}
+            <div className="absolute top-4 right-4 z-10">
+                <div className="bg-white px-4 py-2 rounded-lg shadow border border-slate-200 flex items-center gap-2">
+                    <span className="font-semibold text-slate-700">GitHub Repo:</span>
+                    <input
+                        type="text"
+                        value={githubRepo}
+                        onChange={e => setGithubRepo(e.target.value)}
+                        placeholder="user/repo or URL"
+                        className="border rounded px-2 py-1 text-sm w-56"
+                    />
+                    {githubRepo && (
+                        <a
+                            href={githubRepo.startsWith('http') ? githubRepo : `https://github.com/${githubRepo}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline text-sm"
+                        >
+                            View
+                        </a>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
