@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-24T06:06:14.405006+00:00",
-  "commit_sha": "db4cf8d1fd538fe80bfebd2d1b44bf8a62e5f83b",
+  "generated_at": "2026-08-24T08:40:27.278034+00:00",
+  "commit_sha": "4237865507c0f750cad0ed8280ec771fcf65fafa",
   "retrieval": {
     "known_item_search": {
       "description": "Query = the corpus item's own title (near-exact match). Easy / known-item search.",
@@ -13,12 +13,383 @@
       "mmr_reranked": null
     }
   },
-  "generation": null,
+  "generation": {
+    "coverage": 0.7398989898989897,
+    "precision": 0.7424242424242423,
+    "rouge_l": 0.14335352844386515,
+    "bert_score": 0.836872626434673,
+    "roadmaps_evaluated": 11,
+    "per_skill": [
+      {
+        "skill": "Agile Project Management",
+        "metrics": {
+          "coverage": 0.3333333333333333,
+          "precision": 0.3333333333333333,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.04761904761904761,
+          "bert_score": 0.8213152289390564,
+          "generated_topics": [
+            "Introduction to Agile",
+            "Scrum Framework Overview",
+            "Writing Effective User Stories",
+            "Sprint Planning Techniques",
+            "Agile Project Management Tools",
+            "Conducting Agile Sprints",
+            "Measuring Agile Success",
+            "Scaling Agile Practices",
+            "Agile Project Management Certification"
+          ],
+          "ground_truth_topics": [
+            "Values",
+            "Principles",
+            "Waterfall vs Agile",
+            "Roles",
+            "Events",
+            "Artifacts",
+            "WIP Limits",
+            "Flow",
+            "Kaizen"
+          ]
+        }
+      },
+      {
+        "skill": "Digital Illustration",
+        "metrics": {
+          "coverage": 0.7777777777777778,
+          "precision": 0.7777777777777778,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.125,
+          "bert_score": 0.8278012871742249,
+          "generated_topics": [
+            "Introduction to Digital Illustration",
+            "Choosing and Setting Up Software",
+            "Fundamentals of Drawing",
+            "Color Theory and Application",
+            "Creating Basic Illustrations",
+            "Advanced Techniques in Digital Illustration",
+            "Character Design Fundamentals",
+            "Creating a Portfolio",
+            "Freelancing and Marketing Yourself"
+          ],
+          "ground_truth_topics": [
+            "Layers",
+            "Brushes",
+            "Masking",
+            "Gesture Drawing",
+            "Clean Line Art",
+            "Anatomy",
+            "Color Theory",
+            "Shading",
+            "Blending Modes"
+          ]
+        }
+      },
+      {
+        "skill": "Docker & Kubernetes",
+        "metrics": {
+          "coverage": 0.6666666666666666,
+          "precision": 0.6666666666666666,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.25531914893617014,
+          "bert_score": 0.8619254231452942,
+          "generated_topics": [
+            "Introduction to Docker",
+            "Docker Commands & Basic Workflows",
+            "Dockerfile & Building Images",
+            "Docker Compose",
+            "Introduction to Kubernetes",
+            "Kubernetes Basics: Pods, Services, and Deploymen",
+            "Kubernetes Networking & Storage",
+            "Deploying Applications on Kubernetes",
+            "Kubernetes Cluster Management"
+          ],
+          "ground_truth_topics": [
+            "Containers vs VMs",
+            "Dockerfile",
+            "Docker Compose",
+            "Kubernetes Architecture",
+            "Pods",
+            "Services",
+            "Helm Charts",
+            "Ingress Controllers",
+            "Persistent Volumes"
+          ]
+        }
+      },
+      {
+        "skill": "Introduction to Astrophysics",
+        "metrics": {
+          "coverage": 0.8888888888888888,
+          "precision": 0.8888888888888888,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.08333333333333334,
+          "bert_score": 0.8228774070739746,
+          "generated_topics": [
+            "Basic Physics Principles",
+            "Mathematics for Astrophysics",
+            "Introduction to Astronomy",
+            "Properties of Stars",
+            "Galactic Structure and Dynamics",
+            "Cosmology Basics",
+            "Black Holes and Neutron Stars",
+            "Exoplanets and Habitability",
+            "Current Topics in Astrophysics"
+          ],
+          "ground_truth_topics": [
+            "Star Formation",
+            "Fusion",
+            "Stellar Evolution",
+            "Milky Way Structure",
+            "Dark Matter",
+            "Galaxy Types",
+            "Big Bang",
+            "Expansion of Universe",
+            "CMB"
+          ]
+        }
+      },
+      {
+        "skill": "Molecular Biology Basics",
+        "metrics": {
+          "coverage": 0.8888888888888888,
+          "precision": 1.0,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.11320754716981132,
+          "bert_score": 0.8309586048126221,
+          "generated_topics": [
+            "Introduction to Molecular Biology",
+            "DNA Structure and Function",
+            "RNA Types and Functions",
+            "Protein Synthesis: Transcription and Translation",
+            "Basic Genetic Engineering Techniques",
+            "Cellular Biology and the Role of Molecular Inter",
+            "Applications of Molecular Biology",
+            "Experimental Design and Data Analysis in MB"
+          ],
+          "ground_truth_topics": [
+            "Nucleotides",
+            "Double Helix",
+            "Replication",
+            "Transcription",
+            "Translation",
+            "Protein Synthesis",
+            "Mendelian Genetics",
+            "Mutations",
+            "Gene Regulation"
+          ]
+        }
+      },
+      {
+        "skill": "React Development",
+        "metrics": {
+          "coverage": 0.75,
+          "precision": 1.0,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.163265306122449,
+          "bert_score": 0.8506267070770264,
+          "generated_topics": [
+            "Introduction to JavaScript",
+            "Understanding React Basics",
+            "Working with JSX",
+            "State Management in React",
+            "Component Lifecycle",
+            "React Router for Navigation",
+            "Styling in React",
+            "State Management Libraries",
+            "Building and Deploying React Apps"
+          ],
+          "ground_truth_topics": [
+            "JSX",
+            "Components",
+            "Props & State",
+            "useState",
+            "useEffect",
+            "Custom Hooks",
+            "React Router",
+            "Context API",
+            "Redux Toolkit",
+            "HOCs",
+            "Render Props",
+            "Performance Optimization"
+          ]
+        }
+      },
+      {
+        "skill": "Python Programming",
+        "metrics": {
+          "coverage": 0.8333333333333334,
+          "precision": 0.5,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.05555555555555555,
+          "bert_score": 0.8167281746864319,
+          "generated_topics": [
+            "Introduction to Python",
+            "Control Structures in Python",
+            "Functions and Modules",
+            "Data Structures",
+            "File Handling",
+            "Object-Oriented Programming",
+            "Testing and Debugging",
+            "Web Development with Flask",
+            "Data Analysis with Pandas",
+            "Final Project"
+          ],
+          "ground_truth_topics": [
+            "Variables",
+            "Loops",
+            "Functions",
+            "Lists",
+            "Dictionaries",
+            "Sets"
+          ]
+        }
+      },
+      {
+        "skill": "Screenwriting",
+        "metrics": {
+          "coverage": 0.5555555555555556,
+          "precision": 0.5555555555555556,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.08888888888888889,
+          "bert_score": 0.8269919157028198,
+          "generated_topics": [
+            "Introduction to Screenwriting",
+            "Understanding Story Structure",
+            "Character Development",
+            "Writing Effective Dialogue",
+            "Exploring Genres in Screenwriting",
+            "Screenplay Formatting",
+            "The Revision Process",
+            "Pitching Your Screenplay",
+            "Insights into the Film Industry"
+          ],
+          "ground_truth_topics": [
+            "Sluglines",
+            "Action Lines",
+            "Dialogue",
+            "Three-Act Structure",
+            "The Hero's Journey",
+            "Plot Points",
+            "Character Arcs",
+            "Backstory",
+            "Voice"
+          ]
+        }
+      },
+      {
+        "skill": "SEO Fundamentals",
+        "metrics": {
+          "coverage": 0.7777777777777778,
+          "precision": 0.7777777777777778,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.2380952380952381,
+          "bert_score": 0.8509484529495239,
+          "generated_topics": [
+            "Introduction to SEO",
+            "Keyword Research",
+            "On-Page SEO Techniques",
+            "Technical SEO",
+            "Content Optimization",
+            "Link Building Strategies",
+            "Measuring SEO Success",
+            "Local SEO",
+            "SEO Trends and Updates"
+          ],
+          "ground_truth_topics": [
+            "Search Volume",
+            "Intent",
+            "Long-tail Keywords",
+            "Title Tags",
+            "Meta Descriptions",
+            "Content Optimization",
+            "Backlinks",
+            "Domain Authority",
+            "Local SEO"
+          ]
+        }
+      },
+      {
+        "skill": "Sourdough Bread Baking",
+        "metrics": {
+          "coverage": 0.7777777777777778,
+          "precision": 0.7777777777777778,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.2105263157894737,
+          "bert_score": 0.8509871959686279,
+          "generated_topics": [
+            "Understanding Sourdough",
+            "Sourdough Starter Creation",
+            "Feeding the Starter",
+            "Basic Sourdough Recipe",
+            "Kneading Techniques",
+            "Shaping the Dough",
+            "Scoring the Bread",
+            "Baking the Sourdough",
+            "Troubleshooting Common Issues"
+          ],
+          "ground_truth_topics": [
+            "Creating Starter",
+            "Feeding Schedule",
+            "Discard",
+            "Autolyse",
+            "Folding",
+            "Bulk Fermentation",
+            "Shaping",
+            "Scoring",
+            "Oven Spring"
+          ]
+        }
+      },
+      {
+        "skill": "Urban Gardening",
+        "metrics": {
+          "coverage": 0.8888888888888888,
+          "precision": 0.8888888888888888,
+          "primary_metric": "bipartite_topic_alignment",
+          "secondary_metrics_note": "rouge_l and bert_score are secondary/reference metrics only. Both are order/length-sensitive sequence metrics applied to what is really a set-coverage comparison; coverage/precision above are primary.",
+          "rouge_l": 0.196078431372549,
+          "bert_score": 0.8444384932518005,
+          "generated_topics": [
+            "Introduction to Urban Gardening",
+            "Site Assessment and Planning",
+            "Choosing the Right Plants",
+            "Soil Preparation and Composting",
+            "Container Gardening Techniques",
+            "Watering and Irrigation Systems",
+            "Pest Management in Urban Gardens",
+            "Harvesting and Maintenance",
+            "Community Gardening and Resources"
+          ],
+          "ground_truth_topics": [
+            "Space Assessment",
+            "Light Conditions",
+            "Container Selection",
+            "Potting Mix",
+            "Seeds vs Starts",
+            "Watering",
+            "Pruning",
+            "Pest Control",
+            "Harvesting"
+          ]
+        }
+      }
+    ]
+  },
   "notes": [
-    "retrieval.known_item_search.dense_baseline unavailable: Qdrant not reachable at http://localhost:6333: [WinError 10061] No connection could be made because the target machine actively refused it",
-    "retrieval.known_item_search.mmr_reranked unavailable: Qdrant not reachable at http://localhost:6333: [WinError 10061] No connection could be made because the target machine actively refused it",
-    "retrieval.realistic_learner_phrased.dense_baseline unavailable: Qdrant not reachable at http://localhost:6333: [WinError 10061] No connection could be made because the target machine actively refused it",
-    "retrieval.realistic_learner_phrased.mmr_reranked unavailable: Qdrant not reachable at http://localhost:6333: [WinError 10061] No connection could be made because the target machine actively refused it",
-    "generation eval unavailable: could not initialize RoadmapAgent (OPENAI_API_KEY environment variable is not set). Requires OPENAI_API_KEY."
+    "retrieval.known_item_search.dense_baseline unavailable: 'charmap' codec can't encode character '\\u0410' in position 41: character maps to <undefined>",
+    "retrieval.known_item_search.mmr_reranked unavailable: 'charmap' codec can't encode character '\\u0410' in position 41: character maps to <undefined>",
+    "retrieval.realistic_learner_phrased.dense_baseline unavailable: 'charmap' codec can't encode character '\\u0430' in position 40: character maps to <undefined>",
+    "retrieval.realistic_learner_phrased.mmr_reranked unavailable: 'charmap' codec can't encode character '\\u0430' in position 40: character maps to <undefined>",
+    "generation eval: skipped curated_resources.json (not a roadmap ground-truth document)."
   ]
 }

@@ -14,11 +14,9 @@ logger = structlog.get_logger(__name__)
 # fused with Qdrant's native RRF, then reranked with a cross-encoder.
 # All three are ONNX-runtime models via fastembed - no torch, CPU-friendly.
 #
-# BAAI/bge-base-en-v1.5 (768d) was picked over the smaller bge-small/MiniLM
-# (384d) for meaningfully better semantic retrieval quality; it's still a
-# CPU-only ONNX model with no CUDA dependency. If it turns out too slow/heavy
-# for a free-tier CPU deploy in practice, bge-small-en-v1.5 is a drop-in
-# same-shape fallback (see DECISIONS.md).
+# bge-small-en-v1.5 (384d) - the larger bge-base-en-v1.5 (768d) gave better
+# retrieval quality but OOM'd Render's free tier (512MB) once loaded twice
+# under 2 workers; see DECISIONS.md. Still a CPU-only ONNX model, no CUDA.
 DENSE_MODEL_NAME = "BAAI/bge-small-en-v1.5"
 # Sparse lexical signal: catches exact named-entity/keyword matches
 # ("PyTorch", "Kubernetes", "CS50") that a dense-only embedding can miss.
@@ -42,7 +40,7 @@ CANDIDATE_POOL_SIZE = 50
 # boundary) is used rather than a tuned magic number.
 WEAK_SCORE_THRESHOLD = 0.0
 
-WEB_SEARCH_TIMEOUT_SECONDS = 2.5
+WEB_SEARCH_TIMEOUT_SECONDS = 6.0
 WIKIPEDIA_TIMEOUT_SECONDS = 1.5
 ALLOWED_URL_SCHEMES = {"http", "https"}
 DESCRIPTION_MAX_LENGTH = 200
@@ -67,6 +65,20 @@ def _truncate(text: str, length: int = DESCRIPTION_MAX_LENGTH) -> str:
     if len(text) <= length:
         return text
     return text[:length] + "..."
+
+
+_VIDEO_HOSTS = {"youtube.com", "www.youtube.com", "youtu.be", "m.youtube.com"}
+
+
+def _resource_type_for_url(url: str) -> str:
+    """Web fallback results are otherwise all lumped under "Web Resource" -
+    tag video-hosting URLs distinctly so the UI can render/label them as
+    videos instead of generic links."""
+    try:
+        host = urllib.parse.urlparse(url).netloc.lower()
+    except ValueError:
+        return "Web Resource"
+    return "Video" if host in _VIDEO_HOSTS else "Web Resource"
 
 
 def _reformulate_query(query: str) -> str:
@@ -341,22 +353,44 @@ class ResourceAgent:
 
         # 1. DuckDuckGo (via the `ddgs` package - the maintained successor
         # to the deprecated, aggressively-rate-limited `duckduckgo-search`).
+        # A general tutorial/course query and a YouTube-restricted query run
+        # concurrently (not sequentially) so surfacing at least one video
+        # result doesn't cost extra latency - both share the same timeout
+        # budget as a single call would.
         try:
-            web_results = await asyncio.to_thread(self.ddgs.text, f"{query} tutorial course", max_results=needed)
-            if not web_results:
-                web_results = await asyncio.to_thread(self.ddgs.text, query, max_results=needed)
-            for res in web_results or []:
+            general_task = asyncio.to_thread(self.ddgs.text, f"{query} tutorial course", max_results=needed)
+            youtube_task = asyncio.to_thread(self.ddgs.text, f"{query} site:youtube.com", max_results=2)
+            general_results, youtube_results = await asyncio.gather(
+                general_task, youtube_task, return_exceptions=True
+            )
+            if isinstance(general_results, Exception):
+                logger.warning("resource_agent.ddg_general_failed", query=query, error=str(general_results))
+                general_results = []
+            if isinstance(youtube_results, Exception):
+                logger.warning("resource_agent.ddg_youtube_failed", query=query, error=str(youtube_results))
+                youtube_results = []
+
+            if not general_results and not youtube_results:
+                general_results = await asyncio.to_thread(self.ddgs.text, query, max_results=needed)
+
+            seen_urls: set[str] = set()
+            # Interleave one video result first (if found) so it isn't
+            # crowded out once `needed` (usually 3) results are filled.
+            for res in [*(youtube_results or [])[:1], *(general_results or []), *(youtube_results or [])[1:]]:
                 url = _safe_url(res.get("href", ""))
-                if not url:
+                if not url or url in seen_urls:
                     continue
+                seen_urls.add(url)
                 resources.append(
                     Resource(
                         title=res.get("title", ""),
                         url=url,
                         description=_truncate(res.get("body", "")),
-                        type="Web Resource",
+                        type=_resource_type_for_url(url),
                     )
                 )
+                if len(resources) >= needed:
+                    break
         except Exception as e:
             logger.warning("resource_agent.ddg_failed", query=query, error=str(e))
 
