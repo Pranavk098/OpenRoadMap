@@ -1,5 +1,8 @@
-import sys
+# Manual smoke test: requires a running Qdrant + network access. Not part
+# of pytest/CI — see tests/test_resource_agent.py for the mocked unit tests.
 import os
+import sys
+
 sys.path.append(os.getcwd())
 
 try:

@@ -1,8 +1,9 @@
-import pandas as pd
-import os
 import json
-import uuid
+import os
 import urllib.parse
+import uuid
+
+import pandas as pd
 
 # Configuration
 INPUT_FILE = os.path.join("data", "raw", "coursera_courses.csv")

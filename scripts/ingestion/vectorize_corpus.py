@@ -2,6 +2,7 @@ import json
 import os
 import time
 
+from dotenv import load_dotenv
 from fastembed import SparseTextEmbedding, TextEmbedding
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
@@ -15,7 +16,6 @@ from qdrant_client.models import (
     SparseVectorParams,
     VectorParams,
 )
-from dotenv import load_dotenv
 
 load_dotenv()
 

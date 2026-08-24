@@ -1,7 +1,9 @@
-from ..models import RoadmapResponse
-from ..metrics import ndcg_at_k, bipartite_topic_alignment, TOPIC_MATCH_THRESHOLD
 import warnings
+
 import numpy as np
+
+from ..metrics import TOPIC_MATCH_THRESHOLD, bipartite_topic_alignment, ndcg_at_k
+from ..models import RoadmapResponse
 
 # Suppress warnings for cleaner output
 warnings.filterwarnings("ignore")

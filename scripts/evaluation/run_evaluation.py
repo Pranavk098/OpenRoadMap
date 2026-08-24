@@ -1,21 +1,20 @@
+import glob
 import json
 import os
-import sys
-import glob
 import subprocess
+import sys
 from datetime import datetime, timezone
 
 # Add project root to path
 sys.path.append(os.getcwd())
 
-from src.agents.eval_agent import EvaluationAgent
-from src.models import RoadmapResponse, RoadmapNode
 from scripts.evaluation.evaluate_retrieval import (
-    evaluate_retrieval,
-    TOP_K,
     GROUND_TRUTH_FILE,
     GROUND_TRUTH_FILE_REALISTIC,
+    evaluate_retrieval,
 )
+from src.agents.eval_agent import EvaluationAgent
+from src.models import RoadmapNode, RoadmapResponse
 
 # Retrieval variants compared, keyed by their real, existing technique name -
 # never an invented one ("MultiFactor"/"CrossEncoder" never existed in this

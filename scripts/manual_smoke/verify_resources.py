@@ -1,10 +1,13 @@
-import sys
+# Manual smoke test: requires a running Qdrant + network access. Not part
+# of pytest/CI — see tests/test_resource_agent.py for the mocked unit tests.
 import os
+import sys
 
 # Add src to path
 sys.path.append(os.path.join(os.getcwd(), "src"))
 
 from src.agents.resource_agent import ResourceAgent
+
 
 def verify():
     agent = ResourceAgent()

@@ -2,7 +2,9 @@ import json
 import os
 import sys
 from pathlib import Path
+
 from roadmap_schema import Roadmap
+
 
 def validate_file(file_path):
     try:

@@ -1,8 +1,9 @@
-import pandas as pd
-import os
 import json
-import uuid
+import os
 import urllib.parse
+import uuid
+
+import pandas as pd
 
 # Configuration
 INPUT_FILE = os.path.join("data", "raw", "edx_courses.csv")
@@ -73,8 +74,6 @@ def ingest_edx():
         if not url or pd.isna(url):
              encoded_title = urllib.parse.quote(title)
              url = f"https://www.edx.org/search?q={encoded_title}"
-
-        institution = row.get('institution', '')
 
         # Create unified record
         record = {

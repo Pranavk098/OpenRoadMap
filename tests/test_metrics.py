@@ -1,13 +1,18 @@
 import math
-import sys
 import os
+import sys
 
 import numpy as np
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from src.metrics import dcg_at_k, ndcg_at_k, cosine_similarity_matrix, bipartite_topic_alignment
+from src.metrics import (
+    bipartite_topic_alignment,
+    cosine_similarity_matrix,
+    dcg_at_k,
+    ndcg_at_k,
+)
 
 
 def test_dcg_at_k_hand_computed():

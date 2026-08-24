@@ -1,9 +1,13 @@
-import requests
+# Manual smoke test: spins up a real server and hits the real OpenAI API.
+# Requires OPENAI_API_KEY + Qdrant running. Not part of pytest/CI.
 import json
-import time
+import os
 import subprocess
 import sys
-import os
+import time
+
+import requests
+
 
 def test_api():
     # Start the API in a subprocess

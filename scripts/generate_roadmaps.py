@@ -1,7 +1,7 @@
-import os
-import json
 import argparse
-from typing import List
+import json
+import os
+
 from roadmap_schema import Roadmap
 
 # Try to import openai, handle if missing

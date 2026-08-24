@@ -16,15 +16,15 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from .logging_config import configure_logging
-from .models import RoadmapRequest, RoadmapResponse, validate_goal_value
-from .roadmap_engine import generate_roadmap, stream_roadmap_events
 from .agents.resource_agent import (
     DENSE_MODEL_NAME,
     RERANKER_MODEL_NAME,
     SPARSE_MODEL_NAME,
     ResourceAgent,
 )
+from .logging_config import configure_logging
+from .models import RoadmapRequest, RoadmapResponse, validate_goal_value
+from .roadmap_engine import generate_roadmap, stream_roadmap_events
 
 configure_logging()
 logger = structlog.get_logger(__name__)

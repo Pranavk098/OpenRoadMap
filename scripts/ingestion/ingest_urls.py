@@ -1,8 +1,9 @@
-import requests
-from bs4 import BeautifulSoup
 import json
 import os
 import uuid
+
+import requests
+from bs4 import BeautifulSoup
 
 # Configuration
 INPUT_FILE = os.path.join("data", "manual", "urls_to_ingest.txt")

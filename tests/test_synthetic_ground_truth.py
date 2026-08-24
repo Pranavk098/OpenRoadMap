@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 # scripts/evaluation has no __init__.py (not a package) - import the module
 # directly by putting its directory on sys.path.

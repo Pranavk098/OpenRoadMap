@@ -1,7 +1,8 @@
 import os
-from qdrant_client import QdrantClient, AsyncQdrantClient
-from openai import AsyncOpenAI
+
 from dotenv import load_dotenv
+from openai import AsyncOpenAI
+from qdrant_client import AsyncQdrantClient, QdrantClient
 
 load_dotenv()
 

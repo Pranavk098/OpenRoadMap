@@ -1,8 +1,7 @@
-import sys
 import os
+import sys
 
 import pandas as pd
-import pytest
 
 # scripts/ingestion has no __init__.py (not a package) - import the modules
 # directly by putting their directory on sys.path, same way the scripts
@@ -11,7 +10,6 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts", "ing
 
 import ingest_coursera
 import ingest_edx
-
 
 # --- ingest_coursera.resolve_title ---
 

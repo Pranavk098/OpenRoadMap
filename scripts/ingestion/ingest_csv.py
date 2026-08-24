@@ -1,8 +1,9 @@
-import pandas as pd
-import os
 import json
-import uuid
+import os
 import sys
+import uuid
+
+import pandas as pd
 
 # Configuration
 # Usage: python scripts/ingestion/ingest_csv.py <path_to_csv> <source_name>

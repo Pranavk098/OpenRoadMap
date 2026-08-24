@@ -1,7 +1,7 @@
 import re
+from typing import List, Optional
 
 from pydantic import BaseModel, field_validator
-from typing import List, Optional
 
 MAX_GOAL_LENGTH = 200
 # C0 control characters and DEL. Goal is a short single-line phrase, so

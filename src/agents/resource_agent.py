@@ -5,7 +5,7 @@ import httpx
 import structlog
 from ddgs import DDGS
 
-from ..dependencies import get_async_qdrant_client, COLLECTION_NAME
+from ..dependencies import COLLECTION_NAME, get_async_qdrant_client
 from ..models import Resource
 
 logger = structlog.get_logger(__name__)
@@ -252,7 +252,13 @@ class ResourceAgent:
             return out
 
         try:
-            from qdrant_client.http.models import Fusion, FusionQuery, Prefetch, QueryRequest, SparseVector
+            from qdrant_client.http.models import (
+                Fusion,
+                FusionQuery,
+                Prefetch,
+                QueryRequest,
+                SparseVector,
+            )
 
             requests = []
             for i in valid_indices:

@@ -1,0 +1,7 @@
+# Deliberately scoped to catch real bugs and import hygiene, not to enforce
+# a full style rewrite of pre-existing code (pyupgrade/blind-except/etc.
+# would flag hundreds of pre-existing, working lines with no bug behind
+# them). E9 = syntax errors, F = pyflakes (unused imports/vars, undefined
+# names), I = import sorting.
+[lint]
+select = ["E9", "F", "I"]
