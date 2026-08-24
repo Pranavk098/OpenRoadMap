@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Loader2, AlertTriangle } from 'lucide-react';
+import { ArrowRight, GitBranch, Library, CircleCheck, CornerDownLeft, BarChart2 } from 'lucide-react';
+// Imported capitalised so the flat ESLint config (no eslint-plugin-react) still
+// sees `<Motion.div>` member-expression JSX as a use of the binding.
+import { motion as Motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { generateRoadmap, describeApiError } from '../api/client';
 
 // Builds a URL-safe slug from a topic string, e.g. "Machine Learning!" -> "machine-learning".
 const slugify = (str) =>
@@ -11,37 +13,57 @@ const slugify = (str) =>
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
 
+const POPULAR_TOPICS = ['Machine Learning', 'Web Development', 'Data Science', 'Cybersecurity', 'Photography'];
+
+// Every claim here describes something the app actually does - the DAG layout,
+// the retrieval pipeline, and the localStorage progress tracking. No invented
+// counts, logos or testimonials.
+const FEATURES = [
+    {
+        icon: GitBranch,
+        title: 'Prerequisite-aware',
+        body: 'Topics are laid out as a dependency graph, so you can see what has to come before what.',
+    },
+    {
+        icon: Library,
+        title: 'Real, checkable resources',
+        body: 'Each topic is matched against a resource index — courses, docs and videos, with links you can open.',
+    },
+    {
+        icon: CircleCheck,
+        title: 'Progress that sticks',
+        body: 'Mark topics off as you work through them. Your progress is saved in this browser, per roadmap.',
+    },
+];
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 16 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+};
+
+const stagger = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
+
 const Landing = () => {
     const [input, setInput] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [lastQuery, setLastQuery] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         document.title = 'OpenRoadMap — AI-Powered Learning Roadmaps';
     }, []);
 
-    const runGenerate = async (query) => {
+    // Navigates immediately - Roadmap.jsx owns the actual streaming
+    // generation (and its loading/error states) once there, so the graph
+    // starts appearing in ~1-2s instead of this page sitting on a spinner
+    // for the whole ~10-15s generation.
+    const goToRoadmap = (query) => {
         if (!query.trim()) return;
-
-        setError(null);
-        setIsLoading(true);
-        setLastQuery(query);
-
-        try {
-            const data = await generateRoadmap(query);
-            const slug = slugify(query);
-            sessionStorage.setItem(`roadmap:${slug}`, JSON.stringify({ roadmapData: data, topic: query }));
-            navigate(`/roadmap/${slug}`, { state: { roadmapData: data, topic: query } });
-        } catch (err) {
-            setError(describeApiError(err));
-        } finally {
-            setIsLoading(false);
-        }
+        navigate(`/roadmap/${slugify(query)}`);
     };
 
-    const handleSearch = () => runGenerate(input);
+    const handleSearch = () => goToRoadmap(input);
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -51,103 +73,137 @@ const Landing = () => {
 
     const handleTagClick = (tag) => {
         setInput(tag);
-        runGenerate(tag);
-    };
-
-    const handleRetry = () => {
-        if (lastQuery) runGenerate(lastQuery);
+        goToRoadmap(tag);
     };
 
     return (
-        <div className="flex-1 h-screen bg-white flex flex-col relative overflow-hidden font-sans">
-            {/* Background Gradients */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-purple-100 rounded-full blur-3xl opacity-60"></div>
-                <div className="absolute top-[20%] -right-[10%] w-[30%] h-[30%] bg-blue-100 rounded-full blur-3xl opacity-60"></div>
+        <div className="relative isolate flex min-h-[calc(100vh-69px)] flex-col overflow-hidden bg-white font-sans">
+            {/* Ambient background: two soft colour washes over a faint dot grid.
+                Purely decorative, and non-interactive. */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute -left-[15%] -top-[20%] h-[55%] w-[55%] rounded-full bg-primary-200/45 blur-[110px]" />
+                <div className="absolute -right-[12%] top-[8%] h-[45%] w-[45%] rounded-full bg-sky-200/45 blur-[110px]" />
+                <div className="absolute -bottom-[25%] left-[25%] h-[45%] w-[45%] rounded-full bg-teal-100/50 blur-[110px]" />
+                <div
+                    className="absolute inset-0 opacity-[0.5]"
+                    style={{
+                        backgroundImage: 'radial-gradient(circle, rgb(203 213 225 / 0.7) 1px, transparent 1px)',
+                        backgroundSize: '24px 24px',
+                        maskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%)',
+                        WebkitMaskImage: 'radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%)',
+                    }}
+                />
             </div>
 
+            <main className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-16">
+                <Motion.div variants={stagger} initial="hidden" animate="show" className="flex w-full flex-col items-center">
+                    {/* Badge */}
+                    <Motion.span
+                        variants={fadeUp}
+                        className="mb-7 inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/70 px-3.5 py-1.5 text-xs font-medium text-slate-600 shadow-sm backdrop-blur-sm"
+                    >
+                        <span className="relative flex h-1.5 w-1.5">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-400 opacity-75" />
+                            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary-600" />
+                        </span>
+                        Open source · AI-generated learning roadmaps
+                    </Motion.span>
 
+                    {/* Hero title */}
+                    <Motion.h1
+                        variants={fadeUp}
+                        className="text-center text-[2.75rem] font-bold leading-[1.05] tracking-[-0.03em] text-slate-900 sm:text-6xl"
+                    >
+                        Learn anything,
+                        <br />
+                        <span className="bg-gradient-to-r from-primary-600 via-indigo-600 to-sky-600 bg-clip-text text-transparent">
+                            in the right order.
+                        </span>
+                    </Motion.h1>
 
-            {/* Main Content */}
-            <main className="flex-1 flex flex-col items-center justify-center max-w-4xl mx-auto w-full px-6 -mt-20 relative z-10">
+                    <Motion.p
+                        variants={fadeUp}
+                        className="mt-5 max-w-xl text-center text-base leading-relaxed text-slate-500 sm:text-lg"
+                    >
+                        Name a goal and get a structured roadmap — every topic placed after its prerequisites, each one
+                        paired with real learning resources.
+                    </Motion.p>
 
-                {/* Badge */}
-                <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                    <span className="bg-purple-50 text-purple-700 px-4 py-1.5 rounded-full text-sm font-medium border border-purple-100 flex items-center gap-2 shadow-sm">
-                        🚀 AI-Powered Learning Platform
-                    </span>
-                </div>
+                    {/* Search box */}
+                    <Motion.div variants={fadeUp} className="relative mt-9 w-full max-w-2xl">
+                        <div className="group relative">
+                            <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-primary-500 via-indigo-500 to-sky-500 opacity-20 blur-lg transition duration-500 group-focus-within:opacity-45 group-hover:opacity-35" />
+                            <div className="relative flex items-center gap-2 rounded-2xl border border-slate-200/80 bg-white p-2 shadow-xl shadow-slate-900/[0.06] transition-shadow focus-within:shadow-2xl focus-within:shadow-primary-500/10">
+                                <input
+                                    type="text"
+                                    placeholder="What do you want to learn?"
+                                    value={input}
+                                    onChange={(e) => setInput(e.target.value)}
+                                    onKeyDown={handleKeyDown}
+                                    aria-label="Learning goal"
+                                    className="min-w-0 flex-1 border-none bg-transparent px-4 py-3 text-base text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-0 sm:text-lg"
+                                />
+                                <kbd className="hidden shrink-0 items-center gap-1 rounded-md border border-slate-200 bg-slate-50 px-1.5 py-1 text-[10px] font-medium text-slate-400 sm:flex">
+                                    <CornerDownLeft size={11} />
+                                    Enter
+                                </kbd>
+                                <button
+                                    onClick={handleSearch}
+                                    aria-label="Generate roadmap"
+                                    className="flex shrink-0 items-center gap-1.5 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/15 transition-all hover:bg-slate-800 active:scale-[0.98]"
+                                >
+                                    Generate
+                                    <ArrowRight size={16} />
+                                </button>
+                            </div>
+                        </div>
+                    </Motion.div>
 
-                {/* Hero Title */}
-                <div className="text-center mb-6 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
-                    <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-2">
-                        Build Your Personalized
-                    </h1>
-                    <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 tracking-tight">
-                        Learning Roadmap
-                    </h1>
-                </div>
-
-                {/* Subtitle */}
-
-
-                {/* Search Box */}
-                <div className="w-full max-w-2xl relative mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
-                    <div className="relative group">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-                        <div className="relative flex items-center bg-white rounded-2xl shadow-xl border border-slate-100 p-2">
-                            <input
-                                type="text"
-                                placeholder="What do you want to learn? (e.g., Machine Learning, Photography...)"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                onKeyDown={handleKeyDown}
-                                disabled={isLoading}
-                                className="flex-1 p-4 text-lg text-slate-700 placeholder-slate-400 bg-transparent border-none focus:ring-0 focus:outline-none"
-                            />
+                    {/* Popular topics */}
+                    <Motion.div variants={fadeUp} className="mt-6 flex flex-wrap items-center justify-center gap-2">
+                        <span className="mr-1 text-xs font-medium uppercase tracking-wide text-slate-400">Try</span>
+                        {POPULAR_TOPICS.map((tag) => (
                             <button
-                                onClick={handleSearch}
-                                disabled={isLoading}
-                                className="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-xl transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-purple-200"
+                                key={tag}
+                                onClick={() => handleTagClick(tag)}
+                                className="rounded-full border border-slate-200/80 bg-white/70 px-3.5 py-1.5 text-sm font-medium text-slate-600 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-primary-200 hover:bg-white hover:text-primary-700 hover:shadow-sm"
                             >
-                                {isLoading ? <Loader2 size={24} className="animate-spin" /> : <Send size={24} />}
+                                {tag}
                             </button>
-                        </div>
-                    </div>
-                </div>
+                        ))}
+                    </Motion.div>
 
-                {/* Inline error state (replaces alert()) */}
-                {error && (
-                    <div className="w-full max-w-2xl mb-6 flex items-center justify-between gap-4 bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 animate-in fade-in duration-300">
-                        <div className="flex items-center gap-2 text-sm font-medium">
-                            <AlertTriangle size={18} className="shrink-0" />
-                            <span>{error}</span>
-                        </div>
-                        <button
-                            onClick={handleRetry}
-                            disabled={isLoading}
-                            className="shrink-0 text-sm font-semibold text-red-700 hover:text-red-900 underline disabled:opacity-60"
-                        >
-                            Retry
-                        </button>
-                    </div>
-                )}
+                    {/* Feature highlights */}
+                    <Motion.div
+                        variants={fadeUp}
+                        className="mt-16 grid w-full max-w-4xl grid-cols-1 gap-3 sm:grid-cols-3"
+                    >
+                        {FEATURES.map((feature) => (
+                            <div
+                                key={feature.title}
+                                className="rounded-2xl border border-slate-200/70 bg-white/60 p-5 backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-slate-200 hover:bg-white hover:shadow-lg hover:shadow-slate-900/[0.05]"
+                            >
+                                <span className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary-50 text-primary-600 ring-1 ring-inset ring-primary-100">
+                                    <feature.icon size={17} />
+                                </span>
+                                <h3 className="mb-1 text-sm font-semibold tracking-tight text-slate-900">
+                                    {feature.title}
+                                </h3>
+                                <p className="text-[13px] leading-relaxed text-slate-500">{feature.body}</p>
+                            </div>
+                        ))}
+                    </Motion.div>
 
-                {/* Popular Tags */}
-                <div className="flex flex-wrap items-center justify-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-400">
-                    <span className="text-slate-400 font-medium text-sm">Popular:</span>
-                    {['Machine Learning', 'Web Development', 'Data Science', 'Cybersecurity', 'Photography'].map((tag) => (
-                        <button
-                            key={tag}
-                            onClick={() => handleTagClick(tag)}
-                            disabled={isLoading}
-                            className="px-4 py-1.5 rounded-full bg-slate-100 text-slate-600 text-sm font-medium hover:bg-purple-50 hover:text-purple-700 hover:scale-105 transition-all duration-200 border border-transparent hover:border-purple-100"
-                        >
-                            {tag}
-                        </button>
-                    ))}
-                </div>
-
+                    <Motion.button
+                        variants={fadeUp}
+                        onClick={() => navigate('/evaluation')}
+                        className="mt-8 inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 transition-colors hover:text-slate-700"
+                    >
+                        <BarChart2 size={13} />
+                        See how retrieval and generation quality are measured
+                        <ArrowRight size={12} />
+                    </Motion.button>
+                </Motion.div>
             </main>
         </div>
     );

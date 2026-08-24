@@ -7,3 +7,30 @@
     @apply bg-slate-50 text-slate-900 antialiased;
   }
 }
+
+@layer components {
+  /* ReactFlow ships a fairly dated default chrome (hard borders, square
+     buttons, opaque minimap). These overrides bring its controls in line with
+     the rest of the app's soft-elevation card language. */
+  .roadmap-controls {
+    @apply overflow-hidden rounded-xl border border-slate-200/80 bg-white/90 shadow-lg shadow-slate-900/[0.06] backdrop-blur-md;
+  }
+
+  .roadmap-controls .react-flow__controls-button {
+    @apply border-0 border-b border-slate-100 bg-transparent fill-slate-500 transition-colors last:border-b-0 hover:bg-slate-100 hover:fill-slate-800;
+  }
+
+  .roadmap-minimap {
+    @apply overflow-hidden rounded-xl border border-slate-200/80 bg-white/90 shadow-lg shadow-slate-900/[0.06] backdrop-blur-md;
+  }
+
+  /* The custom node draws its own rounded card, so the wrapper must not paint
+     a focus outline or background behind it. */
+  .react-flow__node-roadmapTopic {
+    @apply cursor-pointer outline-none;
+  }
+
+  .react-flow__attribution {
+    @apply !bg-transparent text-slate-300;
+  }
+}
