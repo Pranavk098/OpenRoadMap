@@ -42,7 +42,7 @@ def _load_ground_truth(path: str):
         return json.load(f)
 
 
-def evaluate_retrieval(variant: str = "baseline", ground_truth_file: str = GROUND_TRUTH_FILE) -> dict:
+async def evaluate_retrieval(variant: str = "baseline", ground_truth_file: str = GROUND_TRUTH_FILE, resource_agent=None) -> dict:
     """
     Runs the retrieval evaluation harness against a running Qdrant instance.
 
@@ -58,6 +58,19 @@ def evaluate_retrieval(variant: str = "baseline", ground_truth_file: str = GROUN
     ground_truth_file: which ground-truth set to evaluate against (see
         GROUND_TRUTH_FILE vs GROUND_TRUTH_FILE_REALISTIC above).
 
+    resource_agent: reuse an existing ResourceAgent across calls (avoids
+        reloading the fastembed models once per variant/ground-truth-set
+        combination). Creates its own if not provided.
+
+    This is async and must run on a single event loop shared with any other
+    ResourceAgent calls in the same process - ResourceAgent's async Qdrant/
+    HTTP clients are bound to whichever loop first uses them, so calling the
+    sync find_resources() convenience wrapper (which does its own
+    asyncio.run() per call) in a tight loop here previously broke the
+    client's connection pool after the first loop closed ("Event loop is
+    closed"). Using find_resources_async directly under one caller-owned
+    loop avoids that.
+
     Raises if Qdrant is not reachable, rather than silently falling through
     to ResourceAgent's web-search fallback - a DuckDuckGo fallback result
     would never match the synthetic corpus IDs in the ground truth, which
@@ -67,8 +80,9 @@ def evaluate_retrieval(variant: str = "baseline", ground_truth_file: str = GROUN
     """
     ground_truth = _load_ground_truth(ground_truth_file)
 
-    from src.agents.resource_agent import ResourceAgent
-    resource_agent = ResourceAgent()
+    if resource_agent is None:
+        from src.agents.resource_agent import ResourceAgent
+        resource_agent = ResourceAgent()
 
     try:
         resource_agent.qdrant_client.get_collections()
@@ -93,7 +107,7 @@ def evaluate_retrieval(variant: str = "baseline", ground_truth_file: str = GROUN
         retrieved_ids = []
         try:
             if variant == "mmr":
-                pool = resource_agent.find_resources(query, limit=MMR_CANDIDATE_POOL)
+                pool = await resource_agent.find_resources_async(query, limit=MMR_CANDIDATE_POOL)
                 if pool:
                     texts = [f"{r.title} {r.description}" for r in pool]
                     doc_vectors = np.array(list(embedder.embed(texts)))
@@ -104,7 +118,7 @@ def evaluate_retrieval(variant: str = "baseline", ground_truth_file: str = GROUN
                         if rid
                     ]
             else:
-                resources = resource_agent.find_resources(query, limit=TOP_K)
+                resources = await resource_agent.find_resources_async(query, limit=TOP_K)
                 retrieved_ids = [res.id for res in resources if res.id]
         except Exception as e:
             print(f"Search failed for '{query}' [{variant}]: {e}")
@@ -132,14 +146,17 @@ def evaluate_retrieval(variant: str = "baseline", ground_truth_file: str = GROUN
     }
 
 
-def main():
+async def main():
+    from src.agents.resource_agent import ResourceAgent
+    resource_agent = ResourceAgent()
+
     for gt_label, gt_file in (("known_item_search", GROUND_TRUTH_FILE), ("realistic_learner_phrased", GROUND_TRUTH_FILE_REALISTIC)):
         if not os.path.exists(gt_file):
             print(f"Ground truth set '{gt_label}' not found at {gt_file}, skipping.")
             continue
         for variant in ("baseline", "mmr"):
             try:
-                results = evaluate_retrieval(variant, ground_truth_file=gt_file)
+                results = await evaluate_retrieval(variant, ground_truth_file=gt_file, resource_agent=resource_agent)
             except Exception as e:
                 print(f"[{gt_label}] Variant '{variant}' unavailable: {e}")
                 continue
@@ -154,4 +171,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())

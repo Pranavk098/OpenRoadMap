@@ -1,3 +1,4 @@
+import asyncio
 import glob
 import json
 import os
@@ -62,7 +63,7 @@ def load_ground_truth(file_path):
         return json.load(f)
 
 
-def run_generation_eval(notes: list) -> dict | None:
+async def run_generation_eval(notes: list) -> dict | None:
     """
     Runs generation-quality eval over data/manual/*.json ground truth by
     generating a roadmap for each skill and scoring it with EvaluationAgent.
@@ -70,6 +71,15 @@ def run_generation_eval(notes: list) -> dict | None:
     RoadmapAgent calls the OpenAI API directly (src/agents/roadmap_agent.py),
     so this requires OPENAI_API_KEY. If it's unavailable, returns None and
     records why in `notes` rather than fabricating a number.
+
+    Not every data/manual/*.json file is a roadmap ground-truth file - e.g.
+    curated_resources.json is the resource corpus (a flat list), not a
+    {"skill": ..., "roadmap": [...]} document. Files that don't match the
+    expected shape are skipped with a note, not treated as a fatal error -
+    one bad/unrelated file in that directory shouldn't discard every other
+    result (this previously crashed the whole run with an unhandled
+    AttributeError, losing real retrieval results computed earlier in the
+    same run).
     """
     try:
         from src.agents.roadmap_agent import RoadmapAgent
@@ -85,12 +95,15 @@ def run_generation_eval(notes: list) -> dict | None:
     per_skill = []
     for file_path in json_files:
         ground_truth = load_ground_truth(file_path)
+        if not isinstance(ground_truth, dict):
+            notes.append(f"generation eval: skipped {os.path.basename(file_path)} (not a roadmap ground-truth document).")
+            continue
         skill = ground_truth.get("skill")
         if not skill:
             continue
 
         try:
-            nodes_data = roadmap_agent.generate_structure(skill)
+            nodes_data = await roadmap_agent.generate_structure(skill)
             roadmap_nodes = [
                 RoadmapNode(
                     id=n["id"],
@@ -127,14 +140,26 @@ def run_generation_eval(notes: list) -> dict | None:
     }
 
 
-def run_retrieval_eval(notes: list) -> dict:
+async def run_retrieval_eval(notes: list) -> dict:
     """
     Runs retrieval eval for every (ground-truth set) x (variant) combination.
     Each ground-truth set is reported separately so the gap between "easy
     known-item search" and "realistic learner-phrased" is a visible,
     interpretable finding rather than folded into one number.
+
+    Shares a single ResourceAgent (and therefore a single event loop, via
+    the caller's asyncio.run()) across every combination - see the docstring
+    on evaluate_retrieval() for why reusing async Qdrant/HTTP clients across
+    separate asyncio.run() calls previously broke mid-run.
     """
     results = {}
+
+    any_gt_exists = any(os.path.exists(gt_path) for _, gt_path, _ in GROUND_TRUTH_SETS)
+    resource_agent = None
+    if any_gt_exists:
+        from src.agents.resource_agent import ResourceAgent
+        resource_agent = ResourceAgent()
+
     for set_key, gt_path, description in GROUND_TRUTH_SETS:
         set_result = {"description": description}
 
@@ -147,7 +172,7 @@ def run_retrieval_eval(notes: list) -> dict:
 
         for variant, out_key in RETRIEVAL_VARIANTS:
             try:
-                r = evaluate_retrieval(variant, ground_truth_file=gt_path)
+                r = await evaluate_retrieval(variant, ground_truth_file=gt_path, resource_agent=resource_agent)
                 if r.get("queries_evaluated", 0) == 0:
                     raise RuntimeError("no queries evaluated")
                 set_result[out_key] = r
@@ -158,12 +183,22 @@ def run_retrieval_eval(notes: list) -> dict:
     return results
 
 
-def run_evaluation() -> dict:
+async def _run_evaluation_async() -> dict:
     print("Starting Evaluation...")
     notes = []
 
-    retrieval_results = run_retrieval_eval(notes)
-    generation_results = run_generation_eval(notes)
+    try:
+        retrieval_results = await run_retrieval_eval(notes)
+    except Exception as e:
+        notes.append(f"retrieval eval crashed: {e}")
+        retrieval_results = {set_key: {"description": desc, **{out_key: None for _, out_key in RETRIEVAL_VARIANTS}}
+                              for set_key, _, desc in GROUND_TRUTH_SETS}
+
+    try:
+        generation_results = await run_generation_eval(notes)
+    except Exception as e:
+        notes.append(f"generation eval crashed: {e}")
+        generation_results = None
 
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -182,6 +217,10 @@ def run_evaluation() -> dict:
     print("\n=== Evaluation Summary ===")
     print(json.dumps(output, indent=2, default=str))
     return output
+
+
+def run_evaluation() -> dict:
+    return asyncio.run(_run_evaluation_async())
 
 
 if __name__ == "__main__":
