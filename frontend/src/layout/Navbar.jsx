@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageSquare, BarChart2, Map } from 'lucide-react';
+import { MessageSquare, BarChart2 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -24,12 +24,6 @@ const Navbar = () => {
                     label="Home"
                     active={isActive('/')}
                     onClick={() => navigate('/')}
-                />
-                <NavItem
-                    icon={<Map size={18} />}
-                    label="Roadmap Demo"
-                    active={isActive('/roadmap')}
-                    onClick={() => navigate('/roadmap')}
                 />
                 <NavItem
                     icon={<BarChart2 size={18} />}
