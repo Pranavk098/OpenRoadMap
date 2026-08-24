@@ -1,26 +1,47 @@
-import React, { useState } from 'react';
-import { Send, Loader2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Send, Loader2, AlertTriangle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { generateRoadmap } from '../api/client';
+import { generateRoadmap, describeApiError } from '../api/client';
+
+// Builds a URL-safe slug from a topic string, e.g. "Machine Learning!" -> "machine-learning".
+const slugify = (str) =>
+    str
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
 
 const Landing = () => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [lastQuery, setLastQuery] = useState(null);
     const navigate = useNavigate();
 
-    const handleSearch = async () => {
-        if (!input.trim()) return;
+    useEffect(() => {
+        document.title = 'OpenRoadMap — AI-Powered Learning Roadmaps';
+    }, []);
 
+    const runGenerate = async (query) => {
+        if (!query.trim()) return;
+
+        setError(null);
         setIsLoading(true);
+        setLastQuery(query);
+
         try {
-            const data = await generateRoadmap(input);
-            navigate('/roadmap', { state: { roadmapData: data, topic: input } });
-        } catch (error) {
-            alert('Failed to generate roadmap. Please ensure the backend is running.');
+            const data = await generateRoadmap(query);
+            const slug = slugify(query);
+            sessionStorage.setItem(`roadmap:${slug}`, JSON.stringify({ roadmapData: data, topic: query }));
+            navigate(`/roadmap/${slug}`, { state: { roadmapData: data, topic: query } });
+        } catch (err) {
+            setError(describeApiError(err));
         } finally {
             setIsLoading(false);
         }
     };
+
+    const handleSearch = () => runGenerate(input);
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -30,17 +51,11 @@ const Landing = () => {
 
     const handleTagClick = (tag) => {
         setInput(tag);
-        setIsLoading(true);
-        generateRoadmap(tag)
-            .then(data => {
-                navigate('/roadmap', { state: { roadmapData: data, topic: tag } });
-            })
-            .catch(() => {
-                alert('Failed to generate roadmap. Please ensure the backend is running.');
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+        runGenerate(tag);
+    };
+
+    const handleRetry = () => {
+        if (lastQuery) runGenerate(lastQuery);
     };
 
     return (
@@ -77,7 +92,7 @@ const Landing = () => {
 
 
                 {/* Search Box */}
-                <div className="w-full max-w-2xl relative mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+                <div className="w-full max-w-2xl relative mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
                     <div className="relative group">
                         <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
                         <div className="relative flex items-center bg-white rounded-2xl shadow-xl border border-slate-100 p-2">
@@ -100,6 +115,23 @@ const Landing = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Inline error state (replaces alert()) */}
+                {error && (
+                    <div className="w-full max-w-2xl mb-6 flex items-center justify-between gap-4 bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 animate-in fade-in duration-300">
+                        <div className="flex items-center gap-2 text-sm font-medium">
+                            <AlertTriangle size={18} className="shrink-0" />
+                            <span>{error}</span>
+                        </div>
+                        <button
+                            onClick={handleRetry}
+                            disabled={isLoading}
+                            className="shrink-0 text-sm font-semibold text-red-700 hover:text-red-900 underline disabled:opacity-60"
+                        >
+                            Retry
+                        </button>
+                    </div>
+                )}
 
                 {/* Popular Tags */}
                 <div className="flex flex-wrap items-center justify-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-400">
