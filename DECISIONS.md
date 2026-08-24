@@ -263,3 +263,22 @@ Live testing after round 1 showed `resources_ms` was still 5-15s in the worst ca
 Verified: 84/84 tests still pass after all constant/architecture changes above.
 
 ---
+
+### Model swap — gpt-4o-mini → gpt-4.1-nano
+
+Researched OpenAI's current model lineup (pricing + latency) to see if a faster model was available (user asked for a consolidated comparison first). Went to `developers.openai.com`'s own docs rather than trusting search-result aggregator sites, several of which had suspiciously fast-incrementing version numbers.
+
+Candidates considered: `gpt-4.1-mini`, `gpt-4.1-nano` (both non-reasoning, "low latency without a reasoning step" per OpenAI's own docs), vs. `gpt-5-nano`/`gpt-5-mini`/`gpt-5.6-luna` (all reasoning-capable — real risk of the *opposite* of faster if not explicitly tuned to minimal effort; one public benchmark showed gpt-5-nano at 63s latency under default/high reasoning effort). Ruled out the whole GPT-5 line for this swap: it needs an explicit `reasoning_effort` param this codebase doesn't send yet, and getting that wrong is a latency regression, not just a missed opportunity — worth a separate, deliberately-tested change later, not bundled into a "push for speed" pass.
+
+**Live comparison, `RoadmapAgent.generate_structure` only** (3 goals x 3 models):
+- `gpt-4o-mini` (previous default): 4.76–5.44s, and separately in this session's earlier full-pipeline runs ranged as high as 12.4s on one outlier.
+- `gpt-4.1-mini`: 5.24–6.80s — no latency win in this sample despite being newer; roughly on par with or slightly slower than gpt-4o-mini.
+- `gpt-4.1-nano`: 3.08–3.95s — consistently fastest, **every single nano run beat every mini/4o-mini run**. Also cheapest of the three ($0.10/$0.40 per 1M vs 4o-mini's $0.15/$0.60).
+
+**Quality check** (not just timing - read full generated node content, not just structure counts): nano's output for "Learn Cybersecurity" was comparably or more specific than gpt-4o-mini's (named real tools - Wireshark, Metasploit, Nmap - readable slug ids, coherent descriptions), with genuine staged prerequisites (1 root, real 2-prerequisite convergence nodes). Checked 2 more goals ("Learn Public Speaking", "Learn Blockchain Development"): still correctly staged (1 root, sensible depth progression), but **leaning more linear/chain-like** - fewer multi-prerequisite convergence nodes than gpt-4o-mini tends to produce. Real tradeoff, not a defect: every generated structure was still logically staged, never flat/random: just less elaborate branching.
+
+**Full pipeline, live, with nano**: "Learn Data Analysis" 11.44s (llm_ms=5.0s), "Learn Game Development" 8.54s (llm_ms=3.9s) - both llm_ms figures well below gpt-4o-mini's observed 5.6-12.4s range, with no outlier seen across every nano run in this session.
+
+**Decision: switched the default** (`roadmap_agent.py`'s `DEFAULT_MODEL`, and `render.yaml`'s `ROADMAP_MODEL` for the live deploy) from `gpt-4o-mini` to `gpt-4.1-nano` — meaningfully faster and cheaper on every run tested, with the one honest tradeoff (simpler DAG topology) judged acceptable against the user's explicit priority on speed. `.env.example` updated to match. 84/84 tests still pass (no test mocks the literal model string).
+
+---

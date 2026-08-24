@@ -20,4 +20,4 @@ services:
       - key: RATE_LIMIT
         value: 5/minute
       - key: ROADMAP_MODEL
-        value: gpt-4o-mini
+        value: gpt-4.1-nano

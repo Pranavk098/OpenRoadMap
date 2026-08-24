@@ -7,7 +7,15 @@ from ..dependencies import get_openai_client
 
 logger = structlog.get_logger(__name__)
 
-DEFAULT_MODEL = "gpt-4o-mini"
+# Switched from gpt-4o-mini after a live comparison (see DECISIONS.md):
+# gpt-4.1-nano is consistently ~30-40% faster on this structure-generation
+# call (both non-reasoning models, so no reasoning-effort latency risk),
+# cheaper on both input and output tokens, and produced comparably
+# coherent, correctly-staged output across every goal tested - the one
+# real tradeoff observed is a mild lean toward simpler/more linear DAGs
+# (fewer multi-prerequisite convergence nodes) than gpt-4o-mini, not
+# incorrect or flat structure.
+DEFAULT_MODEL = "gpt-4.1-nano"
 
 # Strict OpenAI structured-outputs schema. This replaces the old few-shot
 # examples (React / Sourdough / Agile, ~1,200+ wasted input tokens/call)
