@@ -110,7 +110,16 @@ A cache hit emits the identical event sequence, just faster.
 
 **Verification**: fresh-venv install resolves clean (no torch/sentence-transformers/transformers); `from src.main import app` imports cleanly; **51 pytest tests pass**, all clients mocked (`tests/{conftest,test_dag_validator,test_cache,test_resource_agent,test_main,test_roadmap_engine}.py`, root `pytest.ini`).
 **Not verified**: any live OpenAI/Qdrant/Redis/fastembed-model call.
-**Flagged for the hygiene pass**: a bare `pytest` from repo root will still try to collect the pre-existing `tests/test_api.py`, `test_ddg.py`, `test_wide_scope.py` (real subprocess/network scripts, not unit tests) and hang/fail — pre-existing condition, needs addressing when tests/ is cleaned up.
+**Flagged for the hygiene pass**: a bare `pytest` from repo root will still try to collect the pre-existing `tests/test_api.py`, `test_ddg.py`, `test_wide_scope.py` (real subprocess/network scripts, not unit tests) and hang/fail — pre-existing condition, needs addressing when tests/ is cleaned up. Also `scripts/ingestion/search_test.py`/`qdrant_verify.py` are pre-existing scratch debug scripts hardcoded to `localhost:6333`; `search_test.py` still imports `sentence_transformers`, now removed from `requirements.txt`, so it's currently broken. Not fixed here (out of scope, not on the deploy path, not collected by `pytest` since `pytest.ini` scopes to `testpaths = tests`) — candidate for the hygiene pass.
+
+---
+
+### Deploy prep (orchestrator, post-merge)
+
+- **Security incident, caught before it shipped**: the user pasted a live `OPENAI_API_KEY` and a live Qdrant Cloud API key directly into `.env.example` — a file tracked by git and meant to ship in the public repo. Caught via `git diff` before committing; confirmed via `git log -- .env.example` it was never actually committed (safe, but was one `git add .`/`git commit -am` away from a public leak). Moved the real values into `.env` (gitignored, confirmed via `.gitignore`), reverted `.env.example` to placeholders. **User should still rotate both keys** as a precaution — they were pasted into a chat session regardless of what got committed.
+- **`QDRANT_API_KEY` wiring**: neither `QdrantClient`/`AsyncQdrantClient` constructor (`src/dependencies.py`) nor `scripts/ingestion/vectorize_corpus.py`'s standalone client took an API key — worked fine against a local no-auth Qdrant but would silently fail to authenticate against Qdrant Cloud. Added `QDRANT_API_KEY` env var (empty/unset → `None`, correct for local Docker Qdrant), threaded through both. Verified: loads from `.env`, client constructs, and the full test suite (78 tests: 66 core + 12 resource-agent) still passes.
+- **Deploy config added**: `Procfile` (`uvicorn src.main:app --workers 2`, generic Railway/Heroku-style buildpack target) and `render.yaml` (Render blueprint, free-tier web service, `/health` healthcheck, all secrets marked `sync: false` so Render prompts for them in its dashboard rather than reading committed values).
+- **Not done here**: pushing anything to the remote, or merging to `main` on origin — only local git state changed. Pushing affects a shared/public repo and needs an explicit go-ahead separate from "do the local prep."
 
 ---
 

@@ -23,6 +23,7 @@ load_dotenv()
 INPUT_FILE = os.path.join("data", "processed", "unified_corpus.json")
 COLLECTION_ALIAS = os.getenv("QDRANT_COLLECTION", "educational_resources")
 QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
 
 # Same models as src/agents/resource_agent.py so query-time and index-time
 # vectors live in the same embedding spaces (dense semantic + sparse lexical).
@@ -59,7 +60,7 @@ def vectorize_corpus():
     sparse_model = SparseTextEmbedding(SPARSE_MODEL_NAME)
 
     print(f"Connecting to Qdrant at {QDRANT_URL}...")
-    client = QdrantClient(url=QDRANT_URL)
+    client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
 
     # Ingest into a fresh, timestamped collection rather than
     # recreate_collection()'ing the live one - recreate_collection destroys
