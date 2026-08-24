@@ -1,123 +1,94 @@
 import json
+import os
+
+import structlog
+
 from ..dependencies import get_openai_client
 
-class RoadmapAgent:
-    def __init__(self):
-        self.client = get_openai_client()
+logger = structlog.get_logger(__name__)
 
-    def generate_structure(self, goal: str) -> list:
+DEFAULT_MODEL = "gpt-4o-mini"
+
+# Strict OpenAI structured-outputs schema. This replaces the old few-shot
+# examples (React / Sourdough / Agile, ~1,200+ wasted input tokens/call)
+# with a hard schema guarantee, so the model no longer needs examples to
+# learn the output shape.
+ROADMAP_JSON_SCHEMA = {
+    "name": "roadmap_structure",
+    "strict": True,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "nodes": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 10,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "pattern": "^[a-z0-9_]{2,32}$",
+                        },
+                        "title": {"type": "string", "maxLength": 48},
+                        "description": {"type": "string", "maxLength": 160},
+                        "search_query": {
+                            "type": "string",
+                            "maxLength": 80,
+                        },
+                        "prerequisites": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                    },
+                    "required": ["id", "title", "description", "search_query", "prerequisites"],
+                    "additionalProperties": False,
+                },
+            }
+        },
+        "required": ["nodes"],
+        "additionalProperties": False,
+    },
+}
+
+SYSTEM_PROMPT = "You are an expert curriculum designer."
+
+
+class RoadmapAgent:
+    def __init__(self, client=None, model: str | None = None):
+        self.client = client or get_openai_client()
+        # Configurable via env var; defaults to the cheaper mini model since
+        # this is a well-within-range structured task. Set ROADMAP_MODEL=gpt-4o
+        # to switch back to the larger model.
+        self.model = model or os.getenv("ROADMAP_MODEL", DEFAULT_MODEL)
+
+    async def generate_structure(self, goal: str) -> list:
         """
         Generates the DAG structure (nodes and prerequisites) for a given goal.
         """
-        prompt = f"""
-        Create a learning roadmap for the goal: "{goal}".
-        Return a JSON object with a list of "nodes". 
-        Each node must have:
-        - "id": unique string id (e.g., "basics", "advanced_topic")
-        - "title": short display title
-        - "description": brief explanation of what to learn
-        - "prerequisites": list of node ids that must be completed before this one
-        
-        Ensure the roadmap is logical and covers the necessary steps.
-        Return ONLY valid JSON.
-        """
-        
-        response = self.client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {"role": "system", "content": "You are an expert curriculum designer."},
-                {"role": "user", "content": """Create a learning roadmap for the goal: "React Development".
-Return a JSON object with a list of "nodes". 
-Each node must have:
-- "id": unique string id (e.g., "basics", "advanced_topic")
-- "title": short display title
-- "description": brief explanation of what to learn
-- "prerequisites": list of node ids that must be completed before this one
-
-Ensure the roadmap is logical and covers the necessary steps.
-Return ONLY valid JSON."""},
-                {"role": "assistant", "content": """{
-  "nodes": [
-    {
-      "id": "fundamentals",
-      "title": "Fundamentals",
-      "description": "JSX, Components, Props & State",
-      "prerequisites": []
-    },
-    {
-      "id": "hooks_effects",
-      "title": "Hooks & Effects",
-      "description": "useState, useEffect, Custom Hooks",
-      "prerequisites": ["fundamentals"]
-    },
-    {
-      "id": "routing_state",
-      "title": "Routing & State Management",
-      "description": "React Router, Context API, Redux Toolkit",
-      "prerequisites": ["hooks_effects"]
-    },
-    {
-      "id": "advanced_patterns",
-      "title": "Advanced Patterns",
-      "description": "HOCs, Render Props, Performance Optimization",
-      "prerequisites": ["routing_state"]
-    }
-  ]
-}"""},
-                {"role": "user", "content": """Create a learning roadmap for the goal: "Sourdough Bread Baking"."""},
-                {"role": "assistant", "content": """{
-  "nodes": [
-    {
-      "id": "starter",
-      "title": "The Starter",
-      "description": "Creating Starter, Feeding Schedule, Discard",
-      "prerequisites": []
-    },
-    {
-      "id": "dough_management",
-      "title": "Dough Management",
-      "description": "Autolyse, Folding, Bulk Fermentation",
-      "prerequisites": ["starter"]
-    },
-    {
-      "id": "baking",
-      "title": "Baking",
-      "description": "Shaping, Scoring, Oven Spring",
-      "prerequisites": ["dough_management"]
-    }
-  ]
-}"""},
-                {"role": "user", "content": """Create a learning roadmap for the goal: "Agile Project Management"."""},
-                {"role": "assistant", "content": """{
-  "nodes": [
-    {
-      "id": "agile_manifesto",
-      "title": "Agile Manifesto",
-      "description": "Values, Principles, Waterfall vs Agile",
-      "prerequisites": []
-    },
-    {
-      "id": "scrum_framework",
-      "title": "Scrum Framework",
-      "description": "Roles, Events, Artifacts",
-      "prerequisites": ["agile_manifesto"]
-    },
-    {
-      "id": "kanban_lean",
-      "title": "Kanban & Lean",
-      "description": "WIP Limits, Flow, Kaizen",
-      "prerequisites": ["scrum_framework"]
-    }
-  ]
-}"""},
-                {"role": "user", "content": prompt}
-            ],
-            response_format={"type": "json_object"}
+        prompt = (
+            f'Create a learning roadmap for the goal: "{goal}".\n'
+            "Produce between 4 and 10 nodes that logically cover the "
+            "necessary steps to achieve this goal, each with a short id, "
+            "title, description, the ids of any prerequisite nodes, and a "
+            "search_query: a short, keyword-focused search-engine query "
+            "(not prose) that would find a good tutorial/course for that "
+            "node specifically, e.g. 'React hooks useState useEffect "
+            "tutorial' rather than a sentence describing the topic."
         )
-        
+
+        response = await self.client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
+            response_format={"type": "json_schema", "json_schema": ROADMAP_JSON_SCHEMA},
+        )
+
         try:
             dag_json = json.loads(response.choices[0].message.content)
             return dag_json.get("nodes", [])
-        except json.JSONDecodeError:
-            print("Error decoding LLM response")
+        except (json.JSONDecodeError, AttributeError, IndexError, TypeError) as e:
+            logger.warning("roadmap_agent.parse_failed", error=str(e))
             return []
