@@ -32,3 +32,20 @@ At the same point, user supplied a RAG-architecture critique: the retrieval stac
 - **Track C** (frontend) — no RAG-related scope change; just finishing its original verification.
 
 ---
+
+### Track C — Frontend Product
+
+- **C1 (infinite recursion on cycles):** `getLevel` in `Roadmap.jsx` now tracks a `visiting` Set; re-entering a node already in `visiting` returns level `0` instead of recursing. Verified with a standalone script replicating the algorithm against a 2-node and 3-node prerequisite cycle — terminates, produces sane levels, no stack overflow.
+- **C2 (dangling prerequisite edges):** edge creation now checks `nodeMap.has(prereqId) && nodeMap.has(node.id)` before pushing an edge, so a `prerequisites` entry referencing a nonexistent node id is silently dropped instead of handed to ReactFlow.
+- **C3 (URL-addressable roadmaps, no fake fallback):** added `/roadmap/:slug` route. `Landing.jsx` slugifies the topic, stashes the roadmap response in `sessionStorage` under `roadmap:${slug}`, and navigates there (router `state` kept only as a fast path, not the source of truth). `Roadmap.jsx` on mount tries `location.state` → `sessionStorage` → regenerates via the API using a de-slugified topic guess; a failed regeneration shows a real error state (retry + go home), never mock data. Deleted `mockRoadmapData` entirely — it was a silent-failure fallback, not a real demo. Old bare `/roadmap` route now redirects to `/` instead of ever serving fake data. Removed the now-meaningless "Roadmap Demo" nav item in `Navbar.jsx`.
+- **L9 (full re-layout on every progress tick):** split the layout `useEffect` (nodes/edges from `roadmapData` only, no `progressMap` in deps) from progress rendering, which is now merged into a `displayNodes` `useMemo` keyed on `[nodes, progressMap]`. Dragging the progress slider no longer re-runs the level-assignment DFS or rebuilds the graph.
+- **Error handling:** added `ErrorBoundary` (new `components/ErrorBoundary.jsx`) wrapping routed content in `App.jsx`. Replaced both `alert()` calls in `Landing.jsx` with inline error UI + retry button, distinguishing network-down vs. timeout/cold-backend vs. server-error via a new `RoadmapApiError`/`describeApiError` in `api/client.js` (added a 30s `AbortController` timeout to `generateRoadmap` so a hung request can be classified as "waking up the server" rather than hanging forever). Same treatment applied to the API-retry path in `Roadmap.jsx`.
+- **SEO:** `index.html` — real `<title>`, meta description, OG tags, Twitter card tags. `document.title` set per-route via `useEffect` in `Landing.jsx` and `Roadmap.jsx` (not done in `Evaluation.jsx` — owned by Track B).
+- **Code splitting:** `Evaluation` and `Roadmap` routes are now `React.lazy` + `Suspense` in `App.jsx` so the landing bundle doesn't ship ReactFlow or Recharts. `vite.config.js` adds `manualChunks` splitting `reactflow` and `recharts` into their own chunks. Confirmed via `npm run build`: separate chunks, landing page loads neither.
+- **New:** "Copy link" button on the Roadmap header (clipboard + "Copied!" confirmation); aggregate roadmap-completion progress bar in the header (average of all nodes' progress); new `NotFound.jsx` page for unmatched routes.
+- **Verified:** `npm run build` and `npm run lint` both pass clean. Live-driven in-browser: no-backend failure shows inline error + retry (no `alert()`); `/roadmap/machine-learning` with no cached state correctly attempts regeneration and shows a real error state on failure; bare `/roadmap` redirects to `/`; `NotFound` renders for a bogus path.
+- **Asset gaps — need real files from the user:**
+  - Favicon: `index.html` now references `/favicon.svg` but no such file exists in `frontend/public/` (only the default `vite.svg`).
+  - OG image: `index.html`'s `og:image`/`twitter:image` point at `/og-image.png`, a placeholder path — no real social-preview image exists yet.
+
+---
