@@ -1,6 +1,6 @@
 import pytest
 
-from src.agents.resource_agent import ResourceAgent, _reformulate_query, _truncate
+from src.agents.resource_agent import ResourceAgent, _DdgCircuitBreaker, _reformulate_query, _truncate
 from src.models import Resource
 
 
@@ -155,9 +155,9 @@ def test_reformulate_leaves_query_without_ancestor_prefix_unchanged():
 async def test_hybrid_candidates_reranked_and_top_limit_returned():
     response = FakeQueryResponse(
         [
-            _point("1", "Weakest match"),
-            _point("2", "Best match"),
-            _point("3", "Middle match"),
+            _point("1", "Weakest match", url="https://example.com/weakest"),
+            _point("2", "Best match", url="https://example.com/best"),
+            _point("3", "Middle match", url="https://example.com/middle"),
         ]
     )
     qdrant = FakeQdrantClient(single_response=[response])
@@ -175,7 +175,10 @@ async def test_hybrid_candidates_reranked_and_top_limit_returned():
     assert len(results) == 1
     titles = [r.title for r in results[0]]
     assert titles == ["Best match", "Middle match"]
-    # Strong result on the first pass - no web fallback needed.
+    # Corpus alone already cleared the bar for `limit` slots - web search
+    # is gated behind actual need (see find_resources_batch docstring for
+    # why an unconditional burst reliably triggers DDG rate limiting), so
+    # it's never called here.
     assert ddgs.call_count == 0
 
 
@@ -313,6 +316,66 @@ async def test_google_search_link_is_last_resort_when_everything_fails(monkeypat
     assert len(results[0]) == 1
     assert results[0][0].type == "Search Link"
     assert "google.com/search" in results[0][0].url
+
+
+# --- DDG circuit breaker (added after a live run showed DDG rate-limiting
+# under concurrent load, each failed call still costing real latency) -------
+
+
+def test_circuit_breaker_trips_after_threshold_consecutive_failures():
+    breaker = _DdgCircuitBreaker(threshold=3)
+    breaker.record(succeeded=False)
+    breaker.record(succeeded=False)
+    assert not breaker.tripped
+    breaker.record(succeeded=False)
+    assert breaker.tripped
+
+
+def test_circuit_breaker_resets_consecutive_count_on_success():
+    breaker = _DdgCircuitBreaker(threshold=3)
+    breaker.record(succeeded=False)
+    breaker.record(succeeded=False)
+    breaker.record(succeeded=True)
+    breaker.record(succeeded=False)
+    breaker.record(succeeded=False)
+    assert not breaker.tripped
+
+
+async def test_tripped_circuit_breaker_skips_ddg_and_uses_wikipedia(monkeypatch):
+    ddgs = FakeDDGS([{"title": "Should not be reached", "href": "https://example.com/x", "body": "d"}])
+    agent = _agent(ddgs=ddgs)
+    breaker = _DdgCircuitBreaker(threshold=1)
+    breaker.record(succeeded=False)  # trips immediately with threshold=1
+
+    class FakeResponse:
+        status_code = 200
+
+        def json(self):
+            return {
+                "title": "T",
+                "extract": "E",
+                "content_urls": {"desktop": {"page": "https://en.wikipedia.org/wiki/T"}},
+            }
+
+    class FakeAsyncClient:
+        def __init__(self, *a, **k):
+            pass
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *a):
+            return False
+
+        async def get(self, url):
+            return FakeResponse()
+
+    monkeypatch.setattr("src.agents.resource_agent.httpx.AsyncClient", FakeAsyncClient)
+
+    candidates = await agent._web_search_candidates_inner("some query", 3, breaker)
+
+    assert ddgs.call_count == 0
+    assert any(c["resource"].type == "Wikipedia" for c in candidates)
 
 
 # --- backward-compatible sync wrapper ---------------------------------------

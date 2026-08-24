@@ -82,3 +82,35 @@ def test_preserves_extra_fields_like_search_query():
     nodes = [{**_node("a"), "search_query": "python basics tutorial"}]
     result = validate_dag(nodes)
     assert result[0]["search_query"] == "python basics tutorial"
+
+
+def test_fully_flat_structure_is_repaired_into_a_chain():
+    # A degenerate LLM response: every node has zero prerequisites, which
+    # would render as one undifferentiated tier on the frontend instead of
+    # a staged path. Should be repaired into a sequential chain following
+    # the model's own emitted order, not left flat.
+    nodes = [_node("a"), _node("b"), _node("c"), _node("d"), _node("e")]
+    result = validate_dag(nodes)
+    assert [n["id"] for n in result] == ["a", "b", "c", "d", "e"]
+    assert result[0]["prerequisites"] == []
+    assert result[1]["prerequisites"] == ["a"]
+    assert result[2]["prerequisites"] == ["b"]
+    assert result[3]["prerequisites"] == ["c"]
+    assert result[4]["prerequisites"] == ["d"]
+    assert not _has_cycle(result)
+
+
+def test_flat_structure_repair_does_not_fire_with_any_real_prerequisite():
+    # Only ONE node has a real prerequisite - not degenerate, leave as-is.
+    nodes = [_node("a"), _node("b"), _node("c", ["a"]), _node("d")]
+    result = validate_dag(nodes)
+    by_id = {n["id"]: n for n in result}
+    assert by_id["b"]["prerequisites"] == []
+    assert by_id["d"]["prerequisites"] == []
+    assert by_id["c"]["prerequisites"] == ["a"]
+
+
+def test_flat_structure_repair_skipped_below_four_nodes():
+    nodes = [_node("a"), _node("b"), _node("c")]
+    result = validate_dag(nodes)
+    assert all(n["prerequisites"] == [] for n in result)

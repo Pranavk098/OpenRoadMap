@@ -40,10 +40,57 @@ CANDIDATE_POOL_SIZE = 50
 # boundary) is used rather than a tuned magic number.
 WEAK_SCORE_THRESHOLD = 0.0
 
+# Caps concurrent DDG calls across a single roadmap's node batch. Firing one
+# request per weak node simultaneously (tried first) reliably triggers DDG's
+# own rate limiting once more than a couple of nodes need it, which then
+# starves every node's web search, not just the burst's. Raised from 3 to 4
+# alongside the shorter DDG_CALL_TIMEOUT_SECONDS/lower breaker threshold
+# below: when DDG is unhealthy, more concurrency means the first (losing)
+# wave finishes - and trips the breaker for everyone after it - faster.
+WEB_SEARCH_MAX_CONCURRENCY = 4
+
 WEB_SEARCH_TIMEOUT_SECONDS = 6.0
+# DDG gets its own, shorter timeout, separate from WEB_SEARCH_TIMEOUT_SECONDS
+# (which bounds DDG+Wikipedia together). Without this, a DDG call that just
+# hangs (observed live: worse than a fast "no results" failure) burns the
+# *entire* outer budget - the outer asyncio.wait_for then cancels the whole
+# search before Wikipedia ever runs, AND before the circuit breaker's
+# failure counter can even be incremented (the cancellation happens before
+# that line executes), so the breaker never trips either. A dedicated,
+# shorter DDG timeout fails fast, feeds the breaker, and leaves headroom
+# for Wikipedia within the outer budget.
+DDG_CALL_TIMEOUT_SECONDS = 2.0
 WIKIPEDIA_TIMEOUT_SECONDS = 1.5
 ALLOWED_URL_SCHEMES = {"http", "https"}
 DESCRIPTION_MAX_LENGTH = 200
+
+# DDG rate-limits under bursty concurrent load (observed live: a roadmap
+# with several nodes needing web fallback triggers a run of consecutive
+# "No results found" failures from ddgs, each still costing real wall-clock
+# time before failing). Once a batch sees this many consecutive DDG
+# failures, remaining nodes in the same batch skip straight to Wikipedia
+# instead of also paying for a DDG call that's overwhelmingly likely to
+# fail the same way - a real, observed-live resilience fix, not a
+# speculative one.
+DDG_CIRCUIT_BREAKER_THRESHOLD = 2
+
+
+class _DdgCircuitBreaker:
+    """Shared per-batch (per find_resources_batch call) failure counter -
+    see DDG_CIRCUIT_BREAKER_THRESHOLD."""
+
+    def __init__(self, threshold: int = DDG_CIRCUIT_BREAKER_THRESHOLD):
+        self._threshold = threshold
+        self._consecutive_failures = 0
+        self.tripped = False
+
+    def record(self, succeeded: bool) -> None:
+        if succeeded:
+            self._consecutive_failures = 0
+            return
+        self._consecutive_failures += 1
+        if self._consecutive_failures >= self._threshold:
+            self.tripped = True
 
 
 def _safe_url(url: str) -> str | None:
@@ -160,20 +207,44 @@ class ResourceAgent:
 
     async def find_resources_batch(self, queries: list[str], limit: int = 3) -> list[list[Resource]]:
         """
-        Hybrid batch pipeline:
-          1. Embed all queries as both dense and sparse vectors in one pass.
+        Hybrid batch pipeline. The core invariant - and the fix for a real
+        bug found in production, where topically-unrelated local-corpus
+        items (e.g. an ML course served for a "Mathematics for Engineers"
+        node) were shown as if relevant - is that EVERY candidate, from
+        EVERY source, must clear the reranker's relevance bar before it's
+        shown. Nothing is ever shown just because it's the "least bad" of
+        an unfiltered top-N; a slot with nothing genuinely relevant gets
+        the honest search-link fallback instead.
+
+          1. Embed all queries as both dense and sparse vectors - dense and
+             sparse passes run concurrently (`asyncio.gather`), not
+             sequentially.
           2. One Qdrant round trip: per query, prefetch top-N dense and
-             top-N sparse candidates and fuse them with RRF.
-          3. Rerank each node's fused candidates with a cross-encoder and
-             keep the top `limit`.
-          4. Agentic step: if a node's top results are weak or there simply
-             weren't enough candidates, reformulate the query once (drop
-             the ancestor-path context) and retry against a merged
-             candidate set (existing + a widened web search). Bounded to
-             exactly one retry per node.
-          5. Any node still short of `limit` falls back to plain web search
-             (each fallback individually time-boxed so one slow search
-             can't stall the whole batch).
+             top-N sparse candidates and fuse them with RRF (no relevance
+             floor at this stage - RRF is rank-based, not a similarity
+             score, so a small/narrow corpus will happily return its least-
+             irrelevant items for any query with no way to tell they're bad
+             yet), then rerank + filter by WEAK_SCORE_THRESHOLD - the exact
+             same filter used everywhere below, so a node whose corpus
+             matches are genuinely good is already done here. Reranking
+             across nodes runs concurrently (one `to_thread` per node), not
+             as a sequential Python loop blocking the event loop.
+          3. Only nodes still short after that get a real web search - ONE
+             concurrency-capped round (not the old two sequential "retry
+             only if still short" rounds - collapsing to one round is a
+             real latency win, see DECISIONS.md's ~13-15s figure). Critically,
+             the web search always uses the reformulated (ancestor-prefix
+             stripped) query, never the raw retrieval query: the retrieval
+             query is deliberately a long "Goal > Ancestor > Node: details"
+             breadcrumb string for embedding quality, but handed to a web
+             search engine as literal query text that same string returns
+             nothing (confirmed live) - it reads as a run-on sentence with
+             literal ">" characters, not a search query. The bare node query
+             is what a human would actually type.
+          4. The merged pool (corpus + web) gets one final rerank/filter
+             pass per node, judged against that same reformulated query.
+          5. Any slot still empty after that gets the honest "search
+             Google for X" link - never a mis-labeled irrelevant result.
         """
         if not queries:
             return []
@@ -182,74 +253,110 @@ class ResourceAgent:
         dense_vectors, sparse_vectors = await self._embed(queries)
         candidates_by_node = await self._hybrid_search_batch(dense_vectors, sparse_vectors)
 
-        results: list[list[Resource]] = [[] for _ in range(n)]
-        retry_needed: list[int] = []
+        merged_by_node = list(candidates_by_node)
+        good_by_node = await self._rerank_and_filter_many(queries, merged_by_node)
 
-        for i in range(n):
-            ranked = self._rerank(queries[i], candidates_by_node[i])
-            if len(ranked) >= limit and all(score >= WEAK_SCORE_THRESHOLD for score, _ in ranked[:limit]):
-                results[i] = [resource for _score, resource in ranked[:limit]]
-            else:
-                retry_needed.append(i)
-
-        if retry_needed:
-            retry_outcomes = await asyncio.gather(
-                *[self._retry_node(queries[i], candidates_by_node[i], limit) for i in retry_needed],
-                return_exceptions=True,
-            )
-            for idx, outcome in zip(retry_needed, retry_outcomes):
-                if isinstance(outcome, BaseException):
-                    logger.warning("resource_agent.retry_failed", query=queries[idx], error=str(outcome))
-                    outcome = []
-                results[idx] = outcome
-
-        # Final safety net: anything still short (e.g. web retry itself came
-        # up empty) gets one more plain web-search pass.
-        short_indices = [i for i in range(n) if len(results[i]) < limit]
+        short_indices = [i for i in range(n) if len(good_by_node[i]) < limit]
         if short_indices:
-            fallback_results = await asyncio.gather(
-                *[self._web_fallback(queries[i], limit - len(results[i])) for i in short_indices],
-                return_exceptions=True,
+            web_queries = [_reformulate_query(queries[i]) for i in short_indices]
+            web_pools = await self._web_search_many(web_queries, limit)
+
+            for i, web in zip(short_indices, web_pools):
+                merged_by_node[i] = merged_by_node[i] + web
+                logger.info(
+                    "resource_agent.web_fallback_used",
+                    query=queries[i],
+                    good_count_before_web=len(good_by_node[i]),
+                )
+
+            reranked = await self._rerank_and_filter_many(
+                web_queries, [merged_by_node[i] for i in short_indices]
             )
-            for idx, fb in zip(short_indices, fallback_results):
-                if isinstance(fb, BaseException):
-                    logger.warning("resource_agent.web_fallback_error", query=queries[idx], error=str(fb))
-                    fb = []
-                results[idx].extend(fb)
+            for i, good in zip(short_indices, reranked):
+                good_by_node[i] = good
 
-        return [r[:limit] for r in results]
+        results: list[list[Resource]] = []
+        for i in range(n):
+            items = good_by_node[i][:limit]
+            if len(items) < limit:
+                items = items + [self._google_link(queries[i])]
+            results.append(items[:limit])
+        return results
 
-    async def _retry_node(self, query: str, original_candidates: list[dict], limit: int) -> list[Resource]:
-        """The one-bounded-retry 'agentic' step: reformulate the query
-        (drop ancestor-path context) and widen the candidate pool with a
-        fresh web search, then rerank the merged pool jointly. Never
-        recurses - this is called at most once per node."""
-        reformulated = _reformulate_query(query)
-        logger.warning(
-            "resource_agent.weak_or_short_results_retry",
-            original_query=query,
-            reformulated_query=reformulated,
-            candidate_count=len(original_candidates),
+    async def _rerank_and_filter_many(
+        self, queries: list[str], candidates_list: list[list[dict]]
+    ) -> list[list[Resource]]:
+        """Runs _rerank_and_filter for every node concurrently (one
+        to_thread per node) instead of a sequential Python loop - the
+        cross-encoder inference is CPU-bound, so this overlaps nodes on the
+        thread pool rather than blocking the event loop node-by-node."""
+        return list(
+            await asyncio.gather(
+                *[
+                    asyncio.to_thread(self._rerank_and_filter, q, c)
+                    for q, c in zip(queries, candidates_list)
+                ]
+            )
         )
 
-        extra_resources = await self._web_fallback(reformulated, max(limit, 3))
-        merged = list(original_candidates) + [
-            {"resource": r, "text": f"{r.title}: {r.description}"} for r in extra_resources
-        ]
-        ranked = self._rerank(reformulated, merged)
-        return [resource for _score, resource in ranked[:limit]]
+    async def _web_search_many(self, queries: list[str], limit: int) -> list[list[dict]]:
+        """Runs _web_search_candidates for multiple queries with concurrency
+        capped at WEB_SEARCH_MAX_CONCURRENCY - see find_resources_batch's
+        docstring for why an uncapped burst reliably triggers DDG's rate
+        limiting on any roadmap with more than a couple of weak nodes. All
+        queries in one call share one _DdgCircuitBreaker, so once DDG
+        starts failing consistently within this batch, later queries in the
+        same batch stop paying for a DDG call likely to fail the same way."""
+        semaphore = asyncio.Semaphore(WEB_SEARCH_MAX_CONCURRENCY)
+        breaker = _DdgCircuitBreaker()
+
+        async def _bounded(query: str) -> list[dict]:
+            async with semaphore:
+                return await self._web_search_candidates(query, limit, breaker)
+
+        outcomes = await asyncio.gather(*[_bounded(q) for q in queries], return_exceptions=True)
+        results = []
+        for query, outcome in zip(queries, outcomes):
+            if isinstance(outcome, BaseException):
+                logger.warning("resource_agent.web_search_failed", query=query, error=str(outcome))
+                outcome = []
+            results.append(outcome)
+        return results
+
+    def _rerank_and_filter(self, query: str, candidates: list[dict]) -> list[Resource]:
+        """Reranks candidates and drops anything below WEAK_SCORE_THRESHOLD
+        - the single point where "is this actually relevant" is decided,
+        used for both the primary pass and the retry pass so there's no
+        second, looser path a bad result could sneak through."""
+        ranked = self._rerank(query, candidates)
+        good = [resource for score, resource in ranked if score >= WEAK_SCORE_THRESHOLD]
+        seen_urls: set[str] = set()
+        deduped = []
+        for resource in good:
+            if resource.url in seen_urls:
+                continue
+            seen_urls.add(resource.url)
+            deduped.append(resource)
+        return deduped
 
     async def _embed(self, queries: list[str]):
-        try:
-            dense = await asyncio.to_thread(lambda: list(self.dense_model.query_embed(queries)))
-        except Exception as e:
-            logger.warning("resource_agent.dense_embed_failed", error=str(e))
-            dense = [None] * len(queries)
-        try:
-            sparse = await asyncio.to_thread(lambda: list(self.sparse_model.query_embed(queries)))
-        except Exception as e:
-            logger.warning("resource_agent.sparse_embed_failed", error=str(e))
-            sparse = [None] * len(queries)
+        async def _dense():
+            try:
+                return await asyncio.to_thread(lambda: list(self.dense_model.query_embed(queries)))
+            except Exception as e:
+                logger.warning("resource_agent.dense_embed_failed", error=str(e))
+                return [None] * len(queries)
+
+        async def _sparse():
+            try:
+                return await asyncio.to_thread(lambda: list(self.sparse_model.query_embed(queries)))
+            except Exception as e:
+                logger.warning("resource_agent.sparse_embed_failed", error=str(e))
+                return [None] * len(queries)
+
+        # Dense and sparse are independent ONNX inference passes - run
+        # concurrently instead of paying their cost twice, sequentially.
+        dense, sparse = await asyncio.gather(_dense(), _sparse())
         return dense, sparse
 
     async def _hybrid_search_batch(self, dense_vectors, sparse_vectors) -> list[list[dict]]:
@@ -334,77 +441,103 @@ class ResourceAgent:
         paired.sort(key=lambda pair: pair[0], reverse=True)
         return paired
 
-    async def _web_fallback(self, query: str, needed: int) -> list[Resource]:
+    async def _web_search_candidates(
+        self, query: str, needed: int, breaker: "_DdgCircuitBreaker | None" = None
+    ) -> list[dict]:
+        """Real web search results as candidate dicts ({"resource", "text"})
+        for the joint rerank pool - NOT pre-filtered or pre-selected here.
+        Whether any of these are good enough to show is decided once, later,
+        by _rerank_and_filter. Time-boxed so one slow search can't stall the
+        whole batch; returns an empty list (never a synthetic placeholder
+        "resource") on timeout or failure - the caller decides what an empty
+        pool means."""
         if needed <= 0:
             return []
         try:
             return await asyncio.wait_for(
-                self._web_fallback_inner(query, needed), timeout=WEB_SEARCH_TIMEOUT_SECONDS
+                self._web_search_candidates_inner(query, needed, breaker), timeout=WEB_SEARCH_TIMEOUT_SECONDS
             )
         except asyncio.TimeoutError:
-            logger.warning("resource_agent.web_fallback_timeout", query=query)
-            return [self._google_link(query)]
+            logger.warning("resource_agent.web_search_timeout", query=query)
+            return []
         except Exception as e:
-            logger.warning("resource_agent.web_fallback_failed", query=query, error=str(e))
-            return [self._google_link(query)]
+            logger.warning("resource_agent.web_search_failed", query=query, error=str(e))
+            return []
 
-    async def _web_fallback_inner(self, query: str, needed: int) -> list[Resource]:
-        resources: list[Resource] = []
+    async def _web_search_candidates_inner(
+        self, query: str, needed: int, breaker: "_DdgCircuitBreaker | None" = None
+    ) -> list[dict]:
+        candidates: list[dict] = []
 
-        # 1. DuckDuckGo (via the `ddgs` package - the maintained successor
-        # to the deprecated, aggressively-rate-limited `duckduckgo-search`).
-        # A general tutorial/course query and a YouTube-restricted query run
-        # concurrently (not sequentially) so surfacing at least one video
-        # result doesn't cost extra latency - both share the same timeout
-        # budget as a single call would.
-        try:
-            general_task = asyncio.to_thread(self.ddgs.text, f"{query} tutorial course", max_results=needed)
-            youtube_task = asyncio.to_thread(self.ddgs.text, f"{query} site:youtube.com", max_results=2)
-            general_results, youtube_results = await asyncio.gather(
-                general_task, youtube_task, return_exceptions=True
-            )
-            if isinstance(general_results, Exception):
-                logger.warning("resource_agent.ddg_general_failed", query=query, error=str(general_results))
-                general_results = []
-            if isinstance(youtube_results, Exception):
-                logger.warning("resource_agent.ddg_youtube_failed", query=query, error=str(youtube_results))
-                youtube_results = []
-
-            if not general_results and not youtube_results:
-                general_results = await asyncio.to_thread(self.ddgs.text, query, max_results=needed)
+        # DuckDuckGo (via the `ddgs` package - the maintained successor to
+        # the deprecated, aggressively-rate-limited `duckduckgo-search`). A
+        # general tutorial/course query and a YouTube-restricted query run
+        # concurrently so surfacing a video result doesn't cost extra
+        # latency - both share the same timeout budget as a single call. If
+        # the batch's circuit breaker has already tripped (several
+        # consecutive DDG failures for other nodes in this same batch),
+        # skip straight to Wikipedia - see DDG_CIRCUIT_BREAKER_THRESHOLD.
+        if breaker is not None and breaker.tripped:
+            logger.info("resource_agent.ddg_skipped_circuit_open", query=query)
+        else:
+            general_results, youtube_results = [], []
+            try:
+                general_task = asyncio.to_thread(
+                    self.ddgs.text, f"{query} tutorial course", max_results=max(needed, 3)
+                )
+                youtube_task = asyncio.to_thread(self.ddgs.text, f"{query} site:youtube.com", max_results=2)
+                general_results, youtube_results = await asyncio.wait_for(
+                    asyncio.gather(general_task, youtube_task, return_exceptions=True),
+                    timeout=DDG_CALL_TIMEOUT_SECONDS,
+                )
+                if isinstance(general_results, Exception):
+                    logger.warning("resource_agent.ddg_general_failed", query=query, error=str(general_results))
+                    general_results = []
+                if isinstance(youtube_results, Exception):
+                    logger.warning("resource_agent.ddg_youtube_failed", query=query, error=str(youtube_results))
+                    youtube_results = []
+            except asyncio.TimeoutError:
+                # A hung DDG call - not "no results", genuinely no response
+                # within DDG_CALL_TIMEOUT_SECONDS. Fails fast rather than
+                # burning the full WEB_SEARCH_TIMEOUT_SECONDS budget.
+                logger.warning("resource_agent.ddg_timeout", query=query)
+            except Exception as e:
+                logger.warning("resource_agent.ddg_failed", query=query, error=str(e))
+            finally:
+                # Always report to the breaker, including on timeout - this
+                # is the fix for the breaker never tripping under a hanging
+                # DDG (see DDG_CALL_TIMEOUT_SECONDS's docstring).
+                if breaker is not None:
+                    breaker.record(succeeded=bool(general_results or youtube_results))
 
             seen_urls: set[str] = set()
-            # Interleave one video result first (if found) so it isn't
-            # crowded out once `needed` (usually 3) results are filled.
-            for res in [*(youtube_results or [])[:1], *(general_results or []), *(youtube_results or [])[1:]]:
+            for res in [*(youtube_results or []), *(general_results or [])]:
                 url = _safe_url(res.get("href", ""))
                 if not url or url in seen_urls:
                     continue
                 seen_urls.add(url)
-                resources.append(
-                    Resource(
-                        title=res.get("title", ""),
-                        url=url,
-                        description=_truncate(res.get("body", "")),
-                        type=_resource_type_for_url(url),
-                    )
+                title = res.get("title", "")
+                body = res.get("body", "")
+                candidates.append(
+                    {
+                        "resource": Resource(
+                            title=title,
+                            url=url,
+                            description=_truncate(body),
+                            type=_resource_type_for_url(url),
+                        ),
+                        "text": f"{title}: {body}",
+                    }
                 )
-                if len(resources) >= needed:
-                    break
-        except Exception as e:
-            logger.warning("resource_agent.ddg_failed", query=query, error=str(e))
 
-        # 2. Wikipedia summary API: free, no API key, best-effort.
-        if len(resources) < needed:
-            wiki_resource = await self._wikipedia_fallback(query)
-            if wiki_resource:
-                resources.append(wiki_resource)
+        # Wikipedia summary API: free, no API key, best-effort. Also just a
+        # candidate - reranked and filtered like everything else, not given
+        # a free pass just for being a real source.
+        wiki_resource = await self._wikipedia_fallback(query)
+        if wiki_resource:
+            candidates.append({"resource": wiki_resource, "text": f"{wiki_resource.title}: {wiki_resource.description}"})
 
-        # 3. Last resort: a Google search link.
-        if not resources:
-            resources.append(self._google_link(query))
-
-        return resources[:needed]
+        return candidates
 
     async def _wikipedia_fallback(self, query: str) -> Resource | None:
         title = urllib.parse.quote(query.strip().replace(" ", "_"))

@@ -92,4 +92,29 @@ def validate_dag(nodes: list[dict]) -> list[dict]:
     for n in cleaned:
         n["prerequisites"] = adjacency[n["id"]]
 
+    _repair_degenerate_flat_structure(cleaned)
+
     return cleaned
+
+
+def _repair_degenerate_flat_structure(nodes: list[dict]) -> None:
+    """Belt-and-suspenders for a prompt/model failure, not the primary fix
+    (that's a stronger system prompt in roadmap_agent.py): if every single
+    node came back with zero prerequisites, the LLM produced a flat pile
+    rather than any staged learning order at all, and the frontend would
+    render every node as parallel siblings on one tier. Rather than ship
+    that, fall back to chaining each node to the previous one in the
+    model's own emitted order - a reasonable default sequence (the model
+    already tends to emit nodes in a sensible rough order even when it
+    forgets to encode prerequisites), not fabricated content since no
+    node's title/description/id changes, only the (already-empty, already
+    admittedly wrong) relationships. Only fires on this fully degenerate
+    case - any real prerequisite anywhere is left untouched.
+    """
+    if len(nodes) < 4:
+        return
+    if any(n["prerequisites"] for n in nodes):
+        return
+    logger.warning("dag_validator.flat_structure_repaired", node_count=len(nodes))
+    for i in range(1, len(nodes)):
+        nodes[i]["prerequisites"] = [nodes[i - 1]["id"]]
