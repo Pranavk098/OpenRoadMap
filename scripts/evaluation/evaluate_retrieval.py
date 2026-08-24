@@ -5,6 +5,16 @@ import sys
 import numpy as np
 from dotenv import load_dotenv
 
+# Some ground-truth queries contain non-ASCII text (e.g. Russian-language
+# entries); Windows' default console codepage can't encode them, which
+# crashes any print()/log line that includes the raw query. Force UTF-8
+# regardless of the terminal's codepage - only affects this process's
+# stdout/stderr, not application behavior. Linux (where this actually
+# deploys) defaults to UTF-8 already, so this is a local-dev-only fix.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 # Add project root to path
 sys.path.append(os.getcwd())
 

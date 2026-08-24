@@ -6,6 +6,12 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 
+# See evaluate_retrieval.py for why: non-ASCII ground-truth text crashes
+# Windows' default console codepage otherwise.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 # Add project root to path
 sys.path.append(os.getcwd())
 
