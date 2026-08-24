@@ -10,3 +10,14 @@ services:
     volumes:
       - ./qdrant_storage:/qdrant/storage:z
     restart: always
+
+  # Optional: exercise the Redis cache path locally by setting
+  # REDIS_URL=redis://localhost:6379 for the API process. If REDIS_URL is
+  # unset the app just uses its in-process LRU cache, so this service isn't
+  # required for local dev.
+  redis:
+    image: redis:7-alpine
+    container_name: roadmap_redis
+    ports:
+      - "6379:6379"
+    restart: always
