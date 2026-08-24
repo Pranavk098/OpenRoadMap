@@ -118,5 +118,2109 @@
         "type": "Course",
         "source": "Hugging Face",
         "quality_score": 0.96
+    },
+    {
+        "title": "HTML Living Standard",
+        "description": "The official WHATWG specification for HTML, the markup language of the web.",
+        "url": "https://html.spec.whatwg.org/multipage/",
+        "type": "Official Documentation",
+        "source": "WHATWG",
+        "quality_score": 0.9
+    },
+    {
+        "title": "MDN: Learn Web Development",
+        "description": "Mozilla's structured, beginner-friendly curriculum covering HTML, CSS, JavaScript, and web forms.",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+        "type": "Curriculum",
+        "source": "Mozilla",
+        "quality_score": 0.97
+    },
+    {
+        "title": "W3Schools",
+        "description": "Free, example-driven reference and tutorials for HTML, CSS, JavaScript, SQL, Python, and more with an interactive 'Try it' editor.",
+        "url": "https://www.w3schools.com/",
+        "type": "Interactive Course",
+        "source": "W3Schools",
+        "quality_score": 0.85
+    },
+    {
+        "title": "CSS-Tricks",
+        "description": "A long-running, highly respected blog and reference site for CSS techniques, layout (Flexbox/Grid), and front-end tips.",
+        "url": "https://css-tricks.com/",
+        "type": "Tutorial Site",
+        "source": "CSS-Tricks",
+        "quality_score": 0.93
+    },
+    {
+        "title": "React Documentation",
+        "description": "The official React docs, rebuilt around modern hooks-based patterns with interactive examples and a step-by-step tutorial.",
+        "url": "https://react.dev/",
+        "type": "Official Documentation",
+        "source": "Meta / React",
+        "quality_score": 0.99
+    },
+    {
+        "title": "Node.js Documentation",
+        "description": "Official API reference and guides for the Node.js JavaScript runtime.",
+        "url": "https://nodejs.org/en/docs",
+        "type": "Official Documentation",
+        "source": "OpenJS Foundation",
+        "quality_score": 0.97
+    },
+    {
+        "title": "TypeScript Handbook",
+        "description": "The official guide to TypeScript, covering types, interfaces, generics, and how it builds on JavaScript.",
+        "url": "https://www.typescriptlang.org/docs/handbook/intro.html",
+        "type": "Official Documentation",
+        "source": "Microsoft / TypeScript",
+        "quality_score": 0.98
+    },
+    {
+        "title": "JavaScript.info",
+        "description": "A modern, in-depth JavaScript tutorial covering the language from fundamentals to browser APIs and async programming.",
+        "url": "https://javascript.info/",
+        "type": "Tutorial Site",
+        "source": "javascript.info",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Eloquent JavaScript",
+        "description": "A free, well-regarded book teaching JavaScript programming and computer science fundamentals through practical projects.",
+        "url": "https://eloquentjavascript.net/",
+        "type": "Book",
+        "source": "Marijn Haverbeke",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Next.js Documentation",
+        "description": "Official documentation for Next.js, the React framework for production covering routing, rendering, and deployment.",
+        "url": "https://nextjs.org/docs",
+        "type": "Official Documentation",
+        "source": "Vercel",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Vue.js Documentation",
+        "description": "The official guide and API reference for the Vue.js progressive JavaScript framework.",
+        "url": "https://vuejs.org/guide/introduction.html",
+        "type": "Official Documentation",
+        "source": "Vue.js",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Tailwind CSS Documentation",
+        "description": "Official docs for the utility-first CSS framework, with searchable class reference and layout guides.",
+        "url": "https://tailwindcss.com/docs",
+        "type": "Official Documentation",
+        "source": "Tailwind Labs",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Frontend Masters",
+        "description": "In-depth video courses on JavaScript, React, CSS, and web architecture taught by industry practitioners.",
+        "url": "https://frontendmasters.com/",
+        "type": "Course",
+        "source": "Frontend Masters",
+        "quality_score": 0.92
+    },
+    {
+        "title": "web.dev",
+        "description": "Google's guidance hub for modern web development: performance, accessibility, PWAs, and best practices.",
+        "url": "https://web.dev/",
+        "type": "Tutorial Site",
+        "source": "Google",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Traversy Media",
+        "description": "Popular YouTube channel with practical crash courses on web development frameworks, languages, and tools.",
+        "url": "https://www.youtube.com/@TraversyMedia",
+        "type": "Video",
+        "source": "Traversy Media",
+        "quality_score": 0.9
+    },
+    {
+        "title": "The Net Ninja",
+        "description": "YouTube channel offering clear, structured tutorial series on JavaScript, React, Vue, Node.js, and web dev tooling.",
+        "url": "https://www.youtube.com/@NetNinja",
+        "type": "Video",
+        "source": "The Net Ninja",
+        "quality_score": 0.9
+    },
+    {
+        "title": "freeCodeCamp YouTube Channel",
+        "description": "Full-length, free coding courses on video covering web development, data science, and computer science.",
+        "url": "https://www.youtube.com/@freecodecamp",
+        "type": "Video",
+        "source": "freeCodeCamp",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Webpack Documentation",
+        "description": "Official guides and concepts documentation for the Webpack module bundler.",
+        "url": "https://webpack.js.org/concept/",
+        "type": "Official Documentation",
+        "source": "Webpack",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Pandas Documentation",
+        "description": "Official documentation for pandas, the core Python library for data manipulation and analysis.",
+        "url": "https://pandas.pydata.org/docs/",
+        "type": "Official Documentation",
+        "source": "pandas",
+        "quality_score": 0.98
+    },
+    {
+        "title": "NumPy Documentation",
+        "description": "Official documentation and user guide for NumPy, the fundamental package for numerical computing in Python.",
+        "url": "https://numpy.org/doc/stable/",
+        "type": "Official Documentation",
+        "source": "NumPy",
+        "quality_score": 0.98
+    },
+    {
+        "title": "Data Analysis with Python (freeCodeCamp)",
+        "description": "Free certification curriculum covering NumPy, Pandas, Matplotlib, and data analysis workflows in Python.",
+        "url": "https://www.freecodecamp.org/learn/data-analysis-with-python/",
+        "type": "Interactive Course",
+        "source": "freeCodeCamp",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Kaggle Competitions",
+        "description": "Real-world data science competitions with datasets, notebooks, and a community leaderboard for hands-on practice.",
+        "url": "https://www.kaggle.com/competitions",
+        "type": "Community",
+        "source": "Kaggle",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Google Data Analytics Professional Certificate",
+        "description": "A beginner-friendly, job-oriented data analytics program covering spreadsheets, SQL, Tableau, and R.",
+        "url": "https://www.coursera.org/professional-certificates/google-data-analytics",
+        "type": "Course",
+        "source": "Coursera / Google",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Matplotlib Documentation",
+        "description": "Official documentation for Matplotlib, Python's foundational data visualization library.",
+        "url": "https://matplotlib.org/stable/index.html",
+        "type": "Official Documentation",
+        "source": "Matplotlib",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Storytelling with Data",
+        "description": "A widely-cited book and blog on how to communicate insights effectively through data visualization.",
+        "url": "https://www.storytellingwithdata.com/",
+        "type": "Book",
+        "source": "Cole Nussbaumer Knaflic",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Tableau Public Training",
+        "description": "Free official training videos for learning Tableau, from fundamentals to advanced dashboard design.",
+        "url": "https://www.tableau.com/learn/training",
+        "type": "Course",
+        "source": "Tableau",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Power BI Learning Path",
+        "description": "Microsoft's official learning path for Power BI, covering data modeling, DAX, and dashboard creation.",
+        "url": "https://learn.microsoft.com/en-us/training/powerplatform/power-bi",
+        "type": "Official Documentation",
+        "source": "Microsoft",
+        "quality_score": 0.92
+    },
+    {
+        "title": "DataCamp",
+        "description": "Interactive, browser-based courses on Python, R, SQL, and data science with hands-on coding exercises.",
+        "url": "https://www.datacamp.com/",
+        "type": "Interactive Course",
+        "source": "DataCamp",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Corey Schafer YouTube Channel",
+        "description": "Highly regarded Python and data-tooling tutorials (pandas, virtual environments, OOP, Git) known for clarity.",
+        "url": "https://www.youtube.com/@coreyms",
+        "type": "Video",
+        "source": "Corey Schafer",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Awesome Data Science (GitHub)",
+        "description": "A curated, community-maintained list of data science resources, tools, and learning paths.",
+        "url": "https://github.com/academic/awesome-datascience",
+        "type": "Community",
+        "source": "GitHub",
+        "quality_score": 0.85
+    },
+    {
+        "title": "Deep Learning Specialization by Andrew Ng",
+        "description": "A five-course sequence covering neural networks, CNNs, RNNs, and how to structure ML projects.",
+        "url": "https://www.coursera.org/specializations/deep-learning",
+        "type": "Course",
+        "source": "Coursera / DeepLearning.AI",
+        "quality_score": 0.98
+    },
+    {
+        "title": "Dive into Deep Learning",
+        "description": "A free, interactive open-source book teaching deep learning with runnable code in PyTorch, TensorFlow, and MXNet.",
+        "url": "https://d2l.ai/",
+        "type": "Book",
+        "source": "d2l.ai",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Stanford CS231n: Convolutional Neural Networks",
+        "description": "Stanford's renowned course on CNNs for visual recognition, with public lecture notes and assignments.",
+        "url": "https://cs231n.stanford.edu/",
+        "type": "Course",
+        "source": "Stanford University",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Stanford CS229: Machine Learning",
+        "description": "Stanford's classic graduate machine learning course, with publicly available lecture notes and materials.",
+        "url": "https://cs229.stanford.edu/",
+        "type": "Course",
+        "source": "Stanford University",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Keras Documentation",
+        "description": "Official documentation for Keras, the high-level deep learning API for building and training neural networks.",
+        "url": "https://keras.io/",
+        "type": "Official Documentation",
+        "source": "Keras",
+        "quality_score": 0.96
+    },
+    {
+        "title": "XGBoost Documentation",
+        "description": "Official documentation for XGBoost, the widely-used gradient boosting library for structured data problems.",
+        "url": "https://xgboost.readthedocs.io/en/stable/",
+        "type": "Official Documentation",
+        "source": "XGBoost",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Papers with Code",
+        "description": "A free resource pairing machine learning research papers with their open-source code implementations and benchmarks.",
+        "url": "https://paperswithcode.com/",
+        "type": "Community",
+        "source": "Papers with Code",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Distill.pub",
+        "description": "A now-archived but highly regarded publication known for clear, visual explanations of machine learning concepts.",
+        "url": "https://distill.pub/",
+        "type": "Tutorial Site",
+        "source": "Distill",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Sentdex YouTube Channel",
+        "description": "Practical Python and machine learning tutorials covering neural networks, reinforcement learning, and data projects.",
+        "url": "https://www.youtube.com/@sentdex",
+        "type": "Video",
+        "source": "Sentdex",
+        "quality_score": 0.9
+    },
+    {
+        "title": "MIT 6.034 Artificial Intelligence",
+        "description": "MIT OpenCourseWare's introductory course covering search, constraint satisfaction, learning, and neural nets.",
+        "url": "https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/",
+        "type": "Course",
+        "source": "MIT OpenCourseWare",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Machine Learning Mastery",
+        "description": "Practical, code-first tutorials on machine learning algorithms and workflows by Jason Brownlee.",
+        "url": "https://machinelearningmastery.com/",
+        "type": "Tutorial Site",
+        "source": "Machine Learning Mastery",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Google's Deep Learning Tuning Playbook",
+        "description": "A practical, engineering-focused guide to hyperparameter tuning and training deep learning models.",
+        "url": "https://github.com/google-research/tuning_playbook",
+        "type": "Tutorial Site",
+        "source": "Google Research",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Neural Networks and Deep Learning (online book)",
+        "description": "Michael Nielsen's free online book building intuition for neural networks and backpropagation from first principles.",
+        "url": "http://neuralnetworksanddeeplearning.com/",
+        "type": "Book",
+        "source": "Michael Nielsen",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Made With ML",
+        "description": "A free, practical MLOps and applied machine learning course covering how to design, develop, and deploy ML systems.",
+        "url": "https://madewithml.com/",
+        "type": "Course",
+        "source": "Made With ML",
+        "quality_score": 0.93
+    },
+    {
+        "title": "StatQuest with Josh Starmer",
+        "description": "A YouTube channel explaining statistics and machine learning concepts with clear, visual, step-by-step explanations.",
+        "url": "https://www.youtube.com/@statquest",
+        "type": "Video",
+        "source": "StatQuest",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Prompt Engineering Guide",
+        "description": "A comprehensive, community-maintained guide to prompt engineering techniques for large language models.",
+        "url": "https://www.promptingguide.ai/",
+        "type": "Tutorial Site",
+        "source": "DAIR.AI",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Anthropic Claude Documentation",
+        "description": "Official documentation for building with the Claude API, including prompting guides and tool use.",
+        "url": "https://docs.claude.com/",
+        "type": "Official Documentation",
+        "source": "Anthropic",
+        "quality_score": 0.97
+    },
+    {
+        "title": "OpenAI Platform Documentation",
+        "description": "Official documentation for the OpenAI API, covering models, fine-tuning, and best practices.",
+        "url": "https://platform.openai.com/docs",
+        "type": "Official Documentation",
+        "source": "OpenAI",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Hugging Face LLM Course",
+        "description": "A free course on transformers, fine-tuning, and building applications with the Hugging Face ecosystem.",
+        "url": "https://huggingface.co/learn/llm-course",
+        "type": "Course",
+        "source": "Hugging Face",
+        "quality_score": 0.95
+    },
+    {
+        "title": "LangChain Documentation",
+        "description": "Official documentation for LangChain, a framework for building applications powered by language models.",
+        "url": "https://python.langchain.com/docs/introduction/",
+        "type": "Official Documentation",
+        "source": "LangChain",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Attention Is All You Need (paper)",
+        "description": "The original Transformer architecture paper that underpins modern large language models.",
+        "url": "https://arxiv.org/abs/1706.03762",
+        "type": "Tutorial Site",
+        "source": "arXiv",
+        "quality_score": 0.9
+    },
+    {
+        "title": "The Illustrated Transformer",
+        "description": "Jay Alammar's widely-cited visual walkthrough explaining how transformer models work internally.",
+        "url": "https://jalammar.github.io/illustrated-transformer/",
+        "type": "Tutorial Site",
+        "source": "Jay Alammar",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Andrej Karpathy YouTube Channel",
+        "description": "In-depth, from-scratch video lectures on neural networks, GPT, and building language models by Andrej Karpathy.",
+        "url": "https://www.youtube.com/@AndrejKarpathy",
+        "type": "Video",
+        "source": "Andrej Karpathy",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Google AI: Generative AI Learning Path",
+        "description": "Google's free introductory learning path covering generative AI, large language models, and responsible AI.",
+        "url": "https://www.cloudskillsboost.google/paths/118",
+        "type": "Course",
+        "source": "Google Cloud",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Hugging Face Transformers Documentation",
+        "description": "Official documentation for the Transformers library used to load and fine-tune state-of-the-art NLP/LLM models.",
+        "url": "https://huggingface.co/docs/transformers/index",
+        "type": "Official Documentation",
+        "source": "Hugging Face",
+        "quality_score": 0.96
+    },
+    {
+        "title": "DeepLearning.AI Short Courses",
+        "description": "Free, focused short courses on generative AI topics like prompt engineering, RAG, and LangChain, taught with practitioners.",
+        "url": "https://www.deeplearning.ai/short-courses/",
+        "type": "Course",
+        "source": "DeepLearning.AI",
+        "quality_score": 0.94
+    },
+    {
+        "title": "OWASP Top 10 for LLM Applications",
+        "description": "Community-driven guidance on the top security risks specific to large language model applications.",
+        "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+        "type": "Official Documentation",
+        "source": "OWASP",
+        "quality_score": 0.92
+    },
+    {
+        "title": "OWASP Top Ten",
+        "description": "The industry-standard awareness document on the most critical web application security risks.",
+        "url": "https://owasp.org/www-project-top-ten/",
+        "type": "Official Documentation",
+        "source": "OWASP",
+        "quality_score": 0.98
+    },
+    {
+        "title": "TryHackMe",
+        "description": "A gamified, guided platform for learning cybersecurity and ethical hacking through hands-on virtual labs.",
+        "url": "https://tryhackme.com/",
+        "type": "Interactive Course",
+        "source": "TryHackMe",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Hack The Box",
+        "description": "A hands-on platform of realistic vulnerable machines and challenges for practicing penetration testing skills.",
+        "url": "https://www.hackthebox.com/",
+        "type": "Interactive Course",
+        "source": "Hack The Box",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Google Cybersecurity Professional Certificate",
+        "description": "A beginner-friendly, job-oriented program covering security fundamentals, networks, Linux, SQL, and incident response.",
+        "url": "https://www.coursera.org/professional-certificates/google-cybersecurity",
+        "type": "Course",
+        "source": "Coursera / Google",
+        "quality_score": 0.93
+    },
+    {
+        "title": "PortSwigger Web Security Academy",
+        "description": "A free, hands-on curriculum on web application security vulnerabilities, built by the makers of Burp Suite.",
+        "url": "https://portswigger.net/web-security",
+        "type": "Interactive Course",
+        "source": "PortSwigger",
+        "quality_score": 0.96
+    },
+    {
+        "title": "NIST Cybersecurity Framework",
+        "description": "The official U.S. government framework for managing and reducing cybersecurity risk, widely adopted in industry.",
+        "url": "https://www.nist.gov/cyberframework",
+        "type": "Official Documentation",
+        "source": "NIST",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Cybrary",
+        "description": "Free and paid courses covering cybersecurity fundamentals, certifications prep, and hands-on labs.",
+        "url": "https://www.cybrary.it/",
+        "type": "Course",
+        "source": "Cybrary",
+        "quality_score": 0.88
+    },
+    {
+        "title": "MITRE ATT&CK",
+        "description": "A globally-accessible knowledge base of adversary tactics and techniques used in cybersecurity analysis and defense.",
+        "url": "https://attack.mitre.org/",
+        "type": "Official Documentation",
+        "source": "MITRE",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Professor Messer (CompTIA Security+ Training)",
+        "description": "Free, comprehensive video training for CompTIA Security+ and Network+ certification exams.",
+        "url": "https://www.professormesser.com/",
+        "type": "Course",
+        "source": "Professor Messer",
+        "quality_score": 0.92
+    },
+    {
+        "title": "NetworkChuck YouTube Channel",
+        "description": "Popular YouTube channel covering networking, cybersecurity, ethical hacking, and IT career content.",
+        "url": "https://www.youtube.com/@NetworkChuck",
+        "type": "Video",
+        "source": "NetworkChuck",
+        "quality_score": 0.9
+    },
+    {
+        "title": "OverTheWire Wargames",
+        "description": "Classic hands-on wargame challenges for learning security concepts through SSH-based puzzles, from beginner to advanced.",
+        "url": "https://overthewire.org/wargames/",
+        "type": "Interactive Course",
+        "source": "OverTheWire",
+        "quality_score": 0.92
+    },
+    {
+        "title": "SANS Cyber Aces",
+        "description": "Free introductory tutorials on operating systems, networking, and system administration for security fundamentals.",
+        "url": "https://www.sans.org/cyberaces/",
+        "type": "Course",
+        "source": "SANS Institute",
+        "quality_score": 0.9
+    },
+    {
+        "title": "AWS Documentation",
+        "description": "Official documentation hub for all Amazon Web Services products and APIs.",
+        "url": "https://docs.aws.amazon.com/",
+        "type": "Official Documentation",
+        "source": "Amazon Web Services",
+        "quality_score": 0.98
+    },
+    {
+        "title": "AWS Skill Builder",
+        "description": "Amazon's official free training platform with courses and learning plans for AWS certifications.",
+        "url": "https://skillbuilder.aws/",
+        "type": "Course",
+        "source": "Amazon Web Services",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Microsoft Azure Documentation",
+        "description": "Official documentation and reference for Microsoft Azure cloud services.",
+        "url": "https://learn.microsoft.com/en-us/azure/",
+        "type": "Official Documentation",
+        "source": "Microsoft",
+        "quality_score": 0.98
+    },
+    {
+        "title": "Microsoft Learn",
+        "description": "Microsoft's free, official hands-on learning platform with modules and learning paths for Azure, AI, and more.",
+        "url": "https://learn.microsoft.com/en-us/training/",
+        "type": "Interactive Course",
+        "source": "Microsoft",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Google Cloud Documentation",
+        "description": "Official documentation hub for Google Cloud Platform products and services.",
+        "url": "https://cloud.google.com/docs",
+        "type": "Official Documentation",
+        "source": "Google Cloud",
+        "quality_score": 0.98
+    },
+    {
+        "title": "Google Cloud Skills Boost",
+        "description": "Google's official hands-on training platform offering labs and quests for Google Cloud technologies.",
+        "url": "https://www.cloudskillsboost.google/",
+        "type": "Interactive Course",
+        "source": "Google Cloud",
+        "quality_score": 0.93
+    },
+    {
+        "title": "A Cloud Guru",
+        "description": "A subscription platform offering in-depth video courses and hands-on labs for AWS, Azure, and GCP certifications.",
+        "url": "https://acloudguru.com/",
+        "type": "Course",
+        "source": "Pluralsight / A Cloud Guru",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Serverless Framework Documentation",
+        "description": "Official documentation for the Serverless Framework, used to build and deploy serverless applications across cloud providers.",
+        "url": "https://www.serverless.com/framework/docs",
+        "type": "Official Documentation",
+        "source": "Serverless Inc.",
+        "quality_score": 0.88
+    },
+    {
+        "title": "FreeCodeCamp: AWS Cloud Practitioner Certification Course",
+        "description": "A free, full-length video course preparing learners for the AWS Cloud Practitioner certification exam.",
+        "url": "https://www.freecodecamp.org/news/aws-certified-cloud-practitioner-study-course-pass-the-exam-with-this-free-13-hour-course/",
+        "type": "Course",
+        "source": "freeCodeCamp",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Cloud Resume Challenge",
+        "description": "A hands-on project-based challenge where learners build and deploy a resume site using real cloud services and DevOps tools.",
+        "url": "https://cloudresumechallenge.dev/",
+        "type": "Tutorial Site",
+        "source": "Cloud Resume Challenge",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Azure Architecture Center",
+        "description": "Microsoft's official repository of reference architectures and best practices for designing cloud solutions on Azure.",
+        "url": "https://learn.microsoft.com/en-us/azure/architecture/",
+        "type": "Official Documentation",
+        "source": "Microsoft",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Docker Documentation",
+        "description": "Official documentation for Docker, covering containers, images, Compose, and best practices.",
+        "url": "https://docs.docker.com/",
+        "type": "Official Documentation",
+        "source": "Docker",
+        "quality_score": 0.98
+    },
+    {
+        "title": "Kubernetes Documentation",
+        "description": "The official Kubernetes documentation, including concepts, tutorials, and a hands-on 'Learn Kubernetes Basics' tutorial.",
+        "url": "https://kubernetes.io/docs/home/",
+        "type": "Official Documentation",
+        "source": "Kubernetes / CNCF",
+        "quality_score": 0.98
+    },
+    {
+        "title": "Terraform Documentation",
+        "description": "Official documentation for Terraform, HashiCorp's infrastructure-as-code tool.",
+        "url": "https://developer.hashicorp.com/terraform/docs",
+        "type": "Official Documentation",
+        "source": "HashiCorp",
+        "quality_score": 0.97
+    },
+    {
+        "title": "GitHub Actions Documentation",
+        "description": "Official documentation for GitHub Actions, GitHub's built-in CI/CD and automation platform.",
+        "url": "https://docs.github.com/en/actions",
+        "type": "Official Documentation",
+        "source": "GitHub",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Jenkins Documentation",
+        "description": "Official documentation for Jenkins, the widely-used open-source automation server for CI/CD pipelines.",
+        "url": "https://www.jenkins.io/doc/",
+        "type": "Official Documentation",
+        "source": "Jenkins",
+        "quality_score": 0.93
+    },
+    {
+        "title": "The Twelve-Factor App",
+        "description": "A widely-referenced methodology for building software-as-a-service applications that are portable and scalable.",
+        "url": "https://12factor.net/",
+        "type": "Tutorial Site",
+        "source": "Heroku",
+        "quality_score": 0.94
+    },
+    {
+        "title": "KodeKloud",
+        "description": "Hands-on, lab-based courses on Docker, Kubernetes, DevOps, and cloud technologies with interactive terminals.",
+        "url": "https://kodekloud.com/",
+        "type": "Interactive Course",
+        "source": "KodeKloud",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Ansible Documentation",
+        "description": "Official documentation for Ansible, the open-source IT automation and configuration management tool.",
+        "url": "https://docs.ansible.com/",
+        "type": "Official Documentation",
+        "source": "Red Hat / Ansible",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Prometheus Documentation",
+        "description": "Official documentation for Prometheus, the open-source systems monitoring and alerting toolkit.",
+        "url": "https://prometheus.io/docs/introduction/overview/",
+        "type": "Official Documentation",
+        "source": "Prometheus / CNCF",
+        "quality_score": 0.92
+    },
+    {
+        "title": "TechWorld with Nana YouTube Channel",
+        "description": "Highly-regarded DevOps YouTube channel covering Docker, Kubernetes, CI/CD, and cloud-native tooling.",
+        "url": "https://www.youtube.com/@TechWorldwithNana",
+        "type": "Video",
+        "source": "TechWorld with Nana",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Roadmap.sh: DevOps Roadmap",
+        "description": "A visual, community-maintained roadmap outlining the skills and technologies needed to become a DevOps engineer.",
+        "url": "https://roadmap.sh/devops",
+        "type": "Curriculum",
+        "source": "roadmap.sh",
+        "quality_score": 0.92
+    },
+    {
+        "title": "GitLab CI/CD Documentation",
+        "description": "Official documentation for GitLab's built-in continuous integration and delivery pipelines.",
+        "url": "https://docs.gitlab.com/ee/ci/",
+        "type": "Official Documentation",
+        "source": "GitLab",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Apple Swift Documentation",
+        "description": "Official documentation for the Swift programming language used for iOS, macOS, and other Apple platform development.",
+        "url": "https://www.swift.org/documentation/",
+        "type": "Official Documentation",
+        "source": "Apple / Swift.org",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Apple Developer: SwiftUI Documentation",
+        "description": "Official Apple documentation and tutorials for building user interfaces with SwiftUI.",
+        "url": "https://developer.apple.com/documentation/swiftui/",
+        "type": "Official Documentation",
+        "source": "Apple",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Kotlin Documentation",
+        "description": "Official documentation for the Kotlin programming language, the preferred language for Android development.",
+        "url": "https://kotlinlang.org/docs/home.html",
+        "type": "Official Documentation",
+        "source": "JetBrains / Kotlin",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Android Developers Documentation",
+        "description": "Google's official documentation and training hub for building Android applications.",
+        "url": "https://developer.android.com/docs",
+        "type": "Official Documentation",
+        "source": "Google",
+        "quality_score": 0.98
+    },
+    {
+        "title": "React Native Documentation",
+        "description": "Official documentation for React Native, the framework for building native mobile apps using React.",
+        "url": "https://reactnative.dev/docs/getting-started",
+        "type": "Official Documentation",
+        "source": "Meta / React Native",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Flutter Documentation",
+        "description": "Official documentation for Flutter, Google's UI toolkit for building natively compiled cross-platform apps.",
+        "url": "https://docs.flutter.dev/",
+        "type": "Official Documentation",
+        "source": "Google",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Dart Language Tour",
+        "description": "The official guide to the Dart programming language used by Flutter for app development.",
+        "url": "https://dart.dev/language",
+        "type": "Official Documentation",
+        "source": "Google / Dart",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Android Basics with Compose",
+        "description": "Google's free official beginner course for building Android apps using Jetpack Compose.",
+        "url": "https://developer.android.com/courses/android-basics-compose/course",
+        "type": "Course",
+        "source": "Google",
+        "quality_score": 0.94
+    },
+    {
+        "title": "100 Days of SwiftUI",
+        "description": "A free, structured hands-on course teaching Swift and SwiftUI through daily lessons and projects.",
+        "url": "https://www.hackingwithswift.com/100/swiftui",
+        "type": "Curriculum",
+        "source": "Hacking with Swift",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Kodeco (formerly raywenderlich.com)",
+        "description": "Long-running tutorial site with in-depth guides and courses on iOS, Android, and Swift development.",
+        "url": "https://www.kodeco.com/",
+        "type": "Tutorial Site",
+        "source": "Kodeco",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Google Codelabs",
+        "description": "Free, guided, hands-on coding tutorials from Google covering Android, Flutter, web, and cloud technologies.",
+        "url": "https://codelabs.developers.google.com/",
+        "type": "Interactive Course",
+        "source": "Google",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Expo Documentation",
+        "description": "Official documentation for Expo, the toolchain built around React Native for simplifying mobile app development.",
+        "url": "https://docs.expo.dev/",
+        "type": "Official Documentation",
+        "source": "Expo",
+        "quality_score": 0.92
+    },
+    {
+        "title": "PostgreSQL Documentation",
+        "description": "The official, comprehensive documentation for the PostgreSQL relational database system.",
+        "url": "https://www.postgresql.org/docs/",
+        "type": "Official Documentation",
+        "source": "PostgreSQL",
+        "quality_score": 0.98
+    },
+    {
+        "title": "MySQL Documentation",
+        "description": "Official reference manual and documentation for the MySQL database server.",
+        "url": "https://dev.mysql.com/doc/",
+        "type": "Official Documentation",
+        "source": "Oracle / MySQL",
+        "quality_score": 0.96
+    },
+    {
+        "title": "MongoDB Documentation",
+        "description": "Official documentation for MongoDB, the widely-used document-oriented NoSQL database.",
+        "url": "https://www.mongodb.com/docs/",
+        "type": "Official Documentation",
+        "source": "MongoDB",
+        "quality_score": 0.96
+    },
+    {
+        "title": "SQLZoo",
+        "description": "An interactive, browser-based tutorial for practicing SQL queries with immediate feedback.",
+        "url": "https://sqlzoo.net/",
+        "type": "Interactive Course",
+        "source": "SQLZoo",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Mode SQL Tutorial",
+        "description": "A free, thorough interactive SQL tutorial covering basic to advanced querying for data analysis.",
+        "url": "https://mode.com/sql-tutorial/",
+        "type": "Interactive Course",
+        "source": "Mode Analytics",
+        "quality_score": 0.92
+    },
+    {
+        "title": "SQLBolt",
+        "description": "Interactive, browser-based lessons and exercises for learning SQL fundamentals.",
+        "url": "https://sqlbolt.com/",
+        "type": "Interactive Course",
+        "source": "SQLBolt",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Redis Documentation",
+        "description": "Official documentation for Redis, the popular in-memory data store used for caching, queues, and more.",
+        "url": "https://redis.io/docs/latest/",
+        "type": "Official Documentation",
+        "source": "Redis",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Use The Index, Luke",
+        "description": "A free, in-depth guide to SQL indexing and database performance tuning for developers.",
+        "url": "https://use-the-index-luke.com/",
+        "type": "Book",
+        "source": "Markus Winand",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Database Design (freeCodeCamp)",
+        "description": "A free curriculum covering relational database design, normalization, and SQL fundamentals.",
+        "url": "https://www.freecodecamp.org/learn/relational-database/",
+        "type": "Interactive Course",
+        "source": "freeCodeCamp",
+        "quality_score": 0.92
+    },
+    {
+        "title": "SQLite Documentation",
+        "description": "Official documentation for SQLite, the widely embedded, self-contained SQL database engine.",
+        "url": "https://www.sqlite.org/docs.html",
+        "type": "Official Documentation",
+        "source": "SQLite",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Nielsen Norman Group Articles",
+        "description": "Research-based articles and guidance on usability, UX design, and human-computer interaction from a leading UX research firm.",
+        "url": "https://www.nngroup.com/articles/",
+        "type": "Tutorial Site",
+        "source": "Nielsen Norman Group",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Google UX Design Professional Certificate",
+        "description": "A beginner-friendly, job-oriented certificate program covering the end-to-end UX design process.",
+        "url": "https://www.coursera.org/professional-certificates/google-ux-design",
+        "type": "Course",
+        "source": "Coursera / Google",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Laws of UX",
+        "description": "A reference site distilling well-known psychological principles that apply to user experience design.",
+        "url": "https://lawsofux.com/",
+        "type": "Tutorial Site",
+        "source": "Jon Yablonski",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Figma Learn",
+        "description": "Official tutorials and resources for learning how to use Figma, the collaborative interface design tool.",
+        "url": "https://help.figma.com/hu/hc/en-us/categories/23370372882455-Learn-Design",
+        "type": "Official Documentation",
+        "source": "Figma",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Material Design Guidelines",
+        "description": "Google's official design system documentation covering principles, components, and patterns for digital interfaces.",
+        "url": "https://m3.material.io/",
+        "type": "Official Documentation",
+        "source": "Google",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Apple Human Interface Guidelines",
+        "description": "Apple's official design guidelines for building intuitive, consistent interfaces across its platforms.",
+        "url": "https://developer.apple.com/design/human-interface-guidelines",
+        "type": "Official Documentation",
+        "source": "Apple",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Refactoring UI",
+        "description": "A practical, example-driven guide to visual design fundamentals for developers with no design background.",
+        "url": "https://www.refactoringui.com/",
+        "type": "Book",
+        "source": "Adam Wathan & Steve Schoger",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Interaction Design Foundation",
+        "description": "A large library of courses and articles on UX design, research, and design thinking fundamentals.",
+        "url": "https://www.interaction-design.org/",
+        "type": "Course",
+        "source": "Interaction Design Foundation",
+        "quality_score": 0.9
+    },
+    {
+        "title": "A List Apart",
+        "description": "A long-running, influential publication on web design, UX, and front-end best practices.",
+        "url": "https://alistapart.com/",
+        "type": "Tutorial Site",
+        "source": "A List Apart",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Smashing Magazine",
+        "description": "A well-known online publication covering UX/UI design, front-end development, and web design trends.",
+        "url": "https://www.smashingmagazine.com/",
+        "type": "Tutorial Site",
+        "source": "Smashing Magazine",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Google Digital Marketing & E-commerce Certificate",
+        "description": "A beginner-friendly, job-oriented certificate covering digital marketing fundamentals, SEO, and e-commerce.",
+        "url": "https://www.coursera.org/professional-certificates/google-digital-marketing-ecommerce",
+        "type": "Course",
+        "source": "Coursera / Google",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Moz Beginner's Guide to SEO",
+        "description": "A widely-referenced, free guide covering the fundamentals of search engine optimization.",
+        "url": "https://moz.com/beginners-guide-to-seo",
+        "type": "Tutorial Site",
+        "source": "Moz",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Google Search Central Documentation",
+        "description": "Google's official documentation on how Search works and how to optimize sites for it.",
+        "url": "https://developers.google.com/search/docs",
+        "type": "Official Documentation",
+        "source": "Google",
+        "quality_score": 0.96
+    },
+    {
+        "title": "HubSpot Academy",
+        "description": "Free courses and certifications on inbound marketing, content strategy, SEO, and social media.",
+        "url": "https://academy.hubspot.com/",
+        "type": "Course",
+        "source": "HubSpot",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Ahrefs Academy",
+        "description": "Free courses on SEO and content marketing from the team behind the Ahrefs SEO toolset.",
+        "url": "https://ahrefs.com/academy",
+        "type": "Course",
+        "source": "Ahrefs",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Google Analytics Academy",
+        "description": "Google's official free training platform for learning Google Analytics and Google Tag Manager.",
+        "url": "https://analytics.google.com/analytics/academy/",
+        "type": "Course",
+        "source": "Google",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Backlinko",
+        "description": "A well-known SEO blog by Brian Dean with in-depth, data-driven guides on search engine optimization.",
+        "url": "https://backlinko.com/",
+        "type": "Tutorial Site",
+        "source": "Backlinko",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Meta Blueprint",
+        "description": "Meta's official training platform for learning advertising on Facebook and Instagram.",
+        "url": "https://www.facebookblueprint.com/",
+        "type": "Course",
+        "source": "Meta",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Content Marketing Institute",
+        "description": "Resources, research, and guidance on building and executing content marketing strategy.",
+        "url": "https://contentmarketinginstitute.com/",
+        "type": "Tutorial Site",
+        "source": "Content Marketing Institute",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Neil Patel Blog",
+        "description": "A widely-read digital marketing blog covering SEO, content marketing, and growth strategy.",
+        "url": "https://neilpatel.com/blog/",
+        "type": "Tutorial Site",
+        "source": "Neil Patel",
+        "quality_score": 0.87
+    },
+    {
+        "title": "Google Project Management Professional Certificate",
+        "description": "A beginner-friendly, job-oriented certificate covering project management fundamentals, agile, and Scrum.",
+        "url": "https://www.coursera.org/professional-certificates/google-project-management",
+        "type": "Course",
+        "source": "Coursera / Google",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Mind the Product",
+        "description": "A leading community and content hub for product managers, with articles, videos, and events.",
+        "url": "https://www.mindtheproduct.com/",
+        "type": "Community",
+        "source": "Mind the Product",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Reforge",
+        "description": "Advanced, practitioner-taught programs on product management, growth, and marketing for experienced professionals.",
+        "url": "https://www.reforge.com/",
+        "type": "Course",
+        "source": "Reforge",
+        "quality_score": 0.89
+    },
+    {
+        "title": "Product School",
+        "description": "Courses and certifications focused on product management skills, taught by practicing product leaders.",
+        "url": "https://productschool.com/",
+        "type": "Course",
+        "source": "Product School",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Inspired: How to Create Tech Products Customers Love",
+        "description": "Marty Cagan's widely-referenced book on modern product management practice at technology companies.",
+        "url": "https://www.svpg.com/books/inspired-2/",
+        "type": "Book",
+        "source": "Silicon Valley Product Group",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Scrum Guide",
+        "description": "The official, concise definition of Scrum as maintained by its co-creators.",
+        "url": "https://scrumguides.org/",
+        "type": "Official Documentation",
+        "source": "Scrum.org",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Atlassian Agile Coach",
+        "description": "Atlassian's free guide to agile, Scrum, and Kanban practices for software teams.",
+        "url": "https://www.atlassian.com/agile",
+        "type": "Tutorial Site",
+        "source": "Atlassian",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Lenny's Newsletter",
+        "description": "A widely-followed newsletter and content hub covering product management, growth, and career advice from industry practitioners.",
+        "url": "https://www.lennysnewsletter.com/",
+        "type": "Community",
+        "source": "Lenny Rachitsky",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Product Hunt",
+        "description": "A community platform for discovering and discussing newly launched products, useful for market and competitor research.",
+        "url": "https://www.producthunt.com/",
+        "type": "Community",
+        "source": "Product Hunt",
+        "quality_score": 0.87
+    },
+    {
+        "title": "The Product Manager's Toolkit (Coursera)",
+        "description": "A university-taught course covering core product management frameworks and toolkits.",
+        "url": "https://www.coursera.org/learn/uva-darden-product-manager",
+        "type": "Course",
+        "source": "Coursera / University of Virginia",
+        "quality_score": 0.88
+    },
+    {
+        "title": "MIT 6.006: Introduction to Algorithms",
+        "description": "MIT's foundational course on algorithms and data structures, with free lecture notes and problem sets.",
+        "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+        "type": "Course",
+        "source": "MIT OpenCourseWare",
+        "quality_score": 0.97
+    },
+    {
+        "title": "LeetCode",
+        "description": "The most widely-used platform for practicing coding interview problems and data structures & algorithms.",
+        "url": "https://leetcode.com/",
+        "type": "Interactive Course",
+        "source": "LeetCode",
+        "quality_score": 0.95
+    },
+    {
+        "title": "VisuAlgo",
+        "description": "Interactive visualizations of data structures and algorithms designed to aid learning through animation.",
+        "url": "https://visualgo.net/en",
+        "type": "Interactive Course",
+        "source": "VisuAlgo / NUS",
+        "quality_score": 0.93
+    },
+    {
+        "title": "GeeksforGeeks",
+        "description": "A large reference site with tutorials, articles, and practice problems on data structures, algorithms, and CS topics.",
+        "url": "https://www.geeksforgeeks.org/",
+        "type": "Tutorial Site",
+        "source": "GeeksforGeeks",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Introduction to Algorithms (CLRS)",
+        "description": "The canonical, widely-used textbook on algorithms, commonly referred to as 'CLRS'.",
+        "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+        "type": "Book",
+        "source": "MIT Press",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Teach Yourself Computer Science",
+        "description": "A curated, opinionated guide to the core CS topics worth learning, with book and course recommendations.",
+        "url": "https://teachyourselfcs.com/",
+        "type": "Curriculum",
+        "source": "teachyourselfcs.com",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Nand2Tetris",
+        "description": "A free course guiding learners through building a modern computer system from NAND gates up to a working OS.",
+        "url": "https://www.nand2tetris.org/",
+        "type": "Course",
+        "source": "Nand2Tetris",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Computer Networking: A Top-Down Approach (companion site)",
+        "description": "Companion resources for the widely-used networking textbook covering the internet's protocol stack.",
+        "url": "https://gaia.cs.umass.edu/kurose_ross/index.php",
+        "type": "Book",
+        "source": "Kurose & Ross",
+        "quality_score": 0.92
+    },
+    {
+        "title": "ByteByteGo",
+        "description": "A popular newsletter and YouTube channel explaining system design concepts with clear diagrams.",
+        "url": "https://www.youtube.com/@ByteByteGo",
+        "type": "Video",
+        "source": "ByteByteGo",
+        "quality_score": 0.93
+    },
+    {
+        "title": "System Design Primer (GitHub)",
+        "description": "A widely-starred, community-maintained repository teaching how to design large-scale systems for interviews and practice.",
+        "url": "https://github.com/donnemartin/system-design-primer",
+        "type": "Curriculum",
+        "source": "GitHub",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Operating Systems: Three Easy Pieces",
+        "description": "A free, widely-used textbook covering virtualization, concurrency, and persistence in operating systems.",
+        "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+        "type": "Book",
+        "source": "Remzi & Andrea Arpaci-Dusseau",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Exercism",
+        "description": "A free platform offering programming exercises with mentor feedback across dozens of languages.",
+        "url": "https://exercism.org/",
+        "type": "Interactive Course",
+        "source": "Exercism",
+        "quality_score": 0.93
+    },
+    {
+        "title": "Unity Learn",
+        "description": "Unity's official free learning platform with tutorials and courses for building games with the Unity engine.",
+        "url": "https://learn.unity.com/",
+        "type": "Interactive Course",
+        "source": "Unity",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Unreal Engine Documentation",
+        "description": "Official documentation for Unreal Engine, covering Blueprints, C++, and game development workflows.",
+        "url": "https://dev.epicgames.com/documentation/en-us/unreal-engine",
+        "type": "Official Documentation",
+        "source": "Epic Games",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Godot Documentation",
+        "description": "Official documentation for Godot, the free and open-source game engine.",
+        "url": "https://docs.godotengine.org/en/stable/",
+        "type": "Official Documentation",
+        "source": "Godot Engine",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Brackeys YouTube Channel",
+        "description": "A hugely popular archived YouTube channel teaching Unity game development and C# through project-based tutorials.",
+        "url": "https://www.youtube.com/@Brackeys",
+        "type": "Video",
+        "source": "Brackeys",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Game Programming Patterns",
+        "description": "A free online book covering software design patterns commonly used in game development.",
+        "url": "https://gameprogrammingpatterns.com/",
+        "type": "Book",
+        "source": "Robert Nystrom",
+        "quality_score": 0.94
+    },
+    {
+        "title": "CS50's Introduction to Game Development",
+        "description": "Harvard's course on the fundamentals and history of video game development and design.",
+        "url": "https://cs50.harvard.edu/games/",
+        "type": "Course",
+        "source": "Harvard / CS50",
+        "quality_score": 0.93
+    },
+    {
+        "title": "GDC (Game Developers Conference) YouTube Channel",
+        "description": "Official talks and postmortems from the Game Developers Conference, covering design, engineering, and production.",
+        "url": "https://www.youtube.com/@GDCFestivalofGaming",
+        "type": "Video",
+        "source": "Game Developers Conference",
+        "quality_score": 0.92
+    },
+    {
+        "title": "itch.io",
+        "description": "A platform for indie game developers to publish, discover, and study independently made games.",
+        "url": "https://itch.io/",
+        "type": "Community",
+        "source": "itch.io",
+        "quality_score": 0.86
+    },
+    {
+        "title": "Unity Learn: Create with Code",
+        "description": "Unity's official beginner course teaching C# scripting through building real games.",
+        "url": "https://learn.unity.com/course/create-with-code",
+        "type": "Course",
+        "source": "Unity",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Blender Game Asset Creation (Blender.org tutorials)",
+        "description": "Official Blender tutorials covering modeling and creating assets suitable for use in game engines.",
+        "url": "https://www.blender.org/support/tutorials/",
+        "type": "Tutorial Site",
+        "source": "Blender Foundation",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Ethereum Developer Documentation",
+        "description": "Official Ethereum documentation covering smart contracts, the EVM, and building decentralized applications.",
+        "url": "https://ethereum.org/en/developers/docs/",
+        "type": "Official Documentation",
+        "source": "Ethereum Foundation",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Solidity Documentation",
+        "description": "Official documentation for Solidity, the primary programming language for writing Ethereum smart contracts.",
+        "url": "https://docs.soliditylang.org/en/latest/",
+        "type": "Official Documentation",
+        "source": "Solidity",
+        "quality_score": 0.95
+    },
+    {
+        "title": "CryptoZombies",
+        "description": "An interactive, gamified course teaching Solidity and smart contract development by building a game.",
+        "url": "https://cryptozombies.io/",
+        "type": "Interactive Course",
+        "source": "CryptoZombies",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Bitcoin Whitepaper",
+        "description": "Satoshi Nakamoto's original paper introducing Bitcoin and the concept of a peer-to-peer electronic cash system.",
+        "url": "https://bitcoin.org/bitcoin.pdf",
+        "type": "Book",
+        "source": "Satoshi Nakamoto",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Alchemy University",
+        "description": "A free, structured curriculum for learning Web3 and blockchain development from the Alchemy platform.",
+        "url": "https://www.alchemy.com/university",
+        "type": "Curriculum",
+        "source": "Alchemy",
+        "quality_score": 0.89
+    },
+    {
+        "title": "OpenZeppelin Contracts Documentation",
+        "description": "Official documentation for OpenZeppelin, a widely-used library of secure, audited smart contract components.",
+        "url": "https://docs.openzeppelin.com/contracts/",
+        "type": "Official Documentation",
+        "source": "OpenZeppelin",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Mastering Bitcoin",
+        "description": "Andreas Antonopoulos's free, widely-used technical book explaining how Bitcoin works under the hood.",
+        "url": "https://github.com/bitcoinbook/bitcoinbook",
+        "type": "Book",
+        "source": "Andreas M. Antonopoulos",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Solana Documentation",
+        "description": "Official developer documentation for building applications on the Solana blockchain.",
+        "url": "https://solana.com/docs",
+        "type": "Official Documentation",
+        "source": "Solana Foundation",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Web3 University",
+        "description": "Free, hands-on tutorials for learning blockchain development, Solidity, and full-stack Web3 applications.",
+        "url": "https://www.web3.university/",
+        "type": "Tutorial Site",
+        "source": "Web3 University",
+        "quality_score": 0.86
+    },
+    {
+        "title": "Finematics YouTube Channel",
+        "description": "A YouTube channel breaking down DeFi and blockchain concepts with clear animated explanations.",
+        "url": "https://www.youtube.com/@Finematics",
+        "type": "Video",
+        "source": "Finematics",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Khan Academy: Statistics and Probability",
+        "description": "A free, self-paced curriculum covering statistics and probability from the ground up with practice exercises.",
+        "url": "https://www.khanacademy.org/math/statistics-probability",
+        "type": "Interactive Course",
+        "source": "Khan Academy",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Khan Academy: Linear Algebra",
+        "description": "A free, self-paced curriculum covering vectors, matrices, and linear transformations foundational to ML.",
+        "url": "https://www.khanacademy.org/math/linear-algebra",
+        "type": "Interactive Course",
+        "source": "Khan Academy",
+        "quality_score": 0.96
+    },
+    {
+        "title": "3Blue1Brown: Essence of Linear Algebra",
+        "description": "A visually intuitive video series building geometric understanding of core linear algebra concepts.",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra",
+        "type": "Video",
+        "source": "3Blue1Brown",
+        "quality_score": 0.97
+    },
+    {
+        "title": "3Blue1Brown YouTube Channel",
+        "description": "A YouTube channel renowned for visually intuitive explanations of math topics including calculus, linear algebra, and neural networks.",
+        "url": "https://www.youtube.com/@3blue1brown",
+        "type": "Video",
+        "source": "3Blue1Brown",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Seeing Theory",
+        "description": "An interactive, visual introduction to probability and statistics built at Brown University.",
+        "url": "https://seeing-theory.brown.edu/",
+        "type": "Interactive Course",
+        "source": "Brown University",
+        "quality_score": 0.94
+    },
+    {
+        "title": "StatQuest: Statistics Fundamentals Playlist",
+        "description": "A YouTube playlist explaining core statistics concepts step-by-step with clear visuals.",
+        "url": "https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9",
+        "type": "Video",
+        "source": "StatQuest",
+        "quality_score": 0.94
+    },
+    {
+        "title": "MIT 18.06: Linear Algebra",
+        "description": "Gilbert Strang's celebrated MIT linear algebra course, freely available with lecture videos and notes.",
+        "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+        "type": "Course",
+        "source": "MIT OpenCourseWare",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Mathematics for Machine Learning (book)",
+        "description": "A free book covering the linear algebra, calculus, and probability foundations needed for machine learning.",
+        "url": "https://mml-book.github.io/",
+        "type": "Book",
+        "source": "Deisenroth, Faisal & Ong",
+        "quality_score": 0.95
+    },
+    {
+        "title": "Paul's Online Math Notes",
+        "description": "Free, detailed lecture notes and practice problems covering algebra, calculus, and differential equations.",
+        "url": "https://tutorial.math.lamar.edu/",
+        "type": "Tutorial Site",
+        "source": "Lamar University",
+        "quality_score": 0.92
+    },
+    {
+        "title": "OpenIntro Statistics",
+        "description": "A free, widely-used introductory statistics textbook with accompanying labs and data.",
+        "url": "https://www.openintro.org/book/os/",
+        "type": "Book",
+        "source": "OpenIntro",
+        "quality_score": 0.93
+    },
+    {
+        "title": "The Linux Command Line (book)",
+        "description": "A free, comprehensive book teaching the Linux command line from basics to shell scripting.",
+        "url": "https://linuxcommand.org/tlcl.php",
+        "type": "Book",
+        "source": "William Shotts",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Linux Journey",
+        "description": "A free, friendly, structured site for learning Linux fundamentals, from the command line to networking.",
+        "url": "https://labex.io/linuxjourney",
+        "type": "Interactive Course",
+        "source": "Linux Journey / LabEx",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Arch Linux Wiki",
+        "description": "An extensively detailed and widely-referenced wiki covering Linux system administration, far beyond just Arch.",
+        "url": "https://wiki.archlinux.org/",
+        "type": "Official Documentation",
+        "source": "Arch Linux",
+        "quality_score": 0.95
+    },
+    {
+        "title": "explainshell.com",
+        "description": "An interactive tool that breaks down and explains any shell command you paste into it.",
+        "url": "https://explainshell.com/",
+        "type": "Interactive Course",
+        "source": "explainshell",
+        "quality_score": 0.9
+    },
+    {
+        "title": "OverTheWire Bandit",
+        "description": "A beginner-friendly wargame teaching Linux command line and basic security concepts through progressive levels.",
+        "url": "https://overthewire.org/wargames/bandit/",
+        "type": "Interactive Course",
+        "source": "OverTheWire",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Missing Semester (MIT)",
+        "description": "MIT's course on the practical computing skills often left out of CS curricula: shell, git, debugging, and more.",
+        "url": "https://missing.csail.mit.edu/",
+        "type": "Course",
+        "source": "MIT",
+        "quality_score": 0.96
+    },
+    {
+        "title": "LearnShell.org",
+        "description": "An interactive, browser-based tutorial for learning shell scripting fundamentals.",
+        "url": "https://www.learnshell.org/",
+        "type": "Interactive Course",
+        "source": "LearnShell.org",
+        "quality_score": 0.86
+    },
+    {
+        "title": "Ubuntu Documentation",
+        "description": "Official documentation for the Ubuntu Linux distribution, covering installation, administration, and usage.",
+        "url": "https://help.ubuntu.com/",
+        "type": "Official Documentation",
+        "source": "Canonical / Ubuntu",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Digital Photography School",
+        "description": "A large, long-running library of tutorials and tips covering photography fundamentals and techniques.",
+        "url": "https://digital-photography-school.com/",
+        "type": "Tutorial Site",
+        "source": "Digital Photography School",
+        "quality_score": 0.89
+    },
+    {
+        "title": "Photography Life",
+        "description": "In-depth tutorials, gear reviews, and technique guides for photographers of all levels.",
+        "url": "https://photographylife.com/",
+        "type": "Tutorial Site",
+        "source": "Photography Life",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Adobe Lightroom Tutorials",
+        "description": "Official Adobe tutorials for learning Lightroom, the widely-used photo editing and cataloging software.",
+        "url": "https://helpx.adobe.com/lightroom-classic/tutorials.html",
+        "type": "Official Documentation",
+        "source": "Adobe",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Cambridge in Colour",
+        "description": "A well-regarded free tutorial site covering photography fundamentals, techniques, and post-processing.",
+        "url": "https://www.cambridgeincolour.com/tutorials.htm",
+        "type": "Tutorial Site",
+        "source": "Cambridge in Colour",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Peter McKinnon YouTube Channel",
+        "description": "A popular YouTube channel teaching photography and cinematography techniques through practical, engaging tutorials.",
+        "url": "https://www.youtube.com/@petermckinnon",
+        "type": "Video",
+        "source": "Peter McKinnon",
+        "quality_score": 0.89
+    },
+    {
+        "title": "PetaPixel",
+        "description": "A leading photography news and education site covering techniques, gear, and industry trends.",
+        "url": "https://petapixel.com/",
+        "type": "Tutorial Site",
+        "source": "PetaPixel",
+        "quality_score": 0.87
+    },
+    {
+        "title": "Adobe Photoshop Tutorials",
+        "description": "Official Adobe tutorials for learning Photoshop for photo editing and compositing.",
+        "url": "https://helpx.adobe.com/photoshop/tutorials.html",
+        "type": "Official Documentation",
+        "source": "Adobe",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Improve Photography",
+        "description": "A photography education site and podcast covering techniques from beginner to advanced levels.",
+        "url": "https://improvephotography.com/",
+        "type": "Tutorial Site",
+        "source": "Improve Photography",
+        "quality_score": 0.85
+    },
+    {
+        "title": "Adobe Premiere Pro Tutorials",
+        "description": "Official Adobe tutorials for learning Premiere Pro, the industry-standard video editing software.",
+        "url": "https://helpx.adobe.com/premiere-pro/tutorials.html",
+        "type": "Official Documentation",
+        "source": "Adobe",
+        "quality_score": 0.91
+    },
+    {
+        "title": "DaVinci Resolve Training",
+        "description": "Official free training manuals and resources for DaVinci Resolve, a professional video editing and color grading tool.",
+        "url": "https://www.blackmagicdesign.com/products/davinciresolve/training",
+        "type": "Official Documentation",
+        "source": "Blackmagic Design",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Final Cut Pro Resources",
+        "description": "Apple's official resources and guides for learning Final Cut Pro video editing software.",
+        "url": "https://support.apple.com/final-cut-pro",
+        "type": "Official Documentation",
+        "source": "Apple",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Film Riot YouTube Channel",
+        "description": "A YouTube channel teaching filmmaking, editing, and visual effects techniques through practical tutorials.",
+        "url": "https://www.youtube.com/@filmriot",
+        "type": "Video",
+        "source": "Film Riot",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Think Media YouTube Channel",
+        "description": "A YouTube channel focused on content creation strategy, gear, and growing a YouTube channel.",
+        "url": "https://www.youtube.com/@ThinkMedia",
+        "type": "Video",
+        "source": "Think Media",
+        "quality_score": 0.86
+    },
+    {
+        "title": "YouTube Creator Academy",
+        "description": "YouTube's own official courses on building a channel, growing an audience, and understanding the platform.",
+        "url": "https://creatoracademy.youtube.com/",
+        "type": "Course",
+        "source": "YouTube",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Casey Faris YouTube Channel",
+        "description": "A YouTube channel offering practical, technique-focused video editing and filmmaking tutorials.",
+        "url": "https://www.youtube.com/@caseyfaris",
+        "type": "Video",
+        "source": "Casey Faris",
+        "quality_score": 0.85
+    },
+    {
+        "title": "No Film School",
+        "description": "A leading resource for filmmakers covering technique, gear, and industry knowledge for video production.",
+        "url": "https://nofilmschool.com/",
+        "type": "Tutorial Site",
+        "source": "No Film School",
+        "quality_score": 0.86
+    },
+    {
+        "title": "Google Technical Writing Courses",
+        "description": "Google's free official courses on technical writing fundamentals for engineers.",
+        "url": "https://developers.google.com/tech-writing",
+        "type": "Course",
+        "source": "Google",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Write the Docs",
+        "description": "A community and knowledge base dedicated to documentation practices and technical writing.",
+        "url": "https://www.writethedocs.org/",
+        "type": "Community",
+        "source": "Write the Docs",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Purdue OWL",
+        "description": "Purdue University's widely-used online writing lab covering grammar, style, and academic writing.",
+        "url": "https://owl.purdue.edu/",
+        "type": "Tutorial Site",
+        "source": "Purdue University",
+        "quality_score": 0.95
+    },
+    {
+        "title": "On Writing Well",
+        "description": "William Zinsser's classic, widely-recommended book on the craft of writing nonfiction clearly.",
+        "url": "https://www.harpercollins.com/products/on-writing-well-william-zinsser",
+        "type": "Book",
+        "source": "HarperCollins",
+        "quality_score": 0.9
+    },
+    {
+        "title": "The Elements of Style",
+        "description": "Strunk & White's classic, concise guide to English style and composition.",
+        "url": "https://www.gutenberg.org/ebooks/37134",
+        "type": "Book",
+        "source": "Project Gutenberg",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Grammarly Blog",
+        "description": "A blog covering grammar rules, writing tips, and style guidance for everyday and professional writing.",
+        "url": "https://www.grammarly.com/blog",
+        "type": "Tutorial Site",
+        "source": "Grammarly",
+        "quality_score": 0.86
+    },
+    {
+        "title": "Coursera: Good with Words (Writing and Editing)",
+        "description": "A university-taught specialization on effective writing, editing, and storytelling.",
+        "url": "https://www.coursera.org/specializations/good-with-words-writing-editing",
+        "type": "Course",
+        "source": "Coursera / University of Michigan",
+        "quality_score": 0.87
+    },
+    {
+        "title": "Hemingway Editor",
+        "description": "A free web-based tool that highlights complex sentences and readability issues to improve writing clarity.",
+        "url": "https://hemingwayapp.com/",
+        "type": "Interactive Course",
+        "source": "Hemingway App",
+        "quality_score": 0.85
+    },
+    {
+        "title": "Big Interview",
+        "description": "A platform offering structured interview preparation courses and mock interview practice.",
+        "url": "https://biginterview.com/",
+        "type": "Course",
+        "source": "Big Interview",
+        "quality_score": 0.85
+    },
+    {
+        "title": "Pramp",
+        "description": "A free peer-to-peer platform for practicing live technical mock interviews with other job seekers.",
+        "url": "https://www.pramp.com/",
+        "type": "Interactive Course",
+        "source": "Pramp",
+        "quality_score": 0.9
+    },
+    {
+        "title": "LinkedIn Learning",
+        "description": "A large library of professional development courses covering career skills, software tools, and business topics.",
+        "url": "https://www.linkedin.com/learning/",
+        "type": "Course",
+        "source": "LinkedIn",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Cracking the Coding Interview (companion site)",
+        "description": "The companion resources for the widely-used technical interview preparation book by Gayle Laakmann McDowell.",
+        "url": "https://www.crackingthecodinginterview.com/",
+        "type": "Book",
+        "source": "CareersCup",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Google Career Certificates",
+        "description": "Google's collection of job-oriented professional certificates designed to prepare learners for in-demand careers.",
+        "url": "https://grow.google/certificates/",
+        "type": "Course",
+        "source": "Google",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Indeed Career Guide",
+        "description": "A free library of articles covering resume writing, interview prep, and career development advice.",
+        "url": "https://www.indeed.com/career-advice",
+        "type": "Tutorial Site",
+        "source": "Indeed",
+        "quality_score": 0.85
+    },
+    {
+        "title": "Levels.fyi",
+        "description": "A platform providing crowdsourced salary and leveling data across tech companies, useful for career research and negotiation.",
+        "url": "https://www.levels.fyi/",
+        "type": "Community",
+        "source": "Levels.fyi",
+        "quality_score": 0.87
+    },
+    {
+        "title": "Blind",
+        "description": "An anonymous professional community where employees discuss workplace topics, salaries, and career advice.",
+        "url": "https://www.teamblind.com/",
+        "type": "Community",
+        "source": "Blind",
+        "quality_score": 0.83
+    },
+    {
+        "title": "Arduino Official Documentation",
+        "description": "Official documentation and reference for the Arduino platform, covering hardware, language, and libraries.",
+        "url": "https://docs.arduino.cc/",
+        "type": "Official Documentation",
+        "source": "Arduino",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Raspberry Pi Documentation",
+        "description": "Official documentation for Raspberry Pi hardware, software setup, and projects.",
+        "url": "https://www.raspberrypi.com/documentation/",
+        "type": "Official Documentation",
+        "source": "Raspberry Pi Foundation",
+        "quality_score": 0.96
+    },
+    {
+        "title": "Adafruit Learning System",
+        "description": "A vast library of free, well-illustrated tutorials for electronics projects, microcontrollers, and hardware hacking.",
+        "url": "https://learn.adafruit.com/",
+        "type": "Tutorial Site",
+        "source": "Adafruit",
+        "quality_score": 0.94
+    },
+    {
+        "title": "SparkFun Learn",
+        "description": "Free tutorials and guides on electronics fundamentals, sensors, and embedded systems projects.",
+        "url": "https://learn.sparkfun.com/",
+        "type": "Tutorial Site",
+        "source": "SparkFun Electronics",
+        "quality_score": 0.93
+    },
+    {
+        "title": "ROS (Robot Operating System) Documentation",
+        "description": "Official documentation for ROS, the widely-used framework for writing robot software.",
+        "url": "https://docs.ros.org/",
+        "type": "Official Documentation",
+        "source": "Open Robotics",
+        "quality_score": 0.93
+    },
+    {
+        "title": "GreatScott! YouTube Channel",
+        "description": "A YouTube channel covering electronics projects, circuit design, and practical engineering builds.",
+        "url": "https://www.youtube.com/@GreatScottLab",
+        "type": "Video",
+        "source": "GreatScott!",
+        "quality_score": 0.88
+    },
+    {
+        "title": "MIT 6.01: Introduction to EECS via Robotics",
+        "description": "MIT's introductory electrical engineering and computer science course taught through robotics.",
+        "url": "https://ocw.mit.edu/courses/6-01sc-introduction-to-electrical-engineering-and-computer-science-i-spring-2011/",
+        "type": "Course",
+        "source": "MIT OpenCourseWare",
+        "quality_score": 0.93
+    },
+    {
+        "title": "All About Circuits",
+        "description": "A comprehensive free resource for learning electronics theory, from basic circuits to advanced topics.",
+        "url": "https://www.allaboutcircuits.com/",
+        "type": "Tutorial Site",
+        "source": "All About Circuits",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Ableton Live Manual",
+        "description": "The official, detailed user manual for Ableton Live, a leading digital audio workstation for music production.",
+        "url": "https://www.ableton.com/en/live-manual/12/welcome-to-live/",
+        "type": "Official Documentation",
+        "source": "Ableton",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Native Instruments Blog & Tutorials",
+        "description": "Tutorials and articles on music production, sound design, and using Native Instruments software and hardware.",
+        "url": "https://www.native-instruments.com/en/community/tutorials/",
+        "type": "Tutorial Site",
+        "source": "Native Instruments",
+        "quality_score": 0.86
+    },
+    {
+        "title": "In The Mix YouTube Channel",
+        "description": "A YouTube channel with practical, technique-focused music production and mixing tutorials.",
+        "url": "https://www.youtube.com/@InTheMixMusic",
+        "type": "Video",
+        "source": "In The Mix",
+        "quality_score": 0.86
+    },
+    {
+        "title": "Ask.Audio",
+        "description": "A publication covering music production tutorials, software reviews, and audio engineering techniques.",
+        "url": "https://ask.audio/",
+        "type": "Tutorial Site",
+        "source": "Ask.Audio",
+        "quality_score": 0.85
+    },
+    {
+        "title": "MusicTheory.net",
+        "description": "A free, interactive resource for learning music theory fundamentals, useful for music producers and musicians.",
+        "url": "https://www.musictheory.net/",
+        "type": "Interactive Course",
+        "source": "musictheory.net",
+        "quality_score": 0.91
+    },
+    {
+        "title": "FL Studio Manual",
+        "description": "The official user manual for FL Studio, a widely-used digital audio workstation for music production.",
+        "url": "https://www.image-line.com/fl-studio-learning/fl-studio-online-manual/",
+        "type": "Official Documentation",
+        "source": "Image-Line",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Sound on Sound",
+        "description": "A leading magazine and website covering music technology, production techniques, and audio engineering.",
+        "url": "https://www.soundonsound.com/",
+        "type": "Tutorial Site",
+        "source": "Sound on Sound",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Coursera: Introduction to Music Production",
+        "description": "A university-taught course covering the fundamentals of recording, mixing, and producing music.",
+        "url": "https://www.coursera.org/learn/musicproduction",
+        "type": "Course",
+        "source": "Coursera / Berklee",
+        "quality_score": 0.89
+    },
+    {
+        "title": "Blender Manual",
+        "description": "The official, comprehensive manual for Blender, the free and open-source 3D creation suite.",
+        "url": "https://docs.blender.org/manual/en/latest/",
+        "type": "Official Documentation",
+        "source": "Blender Foundation",
+        "quality_score": 0.97
+    },
+    {
+        "title": "Blender Guru",
+        "description": "A hugely popular YouTube channel known for its beginner-friendly 'Blender Donut' tutorial series and 3D tutorials.",
+        "url": "https://www.youtube.com/@blenderguru",
+        "type": "Video",
+        "source": "Blender Guru",
+        "quality_score": 0.94
+    },
+    {
+        "title": "CG Cookie",
+        "description": "A subscription platform offering structured courses on Blender, 3D modeling, and animation.",
+        "url": "https://cgcookie.com/",
+        "type": "Course",
+        "source": "CG Cookie",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Blender Studio",
+        "description": "Blender Foundation's platform hosting open movies, training, and production files for learning 3D animation.",
+        "url": "https://studio.blender.org/",
+        "type": "Tutorial Site",
+        "source": "Blender Foundation",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Autodesk Maya Learning Channel",
+        "description": "Official Autodesk resources and tutorials for learning Maya, an industry-standard 3D animation and modeling tool.",
+        "url": "https://area.autodesk.com/learn/tutorials/",
+        "type": "Official Documentation",
+        "source": "Autodesk",
+        "quality_score": 0.89
+    },
+    {
+        "title": "Blender Cloud Tutorials",
+        "description": "A back-catalog of professional 3D production tutorials produced by the Blender Foundation team.",
+        "url": "https://cloud.blender.org/",
+        "type": "Tutorial Site",
+        "source": "Blender Foundation",
+        "quality_score": 0.87
+    },
+    {
+        "title": "Grant Abbitt YouTube Channel",
+        "description": "A YouTube channel offering clear, beginner-friendly Blender modeling and game-asset tutorials.",
+        "url": "https://www.youtube.com/@grabbitt",
+        "type": "Video",
+        "source": "Grant Abbitt",
+        "quality_score": 0.88
+    },
+    {
+        "title": "Y Combinator Startup School",
+        "description": "Y Combinator's free online program covering how to start and grow a startup, with lectures from experienced founders.",
+        "url": "https://www.startupschool.org/",
+        "type": "Course",
+        "source": "Y Combinator",
+        "quality_score": 0.94
+    },
+    {
+        "title": "Harvard Business Review",
+        "description": "A leading publication offering research-based articles on management, strategy, and business practice.",
+        "url": "https://hbr.org/",
+        "type": "Tutorial Site",
+        "source": "Harvard Business Review",
+        "quality_score": 0.94
+    },
+    {
+        "title": "The Lean Startup (resources)",
+        "description": "Eric Ries's influential methodology for building startups through validated learning and rapid iteration.",
+        "url": "https://theleanstartup.com/",
+        "type": "Book",
+        "source": "Eric Ries",
+        "quality_score": 0.91
+    },
+    {
+        "title": "SCORE",
+        "description": "A free resource, backed by the U.S. Small Business Administration, offering mentorship and guides for entrepreneurs.",
+        "url": "https://www.score.org/",
+        "type": "Tutorial Site",
+        "source": "SCORE",
+        "quality_score": 0.89
+    },
+    {
+        "title": "Coursera: Entrepreneurship Specialization",
+        "description": "A university-taught specialization covering the fundamentals of launching and growing a new venture.",
+        "url": "https://www.coursera.org/specializations/wharton-entrepreneurship",
+        "type": "Course",
+        "source": "Coursera / Wharton",
+        "quality_score": 0.9
+    },
+    {
+        "title": "Indie Hackers",
+        "description": "A community of founders sharing revenue numbers, strategies, and stories about building profitable online businesses.",
+        "url": "https://www.indiehackers.com/",
+        "type": "Community",
+        "source": "Indie Hackers",
+        "quality_score": 0.89
+    },
+    {
+        "title": "Investopedia",
+        "description": "A leading reference site for learning finance, investing, and business/economics fundamentals.",
+        "url": "https://www.investopedia.com/",
+        "type": "Tutorial Site",
+        "source": "Investopedia",
+        "quality_score": 0.9
+    },
+    {
+        "title": "MIT OpenCourseWare: Entrepreneurship",
+        "description": "MIT's free entrepreneurship course materials covering how to launch new ventures.",
+        "url": "https://ocw.mit.edu/courses/15-390-new-enterprises-fall-2013/",
+        "type": "Course",
+        "source": "MIT OpenCourseWare",
+        "quality_score": 0.91
+    },
+    {
+        "title": "Toastmasters International",
+        "description": "A well-established nonprofit organization providing structured public speaking and leadership practice through local clubs.",
+        "url": "https://www.toastmasters.org/",
+        "type": "Community",
+        "source": "Toastmasters International",
+        "quality_score": 0.93
+    },
+    {
+        "title": "TED Talks",
+        "description": "A vast library of expert talks that also serves as a model for effective public speaking and storytelling structure.",
+        "url": "https://www.ted.com/talks",
+        "type": "Video",
+        "source": "TED",
+        "quality_score": 0.92
+    },
+    {
+        "title": "Coursera: Introduction to Public Speaking",
+        "description": "A university-taught course covering the fundamentals of preparing and delivering effective speeches.",
+        "url": "https://www.coursera.org/learn/public-speaking",
+        "type": "Course",
+        "source": "Coursera / University of Washington",
+        "quality_score": 0.89
+    },
+    {
+        "title": "Talk Like TED (resources)",
+        "description": "Carmine Gallo's widely-referenced book distilling public speaking techniques from top TED speakers.",
+        "url": "https://www.carminegallo.com/talk-like-ted/",
+        "type": "Book",
+        "source": "Carmine Gallo",
+        "quality_score": 0.87
+    },
+    {
+        "title": "Improve Your Public Speaking Skills (Coursera Guided Project)",
+        "description": "A short, hands-on guided project for practicing and improving public speaking delivery.",
+        "url": "https://www.coursera.org/learn/public-speaking-skills",
+        "type": "Course",
+        "source": "Coursera",
+        "quality_score": 0.85
+    },
+    {
+        "title": "Six Minutes",
+        "description": "A public speaking blog offering speech critiques, techniques, and analysis of great speeches.",
+        "url": "https://sixminutes.dlugan.com/",
+        "type": "Tutorial Site",
+        "source": "Six Minutes",
+        "quality_score": 0.84
     }
 ]
