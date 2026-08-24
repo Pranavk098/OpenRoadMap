@@ -141,6 +141,12 @@ All three tracks merged cleanly with zero file conflicts (disjoint ownership hel
 - `requirements.txt` — serving/runtime only. **Verified in an isolated fresh venv**: zero torch/transformers/CUDA packages resolve.
 - `requirements-dev.txt` — `-r requirements.txt` plus test/eval/ingestion-only deps (`pytest`, `pytest-asyncio`, `rouge-score`, `bert-score`, `pandas`, `beautifulsoup4`, `feedparser`, `google-api-python-client`, `requests`). `bert-score` does pull `torch` transitively, but only into this dev file, never the serving image.
 
+### Deliberately skipped
+
+- **`mypy`**: the audit's CI suggestion (§8, phase 4) included it. The codebase has no type annotations anywhere; running mypy as-is would either need a permissive config that catches nothing meaningful, or an out-of-scope annotation-writing pass across the whole codebase to be worth anything. Skipped rather than adding a CI step that's decorative. `ruff`'s `F` rules (undefined names, unused imports/vars) catch the cheap subset of what mypy would catch here.
+- **Secret scanning** (audit S6): not added. Worth doing (e.g. a `gitleaks` CI step) but lower priority than everything else in this pass — flagging as a real gap, not silently dropping it.
+- **Renaming the `RoadmapAgent`/`ResourceAgent`/`EvaluationAgent` classes**: the user's own framing offered two equally-valid fixes for the "these aren't real agents" critique — rename to honest names, or make one genuinely agentic. Went with the latter (Track A's bounded retrieval retry) since it's a real capability, not just different words for the same fixed pipeline; the README's "honest naming notes" section explains this choice explicitly rather than leaving it unstated.
+
 ### Final state
 
 - **78/78 backend unit tests pass** (fresh venv, mocked clients, no live services) — confirmed again after the ruff `--fix` pass and `testpaths` change.
