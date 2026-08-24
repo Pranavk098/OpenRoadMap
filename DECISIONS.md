@@ -113,3 +113,15 @@ A cache hit emits the identical event sequence, just faster.
 **Flagged for the hygiene pass**: a bare `pytest` from repo root will still try to collect the pre-existing `tests/test_api.py`, `test_ddg.py`, `test_wide_scope.py` (real subprocess/network scripts, not unit tests) and hang/fail — pre-existing condition, needs addressing when tests/ is cleaned up.
 
 ---
+
+### Orchestrator — merge + dependency reconciliation
+
+All three tracks merged cleanly with zero file conflicts (disjoint ownership held). Post-merge reconciliation:
+
+- Added `numpy` to `requirements.txt` (serving) — `src/metrics.py` (imported eagerly by `eval_agent.py`, imported eagerly by `roadmap_engine.py` at module load) uses it directly; it's a real runtime dependency of the live app, not just eval tooling, even though it arrived via Track B's file.
+- Confirmed `src/reranker.py` (Track B's MMR) is **not** imported anywhere in the serving path — only by `scripts/evaluation/evaluate_retrieval.py`. Track A's live reranking uses fastembed's own `TextCrossEncoder` directly, unrelated to Track B's MMR. No conflict, no shared dependency needed.
+- Split dependencies properly: new `requirements-dev.txt` (`-r requirements.txt` plus `pytest`/`pytest-asyncio`, `rouge-score`/`bert-score`, `pandas`/`beautifulsoup4`/`feedparser`/`google-api-python-client`/`requests` for ingestion scripts). **Verified in isolation**: `pip install -r requirements.txt` alone resolves with zero torch/transformers/CUDA packages — the L7 fix holds for what actually ships in the API container. `bert-score` (dev-only) does transitively pull torch, but that's fine since it never reaches the serving image.
+- **Full integration test**: fresh venv, `pip install -r requirements.txt -r requirements-dev.txt`, ran all 78 tests from both tracks together (`tests/` minus the three pre-existing live-network scripts) — **78/78 pass**, no cross-track import or fixture collisions. `from src.main import app` imports cleanly end-to-end.
+- Frontend (Track C) independently verified: `npm run build` + `npm run lint` clean, code-splitting confirmed via build output (separate `reactflow`/`recharts`/`Roadmap`/`Evaluation` chunks).
+
+---
