@@ -66,3 +66,50 @@ At the same point, user supplied a RAG-architecture critique: the retrieval stac
 - **Dependencies needed in `requirements.txt`** (not edited by this track): `fastembed` (verified installable/functional); `rouge_score`/`bert_score` were already missing — pre-existing gap, not introduced here.
 
 ---
+
+### Track A — Backend Core
+
+**Security**
+- `slowapi` rate limiting (`RATE_LIMIT` env var, default `5/minute`) on `POST /generate-roadmap` and `GET /v1/roadmap/stream`, keyed by client IP.
+- `goal` (POST body + SSE query param) capped at 200 chars, control characters rejected, via a shared validator.
+- CORS: `ALLOWED_ORIGINS` env var (default `http://localhost:5173`), `allow_credentials` dropped entirely (no sessions exist to need it) — fixes the spec-invalid `["*"]` + credentials combo.
+- `CorrelationIdMiddleware` + a generic exception handler: raw exception text logged server-side only, clients get `{"error": "...", "correlation_id": "..."}`. SSE `error` events follow the same contract.
+- `resource_agent.py` validates every resource URL server-side (`http`/`https` only) — not relying on frontend JSX alone.
+
+**Latency / async rewrite**
+- `roadmap_engine.py` fully async; `AsyncOpenAI`/`AsyncQdrantClient` replace sync clients. `POST /generate-roadmap` and the new SSE endpoint share one pipeline (`stream_roadmap_events`) — no duplicated logic.
+- Retrieval batched: one embedding pass for all node queries, one Qdrant round trip for the whole roadmap, web fallbacks via `asyncio.gather` each bounded by `asyncio.wait_for(timeout=2.5)`.
+- Dropped the 3 hardcoded few-shots (~1,200+ wasted input tokens/call) for a strict structured-outputs JSON schema. Model configurable via `ROADMAP_MODEL` (default `gpt-4o-mini`).
+- New `GET /v1/roadmap/stream?goal=...` SSE endpoint (exact contract below); `POST /generate-roadmap` stays byte-for-byte backward compatible.
+- New `src/cache.py`: in-process LRU by default, Redis if `REDIS_URL` is set (permanently degrades to LRU on first Redis failure — never fails a request over a cache problem). Key = `sha256(normalized goal)`, TTL 30 days, checked before any LLM call. `scripts/prewarm_cache.py` added as a standalone, non-blocking prewarm job.
+- New `src/dag_validator.py`: caps at 10 nodes, drops dangling/self prerequisite refs, breaks cycles. Does **not** fabricate nodes to hit a 4-node minimum — logs a warning instead (truthfulness over a count target).
+- Fixed the always-appended `"..."` ellipsis bug (only appends when actually truncating).
+- Swapped `duckduckgo-search` → `ddgs`; added Wikipedia REST summary as a second free fallback before the last-resort Google search link.
+- `structlog` throughout, correlation-id-bound; per-stage timers (`llm_ms`, `resources_ms`, `total_ms`, `cache_hit`) as structured events.
+- `vectorize_corpus.py`: `recreate_collection()` → build-new → upsert → atomic alias swap → delete old (no more index-destroying reindex).
+- `requirements.txt` pinned; `torch`/`sentence-transformers`/`transformers`/`huggingface-hub` removed; `fastembed` added. Confirmed a clean venv install pulls no CUDA wheels.
+- `docker-compose.yml`: optional `redis` service added.
+
+**Retrieval architecture modernization** (the dense-only/MiniLM/cosine-threshold critique)
+- **Hybrid dense+sparse**: dense `fastembed.TextEmbedding("BAAI/bge-base-en-v1.5")` (768d, chosen over bge-small/MiniLM for retrieval quality, still ONNX/CPU/no-torch — bge-small is a documented same-shape fallback if bge-base proves too heavy on a real free-tier CPU deploy); sparse `fastembed.SparseTextEmbedding("Qdrant/bm42-all-minilm-l6-v2-attentions")` for the named-entity/abbreviation case ("PyTorch", "Kubernetes", "CS50") dense-only misses. Uses fastembed's asymmetric `query_embed`/`passage_embed` correctly (not plain `embed`).
+- **Qdrant hybrid query**: two named vectors per point; `Prefetch` dense top-50 + `Prefetch` sparse top-50 fused via `Fusion.RRF`, still one `query_batch_points` round trip for the whole roadmap.
+- **Reranking replaces `score_threshold=0.4`**: fused top-50 reranked via `fastembed.rerank.cross_encoder.TextCrossEncoder("Xenova/ms-marco-MiniLM-L-6-v2")` (ONNX, torch-free); top 3-5 kept by reranker score. A defensive RRF-order fallback exists in code if the cross-encoder fails to load, but isn't the primary path.
+- **Real retrieval queries**: added `search_query` (maxLength 80) to the planner's structured-output schema — zero extra LLM calls — replacing the human-facing `description` as the embedded text (falls back to `"{title}: {description}"` only for pre-migration cached roadmaps).
+- **DAG-aware queries**: after validation, prepends one representative ancestor chain to each node's query (`"React Development > Fundamentals > Hooks & Effects: {search_query}"`) — cheap string concat, no extra calls.
+- **Bounded one-retry agentic step** (resolves the "these aren't real agents" critique via behavior, not a rename): if a node's reranked results are too few or all score below the cross-encoder's own zero-logit relevance boundary, `ResourceAgent` reformulates once (drops the ancestor-path prefix, widens web search, reranks the merged set jointly) — hard-capped at one retry per node, logged.
+- `vectorize_corpus.py` writes both named vectors via `passage_embed`, matching `query_embed` at retrieval time — full ingestion path is torch-free.
+- **Not verified live**: no network access to Hugging Face Hub in this sandbox to actually download/run bge-base, bm42, or ms-marco end-to-end, or a live Qdrant hybrid query. All fastembed/qdrant-client APIs confirmed importable/constructible against pinned versions and covered by mocked tests — no real embedding or ranking was ever produced here. **User must smoke-test this against real Qdrant + HF downloads before shipping.**
+
+**SSE event contract** (`GET /v1/roadmap/stream?goal=...`, `text/event-stream`; each event is `event: <name>\ndata: <json>\n\n`)
+1. `structure` (once, before retrieval): `{"nodes": [{"id","title","description","prerequisites":[...]}, ...]}`
+2. `resources` (once per node, order not guaranteed to match `structure`, correlate via `id`): `{"id", "resources": [{"id","title","url","description","type"}, ...]}`
+3. `done` (terminal): `{"cache_hit": true|false}`
+4. `error` (terminal, instead of `done`): `{"error": "generic message", "correlation_id": "uuid4"}`
+
+A cache hit emits the identical event sequence, just faster.
+
+**Verification**: fresh-venv install resolves clean (no torch/sentence-transformers/transformers); `from src.main import app` imports cleanly; **51 pytest tests pass**, all clients mocked (`tests/{conftest,test_dag_validator,test_cache,test_resource_agent,test_main,test_roadmap_engine}.py`, root `pytest.ini`).
+**Not verified**: any live OpenAI/Qdrant/Redis/fastembed-model call.
+**Flagged for the hygiene pass**: a bare `pytest` from repo root will still try to collect the pre-existing `tests/test_api.py`, `test_ddg.py`, `test_wide_scope.py` (real subprocess/network scripts, not unit tests) and hang/fail — pre-existing condition, needs addressing when tests/ is cleaned up.
+
+---
