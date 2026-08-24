@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-08-24T06:06:14.405006+00:00",
+  "commit_sha": "db4cf8d1fd538fe80bfebd2d1b44bf8a62e5f83b",
+  "retrieval": {
+    "known_item_search": {
+      "description": "Query = the corpus item's own title (near-exact match). Easy / known-item search.",
+      "dense_baseline": null,
+      "mmr_reranked": null
+    },
+    "realistic_learner_phrased": {
+      "description": "Query = a heuristically generated learner-phrased variant of the title (e.g. 'how to learn react hooks'), not the catalog title. Harder, more representative of real usage.",
+      "dense_baseline": null,
+      "mmr_reranked": null
+    }
+  },
+  "generation": null,
+  "notes": [
+    "retrieval.known_item_search.dense_baseline unavailable: Qdrant not reachable at http://localhost:6333: [WinError 10061] No connection could be made because the target machine actively refused it",
+    "retrieval.known_item_search.mmr_reranked unavailable: Qdrant not reachable at http://localhost:6333: [WinError 10061] No connection could be made because the target machine actively refused it",
+    "retrieval.realistic_learner_phrased.dense_baseline unavailable: Qdrant not reachable at http://localhost:6333: [WinError 10061] No connection could be made because the target machine actively refused it",
+    "retrieval.realistic_learner_phrased.mmr_reranked unavailable: Qdrant not reachable at http://localhost:6333: [WinError 10061] No connection could be made because the target machine actively refused it",
+    "generation eval unavailable: could not initialize RoadmapAgent (OPENAI_API_KEY environment variable is not set). Requires OPENAI_API_KEY."
+  ]
+}

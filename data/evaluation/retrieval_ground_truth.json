@@ -1,16 +1,5 @@
 [
   {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "6abff482-c286-4930-9af1-a85e8b3a714e"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
     "query": "Materials Science: 10 Things Every Engineer Should Know",
     "relevant_resource_ids": [
       "87f6a2e9-23aa-4c5f-9de0-31d1a7da278c"
@@ -30,17 +19,6 @@
     "source_item": {
       "title": "R\u00e9ussir le Changement",
       "source": "Coursera"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "6092e117-f7f2-47dd-bf64-a26bdc63b99e"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
     }
   },
   {
@@ -66,17 +44,6 @@
     }
   },
   {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "b4389c01-4805-4a1c-82ca-a6ccb44f4ac6"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
     "query": "Russian Alphabet",
     "relevant_resource_ids": [
       "4d26300a-46d0-465e-9173-c2b71b8e431f"
@@ -85,17 +52,6 @@
     "source_item": {
       "title": "Russian Alphabet",
       "source": "Coursera"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "efa316d7-ba0f-426a-84ee-6173ab6d0aac"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
     }
   },
   {
@@ -143,17 +99,6 @@
     }
   },
   {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "94865d62-f793-4b4a-892e-356542e0f14f"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
     "query": "Requirements Engineering: Secure Software Specifications",
     "relevant_resource_ids": [
       "5146d780-ff4c-488f-a3c9-a9eb21e184d5"
@@ -198,17 +143,6 @@
     }
   },
   {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "daef853c-3437-4207-ac45-38663d58cb85"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
     "query": "Introduction to Ableton Live",
     "relevant_resource_ids": [
       "7ef5afe2-51d8-4562-a51c-6d21fd54c3bf"
@@ -217,28 +151,6 @@
     "source_item": {
       "title": "Introduction to Ableton Live",
       "source": "Coursera"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "3dfb2416-84c3-4d61-a281-2cb53c079105"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "36cee4b2-bd93-4267-a6e9-b8b1ecb97fd6"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
     }
   },
   {
@@ -264,28 +176,6 @@
     }
   },
   {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "9608b3fd-8d55-4af0-84b4-e85fdc717f95"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "7220f5e6-c9ef-49cf-bd46-6689471a5630"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
     "query": "Hacia una pr\u00e1ctica constructivista en el aula",
     "relevant_resource_ids": [
       "355a4cd3-7078-4e43-9806-d06911fb5b3c"
@@ -297,28 +187,6 @@
     }
   },
   {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "6cd97504-b315-454e-9501-81802b546de7"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "4eec9a68-4e3f-4e5c-9920-8fe8dc6afe29"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
     "query": "Introduction to Cyber Attacks",
     "relevant_resource_ids": [
       "aa791a23-c0bb-49a5-98bb-12e4b6e944b9"
@@ -327,17 +195,6 @@
     "source_item": {
       "title": "Introduction to Cyber Attacks",
       "source": "Coursera"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "b96d52e2-4638-4fbc-811f-fa95b3a51742"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
     }
   },
   {
@@ -360,28 +217,6 @@
     "source_item": {
       "title": "First Step Korean",
       "source": "Coursera"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "00e072c0-6887-425b-af9c-23b14b690165"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "dbd91f59-a577-49bc-9d47-5f1b79ca6899"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
     }
   },
   {
@@ -440,39 +275,6 @@
     }
   },
   {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "151158e2-c6fd-46a7-801c-714e6c12718b"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "719ccf08-aea9-4e45-b11d-6a11471876ea"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "7d8caece-fa9d-4516-b459-d7bf0249e50e"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
     "query": "Cybersecurity for Business",
     "relevant_resource_ids": [
       "9b8532fc-ffc2-4740-8e24-4049fd2425e1"
@@ -495,28 +297,6 @@
     }
   },
   {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "1543af99-1fec-4ec1-bc14-7ab4a47e9d58"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "176ad1c7-4793-42d3-a447-13ad9baac656"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
-    }
-  },
-  {
     "query": "Developing Your Musicianship",
     "relevant_resource_ids": [
       "601e4764-8646-4a29-836f-98aba7fd9877"
@@ -536,17 +316,6 @@
     "source_item": {
       "title": "Foundations of Management",
       "source": "Coursera"
-    }
-  },
-  {
-    "query": "Unknown Title",
-    "relevant_resource_ids": [
-      "fa85bfe5-a685-48c4-bf5e-0cab62550849"
-    ],
-    "difficulty": "easy",
-    "source_item": {
-      "title": "Unknown Title",
-      "source": "edX"
     }
   }
 ]
