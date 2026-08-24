@@ -30,26 +30,52 @@ DENSE_VECTOR_NAME = "dense"
 SPARSE_VECTOR_NAME = "sparse"
 
 # How many fused hybrid candidates to pull per node before reranking down
-# to the caller's requested `limit` (typically 3-5).
-CANDIDATE_POOL_SIZE = 50
+# to the caller's requested `limit` (typically 3-5). Lowered from 50: the
+# cross-encoder rerank pass runs per-node on this many candidates, and at
+# 50 it was a measurable chunk of resources_ms even before any web
+# fallback (confirmed live via roadmap.timings) - with a 278-item corpus,
+# scoring 50 candidates per query for a 3-slot result is well past
+# diminishing returns; RRF's top ~20 fused candidates are already the
+# corpus's best guesses for that query.
+CANDIDATE_POOL_SIZE = 20
 
 # ms-marco cross-encoders are trained so a raw (unnormalized) logit score
 # above 0 indicates the query/document pair is plausibly relevant, and
 # below 0 indicates it probably isn't - there's no fixed "0.4"-style
 # probability cutoff to calibrate here, so 0.0 (the model's own decision
-# boundary) is used rather than a tuned magic number.
-WEAK_SCORE_THRESHOLD = 0.0
+# boundary) would be the "no calibration" choice. Loosened to -0.5 (still
+# requires the cross-encoder to judge a candidate as plausibly on-topic,
+# just not strictly past its exact zero boundary): the 278-item corpus is
+# course/doc-level (broad resources, not lesson-granular), so a genuinely
+# relevant broad resource for a narrow node sometimes scores just under
+# zero rather than comfortably above it. At 0.0 that pushed nodes to web
+# fallback - the single biggest latency cost - even when a decent corpus
+# match already existed. Not loosened further than this: still a real
+# relevance judgment, not "return whatever's least bad."
+WEAK_SCORE_THRESHOLD = -0.5
 
 # Caps concurrent DDG calls across a single roadmap's node batch. Firing one
 # request per weak node simultaneously (tried first) reliably triggers DDG's
 # own rate limiting once more than a couple of nodes need it, which then
-# starves every node's web search, not just the burst's. Raised from 3 to 4
+# starves every node's web search, not just the burst's. Raised 3->4->5
 # alongside the shorter DDG_CALL_TIMEOUT_SECONDS/lower breaker threshold
 # below: when DDG is unhealthy, more concurrency means the first (losing)
 # wave finishes - and trips the breaker for everyone after it - faster.
-WEB_SEARCH_MAX_CONCURRENCY = 4
+WEB_SEARCH_MAX_CONCURRENCY = 5
 
-WEB_SEARCH_TIMEOUT_SECONDS = 6.0
+# Hard ceiling on the whole web-fallback stage (all short nodes, every
+# wave), separate from and larger than any single call's timeout below -
+# bounds the worst case (many short nodes, degraded DDG) to a known tax
+# instead of it scaling with how many nodes need fallback. Sized to fit
+# one DDG wave at DDG_CALL_TIMEOUT_SECONDS plus a Wikipedia-only wave or
+# two for whatever the circuit breaker has already given up on.
+WEB_FALLBACK_STAGE_DEADLINE_SECONDS = 4.0
+
+# Bounds DDG+Wikipedia together for one node. Lowered from 6.0 now that
+# WEB_FALLBACK_STAGE_DEADLINE_SECONDS bounds the whole batch anyway - this
+# just needs to fit one DDG_CALL_TIMEOUT_SECONDS attempt plus a Wikipedia
+# call afterward.
+WEB_SEARCH_TIMEOUT_SECONDS = 4.0
 # DDG gets its own, shorter timeout, separate from WEB_SEARCH_TIMEOUT_SECONDS
 # (which bounds DDG+Wikipedia together). Without this, a DDG call that just
 # hangs (observed live: worse than a fast "no results" failure) burns the
@@ -58,8 +84,12 @@ WEB_SEARCH_TIMEOUT_SECONDS = 6.0
 # failure counter can even be incremented (the cancellation happens before
 # that line executes), so the breaker never trips either. A dedicated,
 # shorter DDG timeout fails fast, feeds the breaker, and leaves headroom
-# for Wikipedia within the outer budget.
-DDG_CALL_TIMEOUT_SECONDS = 2.0
+# for Wikipedia within the outer budget. Set to 2.5s, just above a healthy
+# isolated ddgs call's observed ~2.4s (a lower value like 2.0s was timing
+# out even healthy calls, never giving DDG a chance to actually succeed) -
+# the circuit breaker, not this per-call timeout, is what bounds the cost
+# of DDG being unhealthy.
+DDG_CALL_TIMEOUT_SECONDS = 2.5
 WIKIPEDIA_TIMEOUT_SECONDS = 1.5
 ALLOWED_URL_SCHEMES = {"http", "https"}
 DESCRIPTION_MAX_LENGTH = 200
@@ -258,22 +288,24 @@ class ResourceAgent:
 
         short_indices = [i for i in range(n) if len(good_by_node[i]) < limit]
         if short_indices:
-            web_queries = [_reformulate_query(queries[i]) for i in short_indices]
-            web_pools = await self._web_search_many(web_queries, limit)
-
-            for i, web in zip(short_indices, web_pools):
-                merged_by_node[i] = merged_by_node[i] + web
-                logger.info(
-                    "resource_agent.web_fallback_used",
-                    query=queries[i],
-                    good_count_before_web=len(good_by_node[i]),
+            # Hard deadline on the whole web-fallback stage, independent of
+            # the per-call/per-batch timeouts inside it: those bound one
+            # DDG call, not the stage as a whole, so a roadmap with many
+            # short nodes could still stack up several waves' worth of
+            # waiting. This caps the worst case so a bad DDG day costs a
+            # bounded, known tax instead of an open-ended one - whatever
+            # hasn't resolved by the deadline gets the honest fallback link
+            # instead of continuing to wait.
+            try:
+                await asyncio.wait_for(
+                    self._resolve_web_fallback(short_indices, queries, limit, merged_by_node, good_by_node),
+                    timeout=WEB_FALLBACK_STAGE_DEADLINE_SECONDS,
                 )
-
-            reranked = await self._rerank_and_filter_many(
-                web_queries, [merged_by_node[i] for i in short_indices]
-            )
-            for i, good in zip(short_indices, reranked):
-                good_by_node[i] = good
+            except asyncio.TimeoutError:
+                logger.warning(
+                    "resource_agent.web_fallback_stage_deadline_exceeded",
+                    node_count=len(short_indices),
+                )
 
         results: list[list[Resource]] = []
         for i in range(n):
@@ -282,6 +314,34 @@ class ResourceAgent:
                 items = items + [self._google_link(queries[i])]
             results.append(items[:limit])
         return results
+
+    async def _resolve_web_fallback(
+        self,
+        short_indices: list[int],
+        queries: list[str],
+        limit: int,
+        merged_by_node: list[list[dict]],
+        good_by_node: list[list[Resource]],
+    ) -> None:
+        """Mutates merged_by_node/good_by_node in place - split out of
+        find_resources_batch so it can be wrapped in a single
+        WEB_FALLBACK_STAGE_DEADLINE_SECONDS deadline (see call site)."""
+        web_queries = [_reformulate_query(queries[i]) for i in short_indices]
+        web_pools = await self._web_search_many(web_queries, limit)
+
+        for i, web in zip(short_indices, web_pools):
+            merged_by_node[i] = merged_by_node[i] + web
+            logger.info(
+                "resource_agent.web_fallback_used",
+                query=queries[i],
+                good_count_before_web=len(good_by_node[i]),
+            )
+
+        reranked = await self._rerank_and_filter_many(
+            web_queries, [merged_by_node[i] for i in short_indices]
+        )
+        for i, good in zip(short_indices, reranked):
+            good_by_node[i] = good
 
     async def _rerank_and_filter_many(
         self, queries: list[str], candidates_list: list[list[dict]]
