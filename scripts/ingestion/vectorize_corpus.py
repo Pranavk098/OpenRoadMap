@@ -27,8 +27,8 @@ QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
 
 # Same models as src/agents/resource_agent.py so query-time and index-time
 # vectors live in the same embedding spaces (dense semantic + sparse lexical).
-DENSE_MODEL_NAME = "BAAI/bge-base-en-v1.5"
-DENSE_VECTOR_SIZE = 768
+DENSE_MODEL_NAME = "BAAI/bge-small-en-v1.5"
+DENSE_VECTOR_SIZE = 384
 SPARSE_MODEL_NAME = "Qdrant/bm42-all-minilm-l6-v2-attentions"
 
 DENSE_VECTOR_NAME = "dense"

@@ -19,7 +19,7 @@ logger = structlog.get_logger(__name__)
 # CPU-only ONNX model with no CUDA dependency. If it turns out too slow/heavy
 # for a free-tier CPU deploy in practice, bge-small-en-v1.5 is a drop-in
 # same-shape fallback (see DECISIONS.md).
-DENSE_MODEL_NAME = "BAAI/bge-base-en-v1.5"
+DENSE_MODEL_NAME = "BAAI/bge-small-en-v1.5"
 # Sparse lexical signal: catches exact named-entity/keyword matches
 # ("PyTorch", "Kubernetes", "CS50") that a dense-only embedding can miss.
 SPARSE_MODEL_NAME = "Qdrant/bm42-all-minilm-l6-v2-attentions"
