@@ -1,0 +1,698 @@
+[
+  {
+    "query": "how to learn materials science 10 things every engineer should know",
+    "relevant_resource_ids": [
+      "87f6a2e9-23aa-4c5f-9de0-31d1a7da278c"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Materials Science: 10 Things Every Engineer Should Know",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to materials science 10 things every engineer should know",
+    "relevant_resource_ids": [
+      "87f6a2e9-23aa-4c5f-9de0-31d1a7da278c"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Materials Science: 10 Things Every Engineer Should Know",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn r\u00e9ussir le changement",
+    "relevant_resource_ids": [
+      "8717a640-cf09-403d-9d72-f54c8c224722"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "R\u00e9ussir le Changement",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "r\u00e9ussir le changement for beginners",
+    "relevant_resource_ids": [
+      "8717a640-cf09-403d-9d72-f54c8c224722"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "R\u00e9ussir le Changement",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to moral foundations of politics",
+    "relevant_resource_ids": [
+      "8ab177e2-79a8-45fb-be68-05bad2d84aa1"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Moral Foundations of Politics",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to moral foundations of politics",
+    "relevant_resource_ids": [
+      "8ab177e2-79a8-45fb-be68-05bad2d84aa1"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Moral Foundations of Politics",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to building cybersecurity resilience in a hyperconnected world",
+    "relevant_resource_ids": [
+      "4c04fcb9-97f2-4836-ba8b-e8816c66ef16"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Building Cybersecurity Resilience In A Hyperconnected World",
+      "source": "Feedspot"
+    }
+  },
+  {
+    "query": "how to learn building cybersecurity resilience in a hyperconnected world",
+    "relevant_resource_ids": [
+      "4c04fcb9-97f2-4836-ba8b-e8816c66ef16"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Building Cybersecurity Resilience In A Hyperconnected World",
+      "source": "Feedspot"
+    }
+  },
+  {
+    "query": "intro to russian alphabet",
+    "relevant_resource_ids": [
+      "4d26300a-46d0-465e-9173-c2b71b8e431f"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Russian Alphabet",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to russian alphabet",
+    "relevant_resource_ids": [
+      "4d26300a-46d0-465e-9173-c2b71b8e431f"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Russian Alphabet",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "learning javascript for the first time after html and css for beginners",
+    "relevant_resource_ids": [
+      "cf1508aa-7a03-4bc4-82c4-69212def2e2b"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Learning JavaScript for the First Time After HTML and CSS",
+      "source": "YouTube"
+    }
+  },
+  {
+    "query": "beginner guide to learning javascript for the first time after html and css",
+    "relevant_resource_ids": [
+      "cf1508aa-7a03-4bc4-82c4-69212def2e2b"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Learning JavaScript for the First Time After HTML and CSS",
+      "source": "YouTube"
+    }
+  },
+  {
+    "query": "intro to globalization, economic growth and stability",
+    "relevant_resource_ids": [
+      "8b6e598c-183d-499c-8980-5a909b983217"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Globalization, Economic Growth and Stability",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "globalization, economic growth and stability for beginners",
+    "relevant_resource_ids": [
+      "8b6e598c-183d-499c-8980-5a909b983217"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Globalization, Economic Growth and Stability",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to sleep neurobiology, medicine, and society",
+    "relevant_resource_ids": [
+      "e60891e5-35a0-440c-973b-f502b90ff2c8"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Sleep: Neurobiology, Medicine, and Society",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn sleep neurobiology, medicine, and society",
+    "relevant_resource_ids": [
+      "e60891e5-35a0-440c-973b-f502b90ff2c8"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Sleep: Neurobiology, Medicine, and Society",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn spacecraft dynamics and control",
+    "relevant_resource_ids": [
+      "cdca2d07-e31c-4044-a9e1-2f02cd168317"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Spacecraft Dynamics and Control",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to spacecraft dynamics and control",
+    "relevant_resource_ids": [
+      "cdca2d07-e31c-4044-a9e1-2f02cd168317"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Spacecraft Dynamics and Control",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "requirements engineering secure software specifications for beginners",
+    "relevant_resource_ids": [
+      "5146d780-ff4c-488f-a3c9-a9eb21e184d5"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Requirements Engineering: Secure Software Specifications",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to requirements engineering secure software specifications",
+    "relevant_resource_ids": [
+      "5146d780-ff4c-488f-a3c9-a9eb21e184d5"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Requirements Engineering: Secure Software Specifications",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn essentials of corporate finance",
+    "relevant_resource_ids": [
+      "43381c28-7b59-4112-88e7-a17bdab9734e"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Essentials of Corporate Finance",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to essentials of corporate finance",
+    "relevant_resource_ids": [
+      "43381c28-7b59-4112-88e7-a17bdab9734e"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Essentials of Corporate Finance",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to science of exercise",
+    "relevant_resource_ids": [
+      "6771d28b-1bae-496f-bf90-365198493cfe"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Science of Exercise",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn science of exercise",
+    "relevant_resource_ids": [
+      "6771d28b-1bae-496f-bf90-365198493cfe"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Science of Exercise",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn what is an ai anyway? mustafa suleyman ted",
+    "relevant_resource_ids": [
+      "5d03156a-55ee-4171-a28e-214a229e70bc"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "What Is an AI Anyway? | Mustafa Suleyman | TED",
+      "source": "YouTube"
+    }
+  },
+  {
+    "query": "intro to what is an ai anyway? mustafa suleyman ted",
+    "relevant_resource_ids": [
+      "5d03156a-55ee-4171-a28e-214a229e70bc"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "What Is an AI Anyway? | Mustafa Suleyman | TED",
+      "source": "YouTube"
+    }
+  },
+  {
+    "query": "intro to introduction to ableton live",
+    "relevant_resource_ids": [
+      "7ef5afe2-51d8-4562-a51c-6d21fd54c3bf"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Introduction to Ableton Live",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn introduction to ableton live",
+    "relevant_resource_ids": [
+      "7ef5afe2-51d8-4562-a51c-6d21fd54c3bf"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Introduction to Ableton Live",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn information visualization",
+    "relevant_resource_ids": [
+      "b440a308-e385-4faf-b5c4-3320002b7961"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Information Visualization",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to information visualization",
+    "relevant_resource_ids": [
+      "b440a308-e385-4faf-b5c4-3320002b7961"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Information Visualization",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to systems thinking in public health",
+    "relevant_resource_ids": [
+      "6b9002ad-721d-4245-8199-3353d23393a0"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Systems Thinking In Public Health",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to systems thinking in public health",
+    "relevant_resource_ids": [
+      "6b9002ad-721d-4245-8199-3353d23393a0"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Systems Thinking In Public Health",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn hacia una pr\u00e1ctica constructivista en el aula",
+    "relevant_resource_ids": [
+      "355a4cd3-7078-4e43-9806-d06911fb5b3c"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Hacia una pr\u00e1ctica constructivista en el aula",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to hacia una pr\u00e1ctica constructivista en el aula",
+    "relevant_resource_ids": [
+      "355a4cd3-7078-4e43-9806-d06911fb5b3c"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Hacia una pr\u00e1ctica constructivista en el aula",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to introduction to cyber attacks",
+    "relevant_resource_ids": [
+      "aa791a23-c0bb-49a5-98bb-12e4b6e944b9"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Introduction to Cyber Attacks",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn introduction to cyber attacks",
+    "relevant_resource_ids": [
+      "aa791a23-c0bb-49a5-98bb-12e4b6e944b9"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Introduction to Cyber Attacks",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "fundamentals of music theory for beginners",
+    "relevant_resource_ids": [
+      "795f052c-ff81-406b-bdad-17e9dbeb6ee8"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Fundamentals of Music Theory",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn fundamentals of music theory",
+    "relevant_resource_ids": [
+      "795f052c-ff81-406b-bdad-17e9dbeb6ee8"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Fundamentals of Music Theory",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn first step korean",
+    "relevant_resource_ids": [
+      "28f20942-fd0b-4cf9-b86c-d0a800982259"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "First Step Korean",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to first step korean",
+    "relevant_resource_ids": [
+      "28f20942-fd0b-4cf9-b86c-d0a800982259"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "First Step Korean",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn ai excellence awards leading ai innovation for learning and skills development",
+    "relevant_resource_ids": [
+      "20d12cd6-e22d-4bc0-af0e-ea1d7b0169fc"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "AI Excellence Awards: Leading AI Innovation For Learning And Skills Development 2026",
+      "source": "Feedspot"
+    }
+  },
+  {
+    "query": "ai excellence awards leading ai innovation for learning and skills development for beginners",
+    "relevant_resource_ids": [
+      "20d12cd6-e22d-4bc0-af0e-ea1d7b0169fc"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "AI Excellence Awards: Leading AI Innovation For Learning And Skills Development 2026",
+      "source": "Feedspot"
+    }
+  },
+  {
+    "query": "how to learn russian \u04301. \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a a1",
+    "relevant_resource_ids": [
+      "385834fd-9be2-427a-8e4f-2003dee5924d"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Russian for beginners \u04101. \u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a: A1",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to russian \u04301. \u0440\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a a1",
+    "relevant_resource_ids": [
+      "385834fd-9be2-427a-8e4f-2003dee5924d"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Russian for beginners \u04101. \u0420\u0443\u0441\u0441\u043a\u0438\u0439 \u044f\u0437\u044b\u043a: A1",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to using databases with python",
+    "relevant_resource_ids": [
+      "7efcae3d-97e7-4b15-9c6f-a269ed3cb650"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Using Databases with Python",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn using databases with python",
+    "relevant_resource_ids": [
+      "7efcae3d-97e7-4b15-9c6f-a269ed3cb650"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Using Databases with Python",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn supply chain operations",
+    "relevant_resource_ids": [
+      "40eccfe8-1ae5-4d00-b108-4516d57dbc55"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Supply Chain Operations",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to supply chain operations",
+    "relevant_resource_ids": [
+      "40eccfe8-1ae5-4d00-b108-4516d57dbc55"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Supply Chain Operations",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to c for everyone programming fundamentals",
+    "relevant_resource_ids": [
+      "d548273d-6e15-4813-ac83-0cc53e831651"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "C for Everyone: Programming Fundamentals",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "c for everyone programming fundamentals for beginners",
+    "relevant_resource_ids": [
+      "d548273d-6e15-4813-ac83-0cc53e831651"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "C for Everyone: Programming Fundamentals",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn cybersecurity for business",
+    "relevant_resource_ids": [
+      "9b8532fc-ffc2-4740-8e24-4049fd2425e1"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Cybersecurity for Business",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to cybersecurity for business",
+    "relevant_resource_ids": [
+      "9b8532fc-ffc2-4740-8e24-4049fd2425e1"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Cybersecurity for Business",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "fundamentals of graphic design for beginners",
+    "relevant_resource_ids": [
+      "cd3fe827-73f1-45f5-b12b-c14576c6b998"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Fundamentals of Graphic Design",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "how to learn fundamentals of graphic design",
+    "relevant_resource_ids": [
+      "cd3fe827-73f1-45f5-b12b-c14576c6b998"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Fundamentals of Graphic Design",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "beginner guide to developing your musicianship",
+    "relevant_resource_ids": [
+      "601e4764-8646-4a29-836f-98aba7fd9877"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Developing Your Musicianship",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "developing your musicianship for beginners",
+    "relevant_resource_ids": [
+      "601e4764-8646-4a29-836f-98aba7fd9877"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Developing Your Musicianship",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "intro to foundations of management",
+    "relevant_resource_ids": [
+      "0bbd3ed4-c54d-48db-b469-4c417d10dbc0"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Foundations of Management",
+      "source": "Coursera"
+    }
+  },
+  {
+    "query": "foundations of management for beginners",
+    "relevant_resource_ids": [
+      "0bbd3ed4-c54d-48db-b469-4c417d10dbc0"
+    ],
+    "difficulty": "hard",
+    "query_style": "learner_phrased_heuristic",
+    "source_item": {
+      "title": "Foundations of Management",
+      "source": "Coursera"
+    }
+  }
+]

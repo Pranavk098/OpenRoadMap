@@ -2,10 +2,29 @@ import pandas as pd
 import os
 import json
 import uuid
+import urllib.parse
 
 # Configuration
 INPUT_FILE = os.path.join("data", "raw", "coursera_courses.csv")
 OUTPUT_FILE = os.path.join("data", "processed", "coursera_ingested.json")
+
+TITLE_COLUMNS = ('course_title', 'Title', 'title')
+
+
+def resolve_title(row):
+    """
+    Try known column name variants for the title field.
+    Returns the stripped title string, or None if none of the known
+    columns are present, or the value is missing (NaN) / empty after
+    stripping.
+    """
+    for col in TITLE_COLUMNS:
+        if col in row and pd.notnull(row[col]):
+            candidate = str(row[col]).strip()
+            if candidate:
+                return candidate
+    return None
+
 
 def ingest_coursera():
     if not os.path.exists(INPUT_FILE):
@@ -20,28 +39,37 @@ def ingest_coursera():
         print(f"Error reading CSV: {e}")
         return
 
-    # Normalize columns (adjust based on actual CSV headers)
-    # Expected headers from Kaggle dataset: course_title, course_organization, course_rating, etc.
-    # We will map them to our unified schema.
-    
     ingested_data = []
-    
+    seen_titles = set()
+    skipped = 0
+
     print(f"Processing {len(df)} records...")
-    for _, row in df.iterrows():
+    for idx, row in df.iterrows():
+        title = resolve_title(row)
+
+        if title is None:
+            print(f"Warning: skipping row {idx} - no usable title found. Columns present: {list(df.columns)}")
+            skipped += 1
+            continue
+
+        if title in seen_titles:
+            print(f"Warning: skipping row {idx} - duplicate title '{title}'.")
+            skipped += 1
+            continue
+        seen_titles.add(title)
+
         # Generate a unique ID
         course_id = str(uuid.uuid4())
-        
-        # Extract fields with fallbacks
-        title = row.get('course_title', row.get('Title', 'Unknown Title'))
+
+        # Extract remaining fields with fallbacks
         org = row.get('course_organization', row.get('Organization', ''))
         rating = row.get('course_rating', row.get('Rating', 0))
         difficulty = row.get('course_difficulty', row.get('Difficulty', ''))
-        
+
         # Construct description from available info
         description = f"Offered by {org}. Difficulty: {difficulty}. Rating: {rating}."
-        
+
         # Construct search URL if direct URL is missing
-        import urllib.parse
         encoded_title = urllib.parse.quote(title)
         url = f"https://www.coursera.org/search?query={encoded_title}"
 
@@ -59,13 +87,16 @@ def ingest_coursera():
         }
         ingested_data.append(record)
 
+    if skipped:
+        print(f"Skipped {skipped} of {len(df)} rows due to missing/duplicate titles.")
+
     # Ensure output directory exists
     os.makedirs(os.path.dirname(OUTPUT_FILE), exist_ok=True)
-    
+
     print(f"Saving {len(ingested_data)} records to {OUTPUT_FILE}...")
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(ingested_data, f, indent=2)
-    
+
     print("Ingestion complete.")
 
 if __name__ == "__main__":
