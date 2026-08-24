@@ -125,3 +125,27 @@ All three tracks merged cleanly with zero file conflicts (disjoint ownership hel
 - Frontend (Track C) independently verified: `npm run build` + `npm run lint` clean, code-splitting confirmed via build output (separate `reactflow`/`recharts`/`Roadmap`/`Evaluation` chunks).
 
 ---
+
+### Track D — Hygiene / CI (orchestrator, sequential after merge)
+
+- **CI**: `.github/workflows/ci.yml` — backend job runs `ruff check` + `pytest` (mocked, dummy `OPENAI_API_KEY`, no live services needed); frontend job runs `npm run lint` + `npm run build`. Both jobs verified locally before committing the workflow, not just written and hoped for.
+- **`ruff.toml`**: scoped to `E9` (syntax errors), `F` (pyflakes — unused imports/vars, undefined names), `I` (import sorting) — deliberately not the full pyupgrade/blind-except/etc. rule set, which would flag hundreds of pre-existing working lines with no real bug behind them. Ran `ruff --fix` (mechanical import-sorting/unused-import fixes across 16 files) and manually removed one genuinely-dead variable (`institution` in `ingest_edx.py`, pre-existing, unrelated to any track's changes) that the new gate surfaced.
+- **`pytest.ini`**: added `testpaths = tests` — Track A had flagged that a bare `pytest` from repo root would try to collect the pre-existing live-network manual scripts and hang; scoping discovery to `tests/` fixes it directly instead of renaming files to dodge collection.
+- **Test cleanup**: deleted `tests/test_wide_scope.py` (imported `backend.app.main:app`, a path that never existed in this repo — dead, never passed) and `tests/test_ddg.py` (imported `duckduckgo_search` directly, which Track A removed in favor of `ddgs` — now flatly broken). Moved the three remaining manual/live scripts (`test_api.py`, `repro_issue.py`, `verify_resources.py` — real subprocess/network calls, no assertions, not actual pytest tests) to `scripts/manual_smoke/` with a one-line header noting they need live Qdrant/OpenAI and aren't part of CI. `tests/` is now exclusively the mocked automated suite (78 tests, Tracks A+B combined).
+- **Dead file removal**: `frontend/src/layout/Sidebar.jsx` (confirmed via grep — `App.jsx` only imports `Navbar`; the one remaining "Sidebar" string in the codebase is an unrelated JSX comment in `Roadmap.jsx` labeling the resource panel). Root `package.json`/`package-lock.json` (stray accidental-`npm install`-at-repo-root artifacts — no scripts, dependency list unrelated to the actual `frontend/` app, two lockfiles was a standing footgun).
+- **`LICENSE`** (MIT, matching the claim the README already made) and **`.env.example`** (enumerated by grepping every `os.getenv`/`os.environ.get` call across `src/` rather than guessing — `OPENAI_API_KEY`, `QDRANT_URL`, `QDRANT_COLLECTION`, `ALLOWED_ORIGINS`, `RATE_LIMIT`, `ROADMAP_MODEL`, `REDIS_URL`).
+- **`README.md`** rewritten: accurate architecture diagram (hybrid retrieval, reranking, one honest agentic retry — matches what's actually in `src/`, not what was there before), explicit "why these aren't called agents / why this isn't 2023's retrieval stack" section addressing the naming-honesty critique directly, real setup steps reflecting the two-file requirements split and optional Redis, a `Known gaps` section (favicon/OG image still placeholders, eval numbers are environment-dependent — flagging rather than hiding), removed the placeholder-screenshot `<img>` that 404s and the LICENSE-doesn't-exist mismatch.
+
+### Requirements split, finalized
+
+- `requirements.txt` — serving/runtime only. **Verified in an isolated fresh venv**: zero torch/transformers/CUDA packages resolve.
+- `requirements-dev.txt` — `-r requirements.txt` plus test/eval/ingestion-only deps (`pytest`, `pytest-asyncio`, `rouge-score`, `bert-score`, `pandas`, `beautifulsoup4`, `feedparser`, `google-api-python-client`, `requests`). `bert-score` does pull `torch` transitively, but only into this dev file, never the serving image.
+
+### Final state
+
+- **78/78 backend unit tests pass** (fresh venv, mocked clients, no live services) — confirmed again after the ruff `--fix` pass and `testpaths` change.
+- **Frontend build + lint clean**, confirmed again after `Sidebar.jsx`/root-`package.json` deletion.
+- `from src.main import app` imports cleanly end-to-end with the fully merged tree.
+- **What was never executed against live services in this sandbox, and needs a real smoke test before shipping**: any real OpenAI call (structured-outputs schema was validated for shape, not run against the live API), any real Qdrant hybrid query (RRF fusion, the three fastembed model downloads — bge-base-en-v1.5, bm42 sparse, ms-marco reranker — were confirmed importable/constructible, never run against real weights), any real Redis connection, and the live evaluation run (`results.json`'s retrieval/generation fields are currently `null` with honest notes, not fabricated numbers).
+
+---
