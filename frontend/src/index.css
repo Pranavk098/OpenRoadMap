@@ -2,26 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --paper: #FAFAF8;
+  --ink: #14213D;
+  --signal: #E85D2A;
+  --signal-dark: #B53E14;
+  --hairline: rgba(20, 33, 61, 0.12);
+}
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-slate-50 text-slate-900 antialiased;
+    @apply antialiased;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  /* Visible keyboard focus everywhere. Mouse users see nothing extra;
+     keyboard users always get a signal-coloured ring. */
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
 @layer components {
+  /* Skip link: first tab stop, hidden until focused. */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    border-radius: 0.6rem;
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.15s ease-out;
+  }
+
+  .skip-link:focus-visible {
+    top: 1rem;
+    outline-color: var(--signal);
+    color: #fff;
+  }
+
+  /* Per-node skeleton shimmer. A moving hairline sheen over a flat
+     placeholder — never a spinner — so lists keep their shape while
+     resources stream in. */
+  .skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(20, 33, 61, 0.06);
+  }
+
+  .skeleton-shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.75) 50%,
+      transparent 80%
+    );
+    animation: shimmer-sweep 1.6s ease-in-out infinite;
+  }
+
+  @keyframes shimmer-sweep {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Editorial hairline rule used on the landing page in place of the
+     old pastel blobs / glow borders. */
+  .hairline-rule {
+    border-color: var(--hairline);
+  }
+
   /* ReactFlow ships a fairly dated default chrome (hard borders, square
      buttons, opaque minimap). These overrides bring its controls in line with
-     the rest of the app's soft-elevation card language. */
+     the rest of the app's paper/ink card language. */
   .roadmap-controls {
-    @apply overflow-hidden rounded-xl border border-slate-200/80 bg-white/90 shadow-lg shadow-slate-900/[0.06] backdrop-blur-md;
+    @apply overflow-hidden rounded-xl border bg-white/90 shadow-lg shadow-slate-900/[0.06] backdrop-blur-md;
+    border-color: var(--hairline);
   }
 
   .roadmap-controls .react-flow__controls-button {
-    @apply border-0 border-b border-slate-100 bg-transparent fill-slate-500 transition-colors last:border-b-0 hover:bg-slate-100 hover:fill-slate-800;
+    @apply border-0 border-b bg-transparent transition-colors last:border-b-0 hover:bg-slate-100;
+    border-color: var(--hairline);
+    fill: #3d4a68;
+  }
+
+  .roadmap-controls .react-flow__controls-button:hover {
+    fill: var(--ink);
   }
 
   .roadmap-minimap {
-    @apply overflow-hidden rounded-xl border border-slate-200/80 bg-white/90 shadow-lg shadow-slate-900/[0.06] backdrop-blur-md;
+    @apply overflow-hidden rounded-xl border bg-white/90 shadow-lg shadow-slate-900/[0.06] backdrop-blur-md;
+    border-color: var(--hairline);
   }
 
   /* The custom node draws its own rounded card, so the wrapper must not paint
@@ -32,5 +120,25 @@
 
   .react-flow__attribution {
     @apply !bg-transparent text-slate-300;
+  }
+}
+
+/* No motion for users who asked for none: kill the shimmer sweep, smooth
+   scrolling, and the app's small transitions in one place. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .skeleton-shimmer::after {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

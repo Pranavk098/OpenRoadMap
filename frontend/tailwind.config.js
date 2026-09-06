@@ -20,9 +20,25 @@ export default {
           900: '#4c1d95',
           950: '#2e1065',
         },
+        // Paper/ink editorial system. One signal accent — reserve gradients
+        // for data-viz only, never for text or chrome.
+        paper: '#FAFAF8',
+        ink: {
+          DEFAULT: '#14213D',
+          soft: '#3D4A68',
+          muted: '#5C6B84',
+        },
+        signal: {
+          DEFAULT: '#E85D2A',
+          dark: '#B53E14',
+          soft: '#FDEEE6',
+        },
       },
       fontFamily: {
+        // Display (headlines) + body + mono (labels/metrics) pairing.
+        display: ['"Space Grotesk"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
     },
   },

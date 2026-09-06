@@ -175,7 +175,7 @@ const Evaluation = () => {
             {/* Generation */}
             <section className="mb-10">
                 <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <GitBranch className="text-purple-500" size={22} /> Roadmap Generation Quality
+                    <GitBranch className="text-signal" size={22} /> Roadmap Generation Quality
                 </h2>
                 {generation ? (
                     <>
@@ -231,7 +231,7 @@ const Evaluation = () => {
 const formatScore = (value) => (typeof value === 'number' ? value.toFixed(4) : 'n/a');
 
 const EmptyMetric = ({ text }) => (
-    <div className="h-64 flex items-center justify-center text-center text-slate-400 text-sm p-6 border border-dashed border-slate-200 rounded-lg">
+    <div className="h-64 flex items-center justify-center text-center text-slate-500 text-sm p-6 border border-dashed border-slate-200 rounded-lg">
         {text}
     </div>
 );

@@ -89,7 +89,7 @@ def test_stream_endpoint_rejects_bad_goal(client):
 
 
 def test_generate_roadmap_success(client, monkeypatch):
-    async def fake_generate_roadmap(goal):
+    async def fake_generate_roadmap(goal, level="beginner", *args, **kwargs):
         return _fake_roadmap(goal)
 
     monkeypatch.setattr(main_module, "generate_roadmap", fake_generate_roadmap)
@@ -99,7 +99,7 @@ def test_generate_roadmap_success(client, monkeypatch):
 
 
 def test_generate_roadmap_does_not_leak_exception_details(client, monkeypatch):
-    async def boom(goal):
+    async def boom(goal, level="beginner", *args, **kwargs):
         raise RuntimeError("internal detail: db password=hunter2")
 
     monkeypatch.setattr(main_module, "generate_roadmap", boom)
@@ -113,7 +113,7 @@ def test_generate_roadmap_does_not_leak_exception_details(client, monkeypatch):
 
 
 def test_response_has_correlation_id_header(client, monkeypatch):
-    async def fake_generate_roadmap(goal):
+    async def fake_generate_roadmap(goal, level="beginner", *args, **kwargs):
         return _fake_roadmap(goal)
 
     monkeypatch.setattr(main_module, "generate_roadmap", fake_generate_roadmap)
@@ -125,7 +125,7 @@ def test_response_has_correlation_id_header(client, monkeypatch):
 
 
 def test_rate_limit_returns_429_with_correlation_id_on_breach(client, monkeypatch):
-    async def fake_generate_roadmap(goal):
+    async def fake_generate_roadmap(goal, level="beginner", *args, **kwargs):
         return _fake_roadmap(goal)
 
     monkeypatch.setattr(main_module, "generate_roadmap", fake_generate_roadmap)
@@ -170,7 +170,7 @@ def test_cors_rejects_unlisted_origin(client):
 def test_stream_endpoint_emits_structure_resources_done_in_order(client, monkeypatch):
     main_module.limiter.reset()
 
-    async def fake_stream(goal):
+    async def fake_stream(goal, level="beginner", *args, **kwargs):
         yield ("structure", {"nodes": [{"id": "a", "title": "A", "description": "d", "prerequisites": []}]})
         yield ("resources", {"id": "a", "resources": []})
         yield ("done", {"cache_hit": False})
@@ -190,7 +190,7 @@ def test_stream_endpoint_emits_structure_resources_done_in_order(client, monkeyp
 def test_stream_endpoint_emits_error_event_on_failure(client, monkeypatch):
     main_module.limiter.reset()
 
-    async def fake_stream(goal):
+    async def fake_stream(goal, level="beginner", *args, **kwargs):
         yield ("structure", {"nodes": []})
         raise RuntimeError("boom: secret detail")
 

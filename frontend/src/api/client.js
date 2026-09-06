@@ -63,8 +63,17 @@ export const generateRoadmap = async (goal) => {
 //
 // Returns a handle with `.close()` to stop listening (e.g. on unmount or
 // when the user navigates away mid-stream).
-export const streamRoadmap = (goal, { onStructure, onResources, onDone, onError }) => {
-    const url = `${API_BASE_URL}/v1/roadmap/stream?goal=${encodeURIComponent(goal)}`;
+//
+// `level` (beginner/intermediate/advanced) personalizes depth/scope. It is
+// forwarded as a query param; backends that predate the param simply ignore
+// it, so this stays backward compatible.
+export const streamRoadmap = (goal, { onStructure, onResources, onDone, onError, level } = {}) => {
+    const params = new URLSearchParams({ goal });
+    const normalizedLevel = (level || '').strip().toLowerCase();
+    if (['beginner', 'intermediate', 'advanced'].includes(normalizedLevel)) {
+        params.set('level', normalizedLevel);
+    }
+    const url = `${API_BASE_URL}/v1/roadmap/stream?${params.toString()}`;
     const source = new EventSource(url);
     let gotAnyMessage = false;
     let closed = false;

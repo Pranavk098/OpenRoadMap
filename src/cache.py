@@ -31,8 +31,9 @@ def normalize_goal(goal: str) -> str:
     return _WHITESPACE_RE.sub(" ", goal.strip().lower())
 
 
-def cache_key(goal: str) -> str:
-    return hashlib.sha256(normalize_goal(goal).encode("utf-8")).hexdigest()
+def cache_key(goal: str, level: str = "beginner") -> str:
+    lvl = (level or "beginner").strip().lower()
+    return hashlib.sha256(f"{normalize_goal(goal)}\n{lvl}".encode("utf-8")).hexdigest()
 
 
 class CacheBackend(Protocol):

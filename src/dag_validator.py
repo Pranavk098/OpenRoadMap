@@ -93,8 +93,32 @@ def validate_dag(nodes: list[dict]) -> list[dict]:
         n["prerequisites"] = adjacency[n["id"]]
 
     _repair_degenerate_flat_structure(cleaned)
+    _enforce_capstone_depth(cleaned)
 
     return cleaned
+
+
+def _enforce_capstone_depth(nodes: list[dict]) -> None:
+    """Guarantee staged depth for the single-shot fallback path: if every
+    node except the last already has prerequisites (a staged chain with a
+    flat tail), link the orphaned tail to its predecessor. Leaves partially
+    flat graphs alone — the flat-repair above owns the fully-degenerate case
+    and the test suite pins partial-flat as leave-as-is."""
+    if len(nodes) < 4:
+        return
+    last = nodes[-1]
+    if last.get("prerequisites"):
+        return
+    if not all(n.get("prerequisites") for n in nodes[:-1]):
+        return
+    prev_id = nodes[-2].get("id")
+    if prev_id and prev_id != last.get("id"):
+        logger.warning(
+            "dag_validator.capstone_linked",
+            node_id=last.get("id"),
+            anchor=prev_id,
+        )
+        last["prerequisites"] = [prev_id]
 
 
 def _repair_degenerate_flat_structure(nodes: list[dict]) -> None:

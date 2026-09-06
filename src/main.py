@@ -130,16 +130,16 @@ async def create_roadmap(request: Request, payload: RoadmapRequest):
     # below, which logs the full error server-side with the request's
     # correlation id and returns only a generic message + that id to the
     # client (never the raw exception text).
-    return await generate_roadmap(payload.goal)
+    return await generate_roadmap(payload.goal, level=payload.level)
 
 
 def _sse_format(event: str, payload: dict) -> str:
     return f"event: {event}\ndata: {json.dumps(payload)}\n\n"
 
 
-async def _sse_event_generator(goal: str, correlation_id: str):
+async def _sse_event_generator(goal: str, correlation_id: str, level: str = "beginner"):
     try:
-        async for event, payload in stream_roadmap_events(goal):
+        async for event, payload in stream_roadmap_events(goal, level=level):
             yield _sse_format(event, payload)
     except Exception as e:
         logger.error(
@@ -159,15 +159,22 @@ async def _sse_event_generator(goal: str, correlation_id: str):
 
 @app.get("/v1/roadmap/stream")
 @limiter.limit(RATE_LIMIT)
-async def stream_roadmap(request: Request, goal: str = Query(...)):
+async def stream_roadmap(
+    request: Request,
+    goal: str = Query(...),
+    level: str = Query(default="beginner"),
+):
     correlation_id = getattr(request.state, "correlation_id", None)
     try:
         goal = validate_goal_value(goal)
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
+    level = (level or "beginner").strip().lower()
+    if level not in ("beginner", "intermediate", "advanced"):
+        raise HTTPException(status_code=422, detail="level must be beginner, intermediate, or advanced")
 
     return StreamingResponse(
-        _sse_event_generator(goal, correlation_id),
+        _sse_event_generator(goal, correlation_id, level=level),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Correlation-ID": correlation_id or ""},
     )

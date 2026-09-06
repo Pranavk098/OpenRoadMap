@@ -13,33 +13,41 @@ const Evaluation = lazy(() => import('./pages/Evaluation'));
 const Roadmap = lazy(() => import('./pages/Roadmap'));
 
 const PageLoadingFallback = () => (
-  <div className="flex-1 h-screen flex items-center justify-center">
-    <Loader2 className="animate-spin text-purple-600" size={32} />
-  </div>
+    <div className="flex-1 h-screen flex flex-col items-center justify-center gap-4 bg-paper px-6" aria-live="polite" aria-busy="true">
+        <Loader2 className="animate-spin text-ink" size={28} aria-hidden />
+        <div className="w-full max-w-sm space-y-2" aria-hidden>
+            <div className="skeleton-shimmer h-4 w-3/4 rounded" />
+            <div className="skeleton-shimmer h-4 w-1/2 rounded" />
+        </div>
+        <span className="sr-only">Loading page…</span>
+    </div>
 );
 
 function App() {
-  return (
-    <Router>
-      <div className="min-h-screen bg-slate-50 font-sans flex flex-col">
-        <Navbar />
-        <div className="flex-1 relative">
-          <ErrorBoundary>
-            <Suspense fallback={<PageLoadingFallback />}>
-              <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route path="/evaluation" element={<Evaluation />} />
-                <Route path="/roadmap/:slug" element={<Roadmap />} />
-                {/* Old bare /roadmap route used to silently serve fake demo data - send it home instead */}
-                <Route path="/roadmap" element={<Navigate to="/" replace />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </ErrorBoundary>
-        </div>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div className="min-h-screen bg-paper font-sans text-ink flex flex-col">
+                <a href="#main-content" className="skip-link">
+                    Skip to content
+                </a>
+                <Navbar />
+                <div className="flex-1 relative flex flex-col">
+                    <ErrorBoundary>
+                        <Suspense fallback={<PageLoadingFallback />}>
+                            <Routes>
+                                <Route path="/" element={<Landing />} />
+                                <Route path="/evaluation" element={<Evaluation />} />
+                                <Route path="/roadmap/:slug" element={<Roadmap />} />
+                                {/* Old bare /roadmap route used to silently serve fake demo data - send it home instead */}
+                                <Route path="/roadmap" element={<Navigate to="/" replace />} />
+                                <Route path="*" element={<NotFound />} />
+                            </Routes>
+                        </Suspense>
+                    </ErrorBoundary>
+                </div>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
