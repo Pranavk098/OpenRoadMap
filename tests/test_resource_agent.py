@@ -1,6 +1,12 @@
 import pytest
 
-from src.agents.resource_agent import ResourceAgent, _DdgCircuitBreaker, _reformulate_query, _truncate
+from src.agents.resource_agent import (
+    ResourceAgent,
+    _DdgCircuitBreaker,
+    _reformulate_query,
+    _truncate,
+    corpus_gap_report,
+)
 from src.models import Resource
 
 
@@ -398,3 +404,75 @@ def test_sync_find_resources_delegates_to_async_batch(monkeypatch):
     assert captured["limit"] == 5
     assert len(result) == 1
     assert result[0].title == "T"
+
+
+# --- source-trust rerank boost ------------------------------------------------
+
+
+def _cand(title, url, rtype):
+    return {
+        "resource": Resource(title=title, url=url, description="d", type=rtype),
+        "text": f"{title}: d",
+    }
+
+
+def test_trust_boost_lifts_borderline_trusted_over_threshold():
+    # Official docs scoring -0.6 clears the -0.5 bar via its +0.3 boost;
+    # a generic web result at the same raw score does not.
+    agent = _agent(reranker=FakeReranker(lambda _c, _q, _d: -0.6))
+    trusted = agent._rerank_and_filter("q", [_cand("Docs", "https://docs.example.com/x", "Official Documentation")])
+    generic = agent._rerank_and_filter("q", [_cand("Blog", "https://blog.example.com/x", "Web Resource")])
+    assert len(trusted) == 1
+    assert generic == []
+
+
+def test_trust_boost_does_not_override_clear_relevance_gap():
+    def score_fn(_c, _q, text):
+        return 4.0 if text.startswith("Strong") else -4.0
+
+    agent = _agent(reranker=FakeReranker(score_fn))
+    out = agent._rerank_and_filter(
+        "q",
+        [
+            _cand("Strong generic", "https://a.example.com/1", "Web Resource"),
+            _cand("Weak docs", "https://docs.example.com/2", "Official Documentation"),
+        ],
+    )
+    assert [r.title for r in out] == ["Strong generic"]
+
+
+def test_trust_boost_never_reorders_within_node():
+    # Boost applies at the filter step only; relative order stays reranker order.
+    def score_fn(_c, _q, text):
+        return {"B-web": 3.0, "A-docs": 2.0}[text.split(":")[0]]
+
+    agent = _agent(reranker=FakeReranker(score_fn))
+    out = agent._rerank_and_filter(
+        "q",
+        [_cand("A-docs", "https://docs.example.com/a", "Course"), _cand("B-web", "https://b.example.com/b", "Web Resource")],
+    )
+    assert [r.title for r in out] == ["B-web", "A-docs"]
+
+
+# --- corpus-gap report ----------------------------------------------------------
+
+
+def test_corpus_gap_report_flags_only_short_nodes():
+    queries = ["q1", "q2", "q3"]
+    good = [
+        [Resource(title="A", url="https://a.example.com", description="d")],
+        [
+            Resource(title="B", url="https://b.example.com", description="d"),
+            Resource(title="C", url="https://c.example.com", description="d"),
+            Resource(title="D", url="https://d.example.com", description="d"),
+        ],
+        [],
+    ]
+    gaps = corpus_gap_report(queries, good, limit=3)
+    assert [(g["query"], g["good_count"]) for g in gaps] == [("q1", 1), ("q3", 0)]
+
+
+def test_corpus_gap_report_empty_when_filled():
+    queries = ["q1"]
+    good = [[Resource(title="A", url="https://a.example.com", description="d")]]
+    assert corpus_gap_report(queries, good, limit=1) == []

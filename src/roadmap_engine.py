@@ -77,29 +77,52 @@ def _diversify_resources(resources_by_node: list) -> list:
 
     - Global URL dedup: the same link never appears under two nodes (second
       occurrence is dropped, keeping the higher-ranked node's copy).
-    - At most one Search-Link fallback per roadmap: extra ones become an
-      honest practice prompt instead of a fake resource.
-    - Type variety per node is preserved by ordering (retriever already ranks
-      Video/Course/Docs above Search Link), so this only trims, never
-      reorders within a node.
+    - At most one *redundant* Search-Link fallback per roadmap: a Search Link
+      is dropped only when its node already kept a real resource. A node that
+      would otherwise be left empty keeps its own fallback link instead -
+      an honest, actionable link beats an empty node.
+    - Per-type cap (2 per node): a third resource of an already-doubled type
+      is dropped so one node can't fill all 3 slots with the same kind.
+    - Never-empty guard: dedup/type caps never strip a node down to zero
+      when it had candidates - the first candidate is kept as a duplicate
+      rather than leaving the node with nothing (logged).
+    - Type variety per node is otherwise preserved by ordering (retriever
+      already ranks Video/Course/Docs above Search Link), so this only
+      trims, never reorders within a node.
     """
+    MAX_SAME_TYPE_PER_NODE = 2
     seen_urls: set = set()
     search_link_used = False
     diversified = []
     for resources in resources_by_node:
         kept = []
+        type_counts: dict = {}
         for r in resources:
             url = getattr(r, "url", "") or ""
             rtype = (getattr(r, "type", "") or "").lower()
             if url and url in seen_urls:
                 continue
             if "search" in rtype:
-                if search_link_used:
+                if search_link_used and kept:
                     continue
                 search_link_used = True
+            else:
+                if type_counts.get(rtype, 0) >= MAX_SAME_TYPE_PER_NODE:
+                    continue
             if url:
                 seen_urls.add(url)
+            if "search" not in rtype:
+                type_counts[rtype] = type_counts.get(rtype, 0) + 1
             kept.append(r)
+        if not kept and resources:
+            kept = [resources[0]]
+            first_url = getattr(resources[0], "url", "") or ""
+            if first_url:
+                seen_urls.add(first_url)
+            logger.warning(
+                "roadmap_engine.diversify_kept_duplicate_to_avoid_empty",
+                title=getattr(resources[0], "title", ""),
+            )
         diversified.append(kept)
     return diversified
 

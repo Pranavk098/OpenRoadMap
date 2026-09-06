@@ -1,4 +1,4 @@
-from src.dag_validator import MAX_NODES, validate_dag
+from src.dag_validator import MAX_NODES, dag_depth, validate_dag
 
 
 def _node(node_id, prereqs=None):
@@ -114,3 +114,28 @@ def test_flat_structure_repair_skipped_below_four_nodes():
     nodes = [_node("a"), _node("b"), _node("c")]
     result = validate_dag(nodes)
     assert all(n["prerequisites"] == [] for n in result)
+
+
+# --- dag_depth telemetry -----------------------------------------------------
+
+
+def test_dag_depth_empty_is_zero():
+    assert dag_depth([]) == 0
+
+
+def test_dag_depth_linear_chain_counts_tiers():
+    nodes = [_node("a"), _node("b", ["a"]), _node("c", ["b"]), _node("d", ["c"])]
+    assert dag_depth(nodes) == 4
+
+
+def test_dag_depth_branching_takes_longest_path():
+    nodes = [_node("a"), _node("b", ["a"]), _node("c", ["a"]), _node("d", ["b", "c"])]
+    assert dag_depth(nodes) == 3
+
+
+def test_dag_depth_parallel_roots_is_one():
+    assert dag_depth([_node("a"), _node("b")]) == 1
+
+
+def test_dag_depth_terminates_on_cycle():
+    assert dag_depth([_node("a", ["b"]), _node("b", ["a"])]) >= 1

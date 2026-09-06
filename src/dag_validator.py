@@ -95,7 +95,49 @@ def validate_dag(nodes: list[dict]) -> list[dict]:
     _repair_degenerate_flat_structure(cleaned)
     _enforce_capstone_depth(cleaned)
 
+    try:
+        logger.info(
+            "dag_validator.depth",
+            node_count=len(cleaned),
+            depth=dag_depth(cleaned),
+        )
+    except Exception:
+        pass
+
     return cleaned
+
+
+def dag_depth(nodes: list[dict]) -> int:
+    """Longest prerequisite chain length, counted in tiers (a single root is
+    depth 1, empty input is 0). Pure/telemetry-only: never mutates its input.
+
+    Cycle-defensive (memo + visiting set) so it terminates even on a graph
+    validate_dag hasn't repaired yet; unknown prerequisite ids count as roots.
+    """
+    if not nodes:
+        return 0
+    by_id = {n.get("id"): n for n in nodes if n.get("id")}
+    if not by_id:
+        return 0
+    memo: dict = {}
+
+    def _depth(node_id: str, visiting: frozenset = frozenset()) -> int:
+        if node_id in memo:
+            return memo[node_id]
+        if node_id in visiting:
+            return 1
+        node = by_id.get(node_id)
+        if node is None:
+            return 0
+        prereqs = [p for p in (node.get("prerequisites") or []) if p in by_id and p != node_id]
+        if not prereqs:
+            memo[node_id] = 1
+            return 1
+        best = 1 + max(_depth(p, visiting | {node_id}) for p in prereqs)
+        memo[node_id] = best
+        return best
+
+    return max(_depth(nid) for nid in by_id)
 
 
 def _enforce_capstone_depth(nodes: list[dict]) -> None:

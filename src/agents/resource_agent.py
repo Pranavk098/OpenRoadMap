@@ -54,6 +54,40 @@ CANDIDATE_POOL_SIZE = 20
 # relevance judgment, not "return whatever's least bad."
 WEAK_SCORE_THRESHOLD = -0.5
 
+# Small relevance prior for source types that have proven reliable in live
+# runs (official docs, courses, video, wikipedia) over generic web hits.
+# Applied in _rerank_and_filter BEFORE the WEAK_SCORE_THRESHOLD check, so a
+# borderline trusted result (-0.6) can clear the bar while a borderline
+# generic web result cannot. Magnitudes are deliberately smaller than a real
+# reranker-signal gap (strong hits score 2-5), so this only ever decides
+# borderline cases, never overrides a clear relevance judgment. Generic
+# "resource"/"web resource"/"search link" types get no boost.
+TRUSTED_TYPE_BOOST = {
+    "official documentation": 0.3,
+    "documentation": 0.2,
+    "docs": 0.2,
+    "course": 0.25,
+    "interactive course": 0.25,
+    "curriculum": 0.25,
+    "video": 0.2,
+    "wikipedia": 0.15,
+}
+
+
+def corpus_gap_report(
+    queries: list[str], good_by_node: list[list], limit: int
+) -> list[dict]:
+    """Pure helper: which nodes the corpus alone could not fill (post-rerank,
+    pre-web-fallback). Returned entries are {"query", "good_count"} for every
+    node with fewer than `limit` good corpus hits - the lesson-granular gap
+    signal used for corpus planning. Never mutates its inputs."""
+    return [
+        {"query": q, "good_count": len(good)}
+        for q, good in zip(queries, good_by_node)
+        if len(good) < limit
+    ]
+
+
 # Caps concurrent DDG calls across a single roadmap's node batch. Firing one
 # request per weak node simultaneously (tried first) reliably triggers DDG's
 # own rate limiting once more than a couple of nodes need it, which then
@@ -286,6 +320,14 @@ class ResourceAgent:
         merged_by_node = list(candidates_by_node)
         good_by_node = await self._rerank_and_filter_many(queries, merged_by_node)
 
+        gaps = corpus_gap_report(queries, good_by_node, limit)
+        if gaps:
+            logger.warning(
+                "resource_agent.corpus_gap",
+                gap_count=len(gaps),
+                gaps=[{"query": g["query"][:80], "good_count": g["good_count"]} for g in gaps],
+            )
+
         short_indices = [i for i in range(n) if len(good_by_node[i]) < limit]
         if short_indices:
             # Hard deadline on the whole web-fallback stage, independent of
@@ -389,7 +431,11 @@ class ResourceAgent:
         used for both the primary pass and the retry pass so there's no
         second, looser path a bad result could sneak through."""
         ranked = self._rerank(query, candidates)
-        good = [resource for score, resource in ranked if score >= WEAK_SCORE_THRESHOLD]
+        good = []
+        for score, resource in ranked:
+            boost = TRUSTED_TYPE_BOOST.get((getattr(resource, "type", "") or "").lower(), 0.0)
+            if score + boost >= WEAK_SCORE_THRESHOLD:
+                good.append(resource)
         seen_urls: set[str] = set()
         deduped = []
         for resource in good:
