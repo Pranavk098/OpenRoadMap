@@ -1,0 +1,55 @@
+# Production compose for Oracle Always Free (Arch B): API + Qdrant sidecar
+# + Caddy (automatic TLS). Dev compose (docker-compose.yml) is untouched.
+#
+# Two Qdrant modes:
+#   1. Cloud (default): keep QDRANT_URL=https://...cloud.io + QDRANT_API_KEY
+#      in .env and the sidecar below just idles unused — or delete it.
+#   2. Sidecar: set QDRANT_URL=http://qdrant:6333, blank QDRANT_API_KEY, then
+#      re-ingest once via scripts/ingestion/vectorize_corpus.py (alias-swap,
+#      zero downtime) so vectors match the baked bge-small model.
+services:
+  api:
+    build: .
+    container_name: roadmap_api
+    env_file:
+      - .env
+    environment:
+      # Compose service DNS beats localhost inside the container net.
+      - QDRANT_URL=${QDRANT_URL:-http://qdrant:6333}
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      - qdrant
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: roadmap_qdrant
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: roadmap_caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  qdrant_storage:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.git/
+.github/
+.claude/
+.env
+.venv/
+frontend/
+tests/
+scripts/
+data/
+qdrant_storage/
+*.md
+!README.md

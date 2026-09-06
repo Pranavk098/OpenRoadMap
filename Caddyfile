@@ -1,0 +1,10 @@
+# Caddy reverse proxy for the Oracle VM (Arch B). Automatic Let's Encrypt TLS.
+# Replace api.example.com with your domain (or a free DuckDNS subdomain),
+# then point Vercel ALLOWED_ORIGINS at it and set the frontend VITE_API_URL
+# to https://api.example.com.
+api.example.com {
+	reverse_proxy api:8000 {
+		# SSE streaming needs flushing, not buffering.
+		flush_interval -1
+	}
+}

@@ -282,3 +282,26 @@ Candidates considered: `gpt-4.1-mini`, `gpt-4.1-nano` (both non-reasoning, "low 
 **Decision: switched the default** (`roadmap_agent.py`'s `DEFAULT_MODEL`, and `render.yaml`'s `ROADMAP_MODEL` for the live deploy) from `gpt-4o-mini` to `gpt-4.1-nano` â€” meaningfully faster and cheaper on every run tested, with the one honest tradeoff (simpler DAG topology) judged acceptable against the user's explicit priority on speed. `.env.example` updated to match. 84/84 tests still pass (no test mocks the literal model string).
 
 ---
+
+---
+
+### Deploy Arch B — Oracle Always Free ($0, full stack untouched)
+
+User chose Arch B over A (Render slim-down, known retrieval regression) and C
+(external embedding dependency + re-ingest). Research verdict: 3-model ONNX
+stack is ~237 MB weights / ~500-650 MB RSS at --workers 1 — fits neither
+Render free (512 MB, 0.1 CPU) nor HF Spaces Docker (PRO $9/mo to create).
+Oracle A1.Flex (2 OCPU/12 GB, no sleep) swallows it with 10 GB headroom.
+
+Shipped (unverified live — needs the OCI provisioning in docs/ORACLE_DEPLOY.md):
+- `Dockerfile` — slim serving image, bakes all three fastembed weights at
+  build time (names pinned to resource_agent.py), --workers 1.
+- `docker-compose.prod.yml` — api + Qdrant sidecar + Caddy; validated with
+  `docker compose config`. Dev compose untouched.
+- `Caddyfile` — reverse proxy with SSE-friendly flush_interval; user sets domain.
+- `.dockerignore` — keeps image lean (no data/frontend/tests/scripts/.env).
+- `docs/ORACLE_DEPLOY.md` — runbook: OCI setup, ARM notes, Cloud-vs-sidecar
+  Qdrant choice, build/launch, live SSE smoke test, $0 budget check.
+- Qdrant Cloud stays default (278 items ~ 0.6 MB, ~0.1% of free 1 GB);
+  sidecar path re-ingests via the existing alias-swap pipeline.
+- `render.yaml` left as-is (free-tier fallback = Arch A slim-down, future work).
